@@ -38,7 +38,7 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
-#include "TcRunOnceChecker.h"
+#include "tcRunOnceChecker.h"
 #include "tcSystemInfo.h"
 
 #include <QtCore/QList>
@@ -84,14 +84,7 @@ public:
 
     bool operator()(const TcProcessInfo &info)
     {
-#ifndef Q_OS_WIN
-        if (info.name == m_name)
-            return true;
-        const QFileInfo fi(info.name);
-        if (fi.fileName() == m_name || fi.baseName() == m_name)
-            return true;
-        return false;
-#else
+      #if defined(Q_OS_WIN)
         if (info.name().toLower() == m_name.toLower())
             return true;
         if (info.name().toLower() == QDir::toNativeSeparators(m_name.toLower()))
@@ -100,7 +93,14 @@ public:
         if (fi.fileName().toLower() == m_name.toLower() || fi.baseName().toLower() == m_name.toLower())
             return true;
         return info.name() == m_name;
-#endif
+      #else
+        if (info.name() == m_name )
+            return true;
+        const QFileInfo fi(info.name());
+        if (fi.fileName() == m_name || fi.baseName() == m_name)
+            return true;
+        return false;
+      #endif
     }
 
 private:

@@ -1,5 +1,10 @@
 #include "tcSystemInfo.h"
 
+#include <sys/statvfs.h>
+
+#include <QDir>
+#include <QFile>
+
 quint64 TcRunInfo::installedMemory()
 {
 #ifdef Q_OS_LINUX
@@ -47,15 +52,15 @@ QList<TcVolumeInfo> TcRunInfo::mountedVolumes()
 
         const QStringList parts = s.split(QLatin1Char(' '), QString::SkipEmptyParts);
 
-        VolumeInfo v;
-        v.setMountPath(parts.at(1));
-        v.setVolumeDescriptor(parts.at(0));
-        v.setFileSystemType(parts.value(2));
+        TcVolumeInfo v;
+        v.m_mountPath = parts.at(1);
+        v.m_volumeDescriptor = parts.at(0);
+        v.m_fileSystemType = parts.value(2);
 
         struct statvfs data;
         if (statvfs(qPrintable(v.mountPath() + QLatin1String("/.")), &data) == 0) {
-            v.setSize(quint64(static_cast<quint64>(data.f_blocks) * data.f_bsize));
-            v.setAvailableSize(quint64(static_cast<quint64>(data.f_bavail) * data.f_bsize));
+            v.m_size = quint64(static_cast<quint64>(data.f_blocks) * data.f_bsize);
+            v.m_availableSize = quint64(static_cast<quint64>(data.f_bavail) * data.f_bsize);
         }
         result.append(v);
     }
@@ -73,9 +78,9 @@ QList<TcProcessInfo> TcRunInfo::runningProcesses()
             const QString linkPath = QDir(info.absoluteFilePath()).absoluteFilePath(QLatin1String("exe"));
             const QFileInfo linkInfo(linkPath);
             if (linkInfo.exists()) {
-                ProcessInfo processInfo;
-                processInfo.name = linkInfo.symLinkTarget();
-                processInfo.id = info.fileName().toInt();
+                TcProcessInfo processInfo;
+                processInfo.m_name = linkInfo.symLinkTarget();
+                processInfo.m_id = info.fileName().toInt();
                 processes.append(processInfo);
             }
         }

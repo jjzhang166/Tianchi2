@@ -21,6 +21,8 @@
 #ifndef TIANCHI_TCCHINESE_H
 #define TIANCHI_TCCHINESE_H
 
+#if defined(Q_OS_WIN)
+
 #ifndef TIANCHI_API
     #define TIANCHI_API
 #endif
@@ -114,4 +116,5 @@ public:
     static int splitHumanName(const QString& full, QString& sur, QString& real, QString& english);
 };
 
+#endif // Q_OS_WIN
 #endif // TIANCHI_CHINESE_H

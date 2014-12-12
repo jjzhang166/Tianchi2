@@ -20,8 +20,12 @@
 #include <QDateTime>
 #include <QJsonValue>
 
+#ifndef TIANCHI_API
+    #define TIANCHI_API
+#endif
+
 /// @brief 操作模式的标识常量
-struct TcOperMode
+struct TIANCHI_API TcOperMode
 {
 const static int Append = 1; ///< 添加或新建
 const static int Change = 2; ///< 修改
@@ -34,7 +38,7 @@ const static int CopyLine   = 304; ///< 复制行
 const static int CopyTable  = 305; ///< 复制一张表，默认表示含标题
 };
 
-class TcCommon
+class TIANCHI_API TcCommon
 {
 public:
     /// @brief 转换字符串为日期时间(yyyy/MM/dd HH:mm:ss)
@@ -48,31 +52,31 @@ public:
 };
 
 /// @brief 分支逻辑判断
-inline int iif(bool logic, int v1, int v2=0) { return logic ? v1 : v2; }
+inline int TIANCHI_API iif(bool logic, int v1, int v2=0) { return logic ? v1 : v2; }
 /// @brief 分支逻辑判断
-inline QString iif(bool logic, const QString& v1, const QString& v2="") { return logic ? v1 : v2; }
+inline QString TIANCHI_API iif(bool logic, const QString& v1, const QString& v2="") { return logic ? v1 : v2; }
 
 /// @brief 取 Json 的键值
 /// @param jv 把 Json 键值取出后强行转换为 QString 型
-QString toString(const QJsonValue& jv);
+QString TIANCHI_API toString(const QJsonValue& jv);
 /// @brief 取 Json 的键值
 /// @param jv 把 Json 键值取出后强行转换为 QString 型
-QString toDoubleString(const QJsonValue& jv);
+QString TIANCHI_API toDoubleString(const QJsonValue& jv);
 /// @brief 取 Json 的键值
 /// @param jv 把 Json 键值取出后强行转换为 QString 型
-QString toMoneyString(const QJsonValue& jv);
+QString TIANCHI_API toMoneyString(const QJsonValue& jv);
 /// @brief 取 Json 的键值
 /// @param jv 把 Json 键值取出后强行转换为 int 型
-int toInt(const QJsonValue& jv);
+int TIANCHI_API toInt(const QJsonValue& jv);
 /// @brief 取 Json 的键值
 /// @param jv 把 Json 键值取出后强行转换为 int 型
-qint64 toInt64(const QJsonValue& jv);
+qint64 TIANCHI_API toInt64(const QJsonValue& jv);
 /// @brief 取 Json 的键值
 /// @param jv 把 Json 键值取出后强行转换为 double 型
-double  toDouble(const QJsonValue &jv);
+double TIANCHI_API toDouble(const QJsonValue &jv);
 /// @brief 取 Json 的键值
 /// @param jv 把 Json 键值取出后强行转换为 bool 型
-bool toBool(const QJsonValue& jv);
+bool TIANCHI_API toBool(const QJsonValue& jv);
 
 
 #endif // TCCOMMON_H

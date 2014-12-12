@@ -14,7 +14,7 @@
 // ==========================================================================
 /// @file tcFunctionalSortFilterProxyModel.cpp
 // ==========================================================================
-#include "TcFunctionalSortFilterProxyModel.h"
+#include "tcFunctionalSortFilterProxyModel.h"
 
 class TcFunctionalSortFilterProxyModelPrivate
 {

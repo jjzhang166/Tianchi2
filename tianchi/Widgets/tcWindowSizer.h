@@ -4,7 +4,11 @@
 #include <QWidget>
 #include <QCursor>
 
-class TcWindowSizer : public QObject
+#ifndef TIANCHI_API
+    #define TIANCHI_API
+#endif
+
+class TIANCHI_API TcWindowSizer : public QObject
 {
 public:
     TcWindowSizer(QWidget* parent);

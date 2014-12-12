@@ -119,7 +119,6 @@ void IMEEngine::UnsetIMEEngine(void)
     m_dwCaps = 0;
 }
 // ---------------------------------------------------------------------------------------------------------------------
-#endif
 
 QString TcChinese::firstPinyins(const QString& HzString)
 {
@@ -316,3 +315,6 @@ int TcChinese::splitHumanName(const QString& full, QString& sur, QString& real, 
     }
     return ret;
 }
+
+#endif // Q_OS_WIN
+

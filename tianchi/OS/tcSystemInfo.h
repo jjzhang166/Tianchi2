@@ -21,7 +21,9 @@
 #include <QList>
 #include <QDebug>
 
-#include <qt_windows.h>
+#if defined(Q_OS_WIN)
+  #include <qt_windows.h>
+#endif
 
 #ifndef TIANCHI_API
     #define TIANCHI_API
@@ -67,7 +69,7 @@ private:
 };
 QDebug operator<<(QDebug dbg, TcVolumeInfo volume);
 
-class TcProcessInfo
+class TIANCHI_API TcProcessInfo
 {
 public:
     inline quint32 id() const { return m_id; }

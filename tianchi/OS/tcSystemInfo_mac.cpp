@@ -1,5 +1,10 @@
 #include "tcSystemInfo.h"
 
+#include <Carbon/Carbon.h>
+#include <sys/mount.h>
+#include <sys/sysctl.h>
+#include <sys/types.h>
+
 quint64 TcRunInfo::installedMemory()
 {
     SInt32 mb = 0;
@@ -21,15 +26,15 @@ QList<TcVolumeInfo> TcRunInfo::mountedVolumes()
         if (FSRefMakePath(&ref, path, PATH_MAX) == 0) {
             FSGetVolumeInfo(volume, 0, 0, kFSVolInfoSizes, &info, 0, 0);
 
-            VolumeInfo v;
-            v.setSize(quint64(info.totalBytes));
-            v.setAvailableSize(quint64(info.freeBytes));
-            v.setMountPath(QString::fromLocal8Bit(reinterpret_cast< char* >(path)));
+            TcVolumeInfo v;
+            v.m_size = quint64(info.totalBytes);
+            v.m_availableSize = quint64(info.freeBytes);
+            v.m_mountPath = QString::fromLocal8Bit(reinterpret_cast< char* >(path));
 
             struct statfs data;
             if (statfs(qPrintable(v.mountPath() + QLatin1String("/.")), &data) == 0) {
-                v.setFileSystemType(QLatin1String(data.f_fstypename));
-                v.setVolumeDescriptor(QLatin1String(data.f_mntfromname));
+                v.m_fileSystemType = QLatin1String(data.f_fstypename);
+                v.m_volumeDescriptor = QLatin1String(data.f_mntfromname);
             }
             result.append(v);
         }
@@ -62,12 +67,12 @@ QList<TcProcessInfo> TcRunInfo::runningProcesses()
     // fetch the process table
     sysctl(mib, 4, processTable, &processTableSize, NULL, 0);
 
-    QList<ProcessInfo> processes;
+    QList<TcProcessInfo> processes;
     for (size_t i = 0; i < (processTableSize / sizeof(struct kinfo_proc)); ++i) {
         struct kinfo_proc *process = processTable + i;
 
-        ProcessInfo processInfo;
-        processInfo.id = process->kp_proc.p_pid;
+        TcProcessInfo processInfo;
+        processInfo.m_id = process->kp_proc.p_pid;
 
         mib[1] = KERN_PROCARGS2;
         mib[2] = process->kp_proc.p_pid;
@@ -86,10 +91,10 @@ QList<TcProcessInfo> TcRunInfo::runningProcesses()
              * ~~~~~~~~~~~~~~~~~~~
              * |-----------------|
             */
-            processInfo.name = QString::fromLocal8Bit(processArguments + sizeof(int));
+            processInfo.m_name = QString::fromLocal8Bit(processArguments + sizeof(int));
         } else {
             // if we fail, use the name from the process table
-            processInfo.name = QString::fromLocal8Bit(process->kp_proc.p_comm);
+            processInfo.m_name = QString::fromLocal8Bit(process->kp_proc.p_comm);
         }
         processes.append(processInfo);
     }

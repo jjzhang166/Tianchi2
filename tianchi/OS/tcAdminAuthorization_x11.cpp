@@ -54,10 +54,10 @@
 #include <fcntl.h>
 
 #ifdef Q_OS_LINUX
-#include <linux/limits.h>
-#include <pty.h>
+  #include <linux/limits.h>
+  #include <pty.h>
 #else
-#include <util.h>
+  #include <util.h>
 #endif
 
 #include <sys/ioctl.h>
@@ -68,6 +68,14 @@
 
 #define SU_COMMAND "/usr/bin/sudo"
 //#define SU_COMMAND "/bin/echo"
+
+
+//int openpty(int *__amaster, int *__aslave, char *__name,
+//            const struct termios *__termp,
+//            const struct winsize *__winp) __THROW
+//{
+//    return 0;
+//}
 
 static QString getPassword(QWidget *parent)
 {

@@ -16,7 +16,9 @@ bool TcWindows::createLink(const QString &fileName, const QString &linkName,
                 const QString &arguments, const QString &iconPath,
                 const QString &iconId)
 {
-    bool success = QFile::link(fileName, linkName);
+    QString tlinkName = linkName;
+    if (!tlinkName.endsWith(".lnk")) tlinkName += ".lnk";
+    bool success = QFile::link(fileName, tlinkName);
 
     if (!success)
         return success;
@@ -42,7 +44,7 @@ bool TcWindows::createLink(const QString &fileName, const QString &linkName,
 
     IPersistFile *ppf = NULL;
     if (SUCCEEDED(psl->QueryInterface(IID_IPersistFile, (void **)&ppf))) {
-        ppf->Save((wchar_t*)QDir::toNativeSeparators(linkName).utf16(), true);
+        ppf->Save((wchar_t*)QDir::toNativeSeparators(tlinkName).utf16(), true);
         ppf->Release();
     }
     psl->Release();

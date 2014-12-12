@@ -21,7 +21,7 @@
     #define TIANCHI_API
 #endif
 
-#include <QGlobal.h>
+#include <QtGlobal>
 
 /// @brief 实现程序退出自动重启
 /// @author 渡世白玉 dushibaiyu@yahoo.com

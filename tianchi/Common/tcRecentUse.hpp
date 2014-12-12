@@ -41,10 +41,14 @@
 
 #include <QList>
 
+#ifndef TIANCHI_API
+    #define TIANCHI_API
+#endif
+
 /// @brief “最近使用”模版类
 /// @author cnhemiya
 /// @date 2013-10-11
-template<typename T> class TcRecentUse
+template<typename T> class TIANCHI_API TcRecentUse
 {
 public:
     /// @brief 使用的list类型

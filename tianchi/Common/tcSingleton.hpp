@@ -39,9 +39,14 @@
 #define TIANCHI_TCSINGLETON_HPP
 
 #include <cassert>
+#include <qglobal.h>
+
+#ifndef TIANCHI_API
+    #define TIANCHI_API
+#endif
 
 template<typename T>
-class TcSingleton
+class TIANCHI_API TcSingleton
 {
 	typedef TcSingleton<T> this_type;
 

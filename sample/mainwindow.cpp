@@ -1,8 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include "TcWndCaption.h"
-#include "TcWindowSizer.h"
+#include "tcWndCaption.h"
+#include "tcWindowSizer.h"
 #include <QMessageBox>
 #include <QDebug>
 
@@ -71,24 +71,32 @@ void MainWindow::on_pushButton_6_clicked()
 
 void MainWindow::on_pushButton_7_clicked()
 {
+  #if defined(Q_OS_WIN)
     QMessageBox::information(this, "取得多个汉字的首字母", "中华人民共和国: " + TcChinese::firstPinyins("中华人民共和国"));
+  #endif
 }
 
 void MainWindow::on_pushButton_8_clicked()
 {
+  #if defined(Q_OS_WIN)
     QMessageBox::information(this, "取得多个汉字的全部拼音", "中华人民共和国(不含音调): " + TcChinese::toPinyin("中华人民共和国"));
     QMessageBox::information(this, "取得多个汉字的全部拼音", "中华人民共和国(含音调): " + TcChinese::toPinyin("中华人民共和国", true));
+  #endif
 }
 
 void MainWindow::on_pushButton_9_clicked()
 {
+  #if defined(Q_OS_WIN)
     QMessageBox::information(this, "混合字符时，转换中不过滤英数符号等", "中1华2人3民4共5和6国：" + TcChinese::toChars("中1华2人3民4共5和6国"));
     QMessageBox::information(this, "混合字符时，转换中不过滤英数符号等", "中1华2人3民4共5和6国(含音调)：" + TcChinese::toChars("中1华2人3民4共5和6国", true));
+  #endif
 }
 
 void MainWindow::on_pushButton_10_clicked()
 {
+  #if defined(Q_OS_WIN)
     QMessageBox::information(this, "中文名字翻译为英文", "诸葛亮：" + TcChinese::toEnglishName("诸葛亮", true, true, true));
+  #endif
 }
 
 void MainWindow::on_pushButton_11_clicked()
@@ -115,7 +123,7 @@ void MainWindow::on_pushButton_13_clicked()
 
         TcAdminAuthorization::execute(this, "notepad.exe", QStringList());
     #else
-        QMessageBox::information(this, "没有功能", Q"请自行试试调用某个程序吧~~~");
+        QMessageBox::information(this, "没有功能", "请自行试试调用某个程序吧~~~");
     #endif
 }
 
@@ -257,6 +265,7 @@ void MainWindow::on_pushButton_24_clicked()
 
 void MainWindow::on_pushButton_25_clicked()
 {
-
+  #if defined(Q_OS_WIN)
     TcWindows::createLink(qApp->applicationFilePath(), TcWindows::getWinSysDir(TcWindows::UserDeskTopPath) + "\\天池演示程序");
+  #endif
 }

@@ -5,7 +5,11 @@
 #include <QLabel>
 #include <QToolButton>
 
-class TcWndCaption : public QWidget
+#ifndef TIANCHI_API
+    #define TIANCHI_API
+#endif
+
+class TIANCHI_API TcWndCaption : public QWidget
 {
     Q_OBJECT
 public:

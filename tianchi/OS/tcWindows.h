@@ -21,9 +21,13 @@
 #if defined(Q_OS_WIN)
 #include <shlobj.h>
 
+#ifndef TIANCHI_API
+    #define TIANCHI_API
+#endif
+
 /// @brief Microsoft Windows 系统功能，只能在Windows上使用
 /// @author 渡世白玉 dushibaiyu@yahoo.com
-class TcWindows
+class TIANCHI_API TcWindows
 {
 public:
     //用户目录和临时目录，请用QDir获取
