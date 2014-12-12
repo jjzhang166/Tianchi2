@@ -1,4 +1,4 @@
-#include "Network/tcUdp.h"
+#include "tcUdp.h"
 
 #include <QByteArray>
 

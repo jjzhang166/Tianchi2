@@ -14,7 +14,7 @@
 #pragma execution_character_set("utf-8")
 #endif
 
-#include "tcChinese_p.h"
+#include "tcChinese_msime"
 // ---------------------------------------------------------------------------------------------------------------------
 class IMEEngine
 {
