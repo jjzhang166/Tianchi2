@@ -1,14 +1,32 @@
+/// ********************************************************************************************************************
+/// @copyright Tianchi C++ source library for Qt5 (天池共享源码库)\n
+/// 天池共享源码库开发组(www.qtcn.org)\n
+/// @license 授权协议：请阅读天池共享源码库附带的授权协议(LICENSE.LGPLv2.1)\n
+/// ********************************************************************************************************************
+/// @file tcWndCaption.h
+/// @brief 自绘窗口的可移动标题
+/// @version 1.0
+/// @date 2014.12.12
+/// @author 圣域天子(Jonix@qtcn.org)
+///
+/// ====================================================================================================================
+
+#pragma once
 #ifndef TIANCHI_TCWNDCAPTION_H
 #define TIANCHI_TCWNDCAPTION_H
-
-#include <QWidget>
-#include <QLabel>
-#include <QToolButton>
 
 #ifndef TIANCHI_API
     #define TIANCHI_API
 #endif
 
+#include <QWidget>
+#include <QLabel>
+#include <QToolButton>
+
+/// @code
+///    // 在窗口的构造函数中使用
+///    ui->formLayout->insertWidget(0, new TcWndCaption(this, "我是可移动的自绘标题"));
+/// @endcode
 class TIANCHI_API TcWndCaption : public QWidget
 {
     Q_OBJECT

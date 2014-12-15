@@ -129,7 +129,7 @@ bool TcAdminAuthorization::execute(QWidget *parent, const QString &program, cons
         return false;
     }
 
-    ::revoke(ttyName);
+    ::revoke(ttyName.data());
     ::unlockpt(masterFD);
 
     slaveFD = ::open(ttyName, O_RDWR | O_NOCTTY);

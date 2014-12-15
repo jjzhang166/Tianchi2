@@ -1,32 +1,32 @@
-// **************************************************************************
-// Tianchi C++ library for Qt (open source)
-// 天池共享源码库
-// 版权所有 (C) 天池共享源码库开发组
-// 授权协议：请阅读天池共享源码库附带的授权协议
-// **************************************************************************
-// 文档说明：Microsoft Windows 系统功能，只能在Windows上使用
-// ==========================================================================
-// 开发日志：
-// 日期         人员        说明
-// --------------------------------------------------------------------------
-// 2012.12.12  渡世白玉
-// ==========================================================================
-/// @file tcSystemInfo.h 检查是否当前程序是第一次启动
+/// ********************************************************************************************************************
+/// @copyright Tianchi C++ source library for Qt5 (天池共享源码库)\n
+/// 天池共享源码库开发组(www.qtcn.org)\n
+/// @license 授权协议：请阅读天池共享源码库附带的授权协议(LICENSE.LGPLv2.1)\n
+/// ********************************************************************************************************************
+/// @file tcWindows.h
+/// @brief Microsoft Windows 系统功能，只能在Windows上使用
+/// @version 1.0
+/// @date 2014.12.12
+/// @author 渡世白玉(dushibaiyu@yahoo.com)
+/// @attention 只能在 Windows 下使用
+///
+/// ====================================================================================================================
+
 #pragma once
 #ifndef TIANCHI_TCWINDOWS_H
 #define TIANCHI_TCWINDOWS_H
-
-#include <QString>
-
-#if defined(Q_OS_WIN)
-#include <shlobj.h>
 
 #ifndef TIANCHI_API
     #define TIANCHI_API
 #endif
 
+#include <QtCore>
+#if defined(Q_OS_WIN)
+
+#include <QString>
+#include <shlobj.h>
+
 /// @brief Microsoft Windows 系统功能，只能在Windows上使用
-/// @author 渡世白玉 dushibaiyu@yahoo.com
 class TIANCHI_API TcWindows
 {
 public:

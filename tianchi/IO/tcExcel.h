@@ -1,49 +1,44 @@
-// **************************************************************************
-// Tianchi C++ library for Qt (open source)
-// 天池共享源码库
-// 版权所有 (C) 天池共享源码库开发组
-// 授权协议：请阅读天池共享源码库附带的授权协议
-// **************************************************************************
-// 文档说明：通过 OLE 方式操作 Microsoft Excel（仅限 Windows 下使用，要求已安
-//           装 Excel）
-// ==========================================================================
-// 开发日志：
-// 日期         人员        说明
-// --------------------------------------------------------------------------
-// 2013.04.10   圣域天子    建立
-//
-// ==========================================================================
-/// @file tcMSExcel.h 通过 OLE 方式操作 Microsoft Excel（仅限 Windows 下使用，
-//                    要求已安装 Excel）
-// ==========================================================================
-#ifndef TIANCHI_TCMSEXCEL_H
-#define TIANCHI_TCMSEXCEL_H
+/// ********************************************************************************************************************
+/// @copyright Tianchi C++ source library for Qt5 (天池共享源码库)\n
+/// 天池共享源码库开发组(www.qtcn.org)\n
+/// @license 授权协议：请阅读天池共享源码库附带的授权协议(LICENSE.LGPLv2.1)\n
+/// ********************************************************************************************************************
+/// @file tcExcel.h
+/// @brief 通过 OLE 方式操作 Microsoft Excel（仅限 Windows 下使用，要求已安装 Excel）
+/// @version 1.0
+/// @date 2013.04.10
+/// @author 圣域天子(Jonix@qtcn.org)
+/// @attention 只能在 Windows 下，并已安装了 Microsoft Excel 时使用
+///
+/// ====================================================================================================================
 
-#include <QtCore>
-
-#if defined(Q_OS_WIN)
+#pragma once
+#ifndef TIANCHI_TCEXCEL_H
+#define TIANCHI_TCEXCEL_H
 
 #ifndef TIANCHI_API
     #define TIANCHI_API
 #endif
+
+#include <QtCore>
+#if defined(Q_OS_WIN)
 
 #include <QString>
 #include <QStringList>
 #include <QVariant>
 #include <ActiveQt/QAxObject>
 
+/// @class TcExcel 通过 OLE 方式操作 Microsoft Excel
 /// @brief 通过 OLE 方式操作 Microsoft Excel
 /// @note 通过 OLE 方式操作 Microsoft Excel
 /// @warning 只能在 Windows 下，并已安装了 Excel 时才能使用
-/// @author 圣域天子 Jonix@qtcn.org
-/// @date 2013-04-10
-class TIANCHI_API TcMSExcel
+class TIANCHI_API TcExcel
 {
 public:
     /// @brief 构造方法
-    TcMSExcel();
+    TcExcel();
     /// @brief 析构方法
-    virtual ~TcMSExcel();
+    virtual ~TcExcel();
 
     /// @brief 设置方向的常数
     enum Alignment
@@ -144,4 +139,4 @@ private:
     void destory();
 };
 #endif // Q_OS_WIN
-#endif // TIANCHI_MSEXCEL_H
+#endif // TIANCHI_EXCEL_H

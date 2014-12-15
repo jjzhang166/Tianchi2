@@ -1,4 +1,9 @@
 #依赖的Qt模块：core，network
+
+QT += network
+
+INCLUDEPATH += $$PWD/
+
 HEADERS  += \
     $$PWD/tcDownloader.h \
     $$PWD/tcUdp.h \
@@ -7,9 +12,7 @@ HEADERS  += \
     
 SOURCES += \
     $$PWD/tcDownloader.cpp \
-    $$PWD/tcSingleinstance.cpp \
     $$PWD/tcUdp.cpp \
     $$PWD/tcFtp.cpp \
     $$PWD/tcHttp.cpp
 
-INCLUDEPATH += $$PWD/

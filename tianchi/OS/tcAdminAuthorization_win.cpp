@@ -180,7 +180,7 @@ bool TcAdminAuthorization::execute(QWidget *, const QString &program, const QStr
     const QString file = QDir::toNativeSeparators(program);
     const QString args = qt_create_commandline(QString(), arguments);
 
-    SHELLEXECUTEINFOW shellExecuteInfo = { 0 };
+    SHELLEXECUTEINFOW shellExecuteInfo;
     shellExecuteInfo.nShow = SW_HIDE;
     shellExecuteInfo.lpVerb = L"runas";
     shellExecuteInfo.lpFile = (wchar_t *)file.utf16();

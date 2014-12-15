@@ -1,4 +1,7 @@
 #依赖的Qt模块：core，axcontainer（windows下）
+
+INCLUDEPATH += $$PWD/
+
 HEADERS  += \
       $$PWD/tcIO.h \
       $$PWD/tcLog.h 
@@ -7,11 +10,17 @@ SOURCES += \
       $$PWD/tcIO.cpp \
       $$PWD/tcLog.cpp
 
-INCLUDEPATH += $$PWD/
-
 win32:{
-  HEADERS  += $$PWD/tcMSExcel.h
-  SOURCES += $$PWD/tcMSExcel.cpp
-  
-  LIBS += -lversion
+
+    QT += axcontainer
+
+    HEADERS += \
+        $$PWD/tcExcel.h \
+        $$PWD/tcExcelReader.h
+
+    SOURCES += \
+        $$PWD/tcExcel.cpp \
+        $$PWD/tcExcelReader.cpp
+
+    LIBS += -lversion
 }

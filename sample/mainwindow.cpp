@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 
 #include "tcWndCaption.h"
-#include "tcWindowSizer.h"
+#include "tcWndSizer.h"
 #include <QMessageBox>
 #include <QDebug>
 
@@ -19,8 +19,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    ui->formLayout->insertWidget(0, new TcWndCaption(this, "我要抢单", QIcon(":/images/close.png")));
-    new TcWindowSizer(this);
+    ui->formLayout->insertWidget(0, new TcWndCaption(this, "我是可移动的自绘标题"));
+    new TcWndSizer(this);
 }
 
 MainWindow::~MainWindow()
@@ -109,12 +109,6 @@ void MainWindow::on_pushButton_12_clicked()
 {
     QMessageBox::information(this, "确认权限", QString("有没有管理员权限: ")
                              + (TcAdminAuthorization::hasAdminRights() ? "有" : "无"));
-
-//    class QRUNINFOSHARED_EXPORT AdminAuthorization
-//    {
-//    public:
-//        static bool hasAdminRights();
-//        static bool execute(QWidget *parent, const QString &programs, const QStringList &arguments);
 }
 
 void MainWindow::on_pushButton_13_clicked()

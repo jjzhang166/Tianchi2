@@ -1,4 +1,6 @@
 #依赖的Qt模块：core
+INCLUDEPATH += $$PWD/
+
 HEADERS  += \
     $$PWD/tcFunctionalSortFilterProxyModel.h \
     $$PWD/tcRecentUse.hpp \
@@ -12,4 +14,3 @@ SOURCES += \
     $$PWD/tcVariantMapTableModel.cpp \
     $$PWD/tcCommon.cpp
 
-INCLUDEPATH += $$PWD/

@@ -57,7 +57,10 @@ TcWndCaption::TcWndCaption(QWidget* parent, const QString& title, const QIcon& i
     m_bnClose->setMaximumSize(FIXED_HEIGHT, FIXED_HEIGHT);
     m_bnClose->setStyleSheet("QToolButton{border: 0px}"
                              "QToolButton:hover{border: 0px solid;background-color:rgb(212,64,39);}");
-    m_bnClose->setIcon(icon);
+    if ( icon.isNull() )
+    {
+        m_bnClose->setIcon(QIcon(":/tcWndCaption/close.png"));
+    }
     if ( parent != nullptr )
     {
         connect(m_bnClose, &QToolButton::clicked, parent, &QWidget::close);

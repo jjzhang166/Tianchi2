@@ -1,22 +1,27 @@
-// *****************************************************************************
-// Tianchi C++ library for Qt (open source)
-// 天池共享源码库
-// 版权所有 (C) 天池共享源码库开发组
-// 授权协议：请阅读天池共享源码库附带的授权协议
-// *****************************************************************************
-// 文档说明：“最近使用”模版类，例如：用于最近打开的文件
-// =============================================================================
-// 开发日志：
-// 日期         人员        说明
-// -----------------------------------------------------------------------------
-// 2013-10-11   cnhemiya    建立
-//
-// =============================================================================
-/// @file TcRecentUse.hpp
-// =============================================================================
+/// ********************************************************************************************************************
+/// @copyright Tianchi C++ source library for Qt5 (天池共享源码库)\n
+/// 天池共享源码库开发组(www.qtcn.org)\n
+/// @license 授权协议：请阅读天池共享源码库附带的授权协议(LICENSE.LGPLv2.1)\n
+/// ********************************************************************************************************************
+/// @file tcRecentUse.hpp
 /// @brief "最近使用"模版类，例如：用于最近打开的文件，默认最大10个
-/// @author cnhemiya@gmail.com
-/// @date 2013-10-11
+/// @version 1.0
+/// @date 2013.10.11
+/// @author 南果梨(cnhemiya@gmail.com)
+///
+/// ====================================================================================================================
+
+#pragma once
+#ifndef TIANCHI_TCRECENTUSE_HPP
+#define TIANCHI_TCRECENTUSE_HPP
+
+#ifndef TIANCHI_API
+    #define TIANCHI_API
+#endif
+
+#include <QList>
+
+/// @brief “最近使用”模版类
 /// @par 示例:
 /// @code
 /// int main()
@@ -35,19 +40,6 @@
 ///     return 0;
 /// }
 /// @endcode
-
-#ifndef TCRECENTUSE_HPP
-#define TCRECENTUSE_HPP
-
-#include <QList>
-
-#ifndef TIANCHI_API
-    #define TIANCHI_API
-#endif
-
-/// @brief “最近使用”模版类
-/// @author cnhemiya
-/// @date 2013-10-11
 template<typename T> class TIANCHI_API TcRecentUse
 {
 public:
@@ -169,4 +161,4 @@ private:
     const int m_defaultMax;
 };
 
-#endif // TCRECENTUSE_HPP
+#endif // TIANCHI_TCRECENTUSE_HPP

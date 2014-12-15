@@ -1,4 +1,5 @@
 #include "tcLog.h"
+
 #include <QCoreApplication>
 #include <QDir>
 #include <QFile>

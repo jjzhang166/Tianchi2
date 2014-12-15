@@ -1,39 +1,19 @@
-// **************************************************************************
-// Tianchi C++ library for Qt (open source)
-// 天池共享源码库
-// 版权所有 (C) 天池共享源码库开发组
-// 授权协议：请阅读天池共享源码库附带的授权协议
-// **************************************************************************
-// 文档说明：简单的 Tuple(元组) 模版类, 提供2~10个类型参数的模版
-// ==========================================================================
-// 开发日志：
-// 日期         人员                   说明
-// --------------------------------------------------------------------------
-// 2013.05.25   cnhemiya@gmail.com    建立
-//
-// ==========================================================================
-/// @file tcTuple.hpp 简单的 Tuple(元组) 模版类, 提供2~10个类型参数的模版
-// ==========================================================================
-
+/// ********************************************************************************************************************
+/// @copyright Tianchi C++ source library for Qt5 (天池共享源码库)\n
+/// 天池共享源码库开发组(www.qtcn.org)\n
+/// @license 授权协议：请阅读天池共享源码库附带的授权协议(LICENSE.LGPLv2.1)\n
+/// ********************************************************************************************************************
+/// @file tcTuple.hpp
 /// @brief 简单的 Tuple(元组) 模版类, 提供2~10个类型参数的模版
-/// @author cnhemiya@gmail.com
-/// @date 2013-05-25
-/// @par 示例:
-/// @code
-/// int main()
-/// {
-///		TcTuple<int, double> demo;
-///		demo.set0(99);
-///		demo.set1(3.14);
-///		cout << demo.get0() << endl;
-///		cout << demo.get1() << endl;
-/// }
-/// @endcode
+/// @version 1.0
+/// @date 2013.05.25
+/// @author 南果梨(cnhemiya@gmail.com)
+///
+/// ====================================================================================================================
 
+#pragma once
 #ifndef TIANCHI_TCTUPLE_HPP
 #define TIANCHI_TCTUPLE_HPP
-
-#include <qglobal.h>
 
 #ifndef TIANCHI_API
     #define TIANCHI_API
@@ -58,6 +38,20 @@ template<typename T0 = _tc_tuple_ns_::null_type,
 		 typename T9 = _tc_tuple_ns_::null_type>
 class TcTuple;
 
+/// @brief 简单的 Tuple(元组) 模版类, 提供2~10个类型参数的模版
+/// @author cnhemiya@gmail.com
+/// @date 2013-05-25
+/// @par 示例:
+/// @code
+/// int main()
+/// {
+///		TcTuple<int, double> demo;
+///		demo.set0(99);
+///		demo.set1(3.14);
+///		cout << demo.get0() << endl;
+///		cout << demo.get1() << endl;
+/// }
+/// @endcode
 template<typename T0, typename T1>
 class TIANCHI_API TcTuple<T0, T1,
 		_tc_tuple_ns_::null_type,

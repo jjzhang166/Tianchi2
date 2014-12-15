@@ -1,13 +1,13 @@
-#include "tcMSExcel.h"
+#include "tcExcel.h"
 
 #if defined(Q_OS_WIN)
 #include <QList>
 
-TcMSExcel::TcMSExcel()
+TcExcel::TcExcel()
 {
 }
 
-TcMSExcel::~TcMSExcel()
+TcExcel::~TcExcel()
 {
     close();
     if (!excel->isNull())
@@ -21,7 +21,7 @@ TcMSExcel::~TcMSExcel()
     delete excel ; excel  = nullptr;
 }
 
-void TcMSExcel::construct()
+void TcExcel::construct()
 {
     destory();
     excel->setControl("Excel.Application");
@@ -35,7 +35,7 @@ void TcMSExcel::construct()
     }
 }
 
-bool TcMSExcel::create(const QString& filename)
+bool TcExcel::create(const QString& filename)
 {
     bool ret = false;
     if (books != NULL && ! books->isNull())
@@ -50,7 +50,7 @@ bool TcMSExcel::create(const QString& filename)
     return ret;
 }
 
-bool TcMSExcel::open(const QString& filename)
+bool TcExcel::open(const QString& filename)
 {
     bool ret = false;
     construct();
@@ -68,7 +68,7 @@ bool TcMSExcel::open(const QString& filename)
     return ret;
 }
 
-void TcMSExcel::save(const QString& filename)
+void TcExcel::save(const QString& filename)
 {
     if ( book != NULL && ! book->isNull())
     {
@@ -77,12 +77,12 @@ void TcMSExcel::save(const QString& filename)
     }
 }
 
-void TcMSExcel::close()
+void TcExcel::close()
 {
     destory();
 }
 
-void TcMSExcel::destory()
+void TcExcel::destory()
 {
     delete sheet ; sheet  = nullptr;
     delete sheets; sheets = nullptr;
@@ -101,7 +101,7 @@ void TcMSExcel::destory()
     m_sheetName = "";
 }
 
-void TcMSExcel::kick()
+void TcExcel::kick()
 {
     if ( excel != NULL && !excel->isNull())
     {
@@ -115,7 +115,7 @@ void TcMSExcel::kick()
     destory();
 }
 
-QStringList TcMSExcel::sheetNames()
+QStringList TcExcel::sheetNames()
 {
     QStringList ret;
     if ( sheets != NULL && !sheets->isNull() )
@@ -130,7 +130,7 @@ QStringList TcMSExcel::sheetNames()
     return ret;
 }
 
-void TcMSExcel::setVisible(bool value)
+void TcExcel::setVisible(bool value)
 {
     if ( excel != NULL && !excel->isNull())
     {
@@ -138,7 +138,7 @@ void TcMSExcel::setVisible(bool value)
     }
 }
 
-void TcMSExcel::setCaption(const QString& value)
+void TcExcel::setCaption(const QString& value)
 {
     if ( excel != NULL && !excel->isNull() )
     {
@@ -146,7 +146,7 @@ void TcMSExcel::setCaption(const QString& value)
     }
 }
 
-bool TcMSExcel::addBook()
+bool TcExcel::addBook()
 {
     bool ret = false;
     if ( excel != NULL && !excel->isNull())
@@ -161,7 +161,7 @@ bool TcMSExcel::addBook()
     return ret;
 }
 
-bool TcMSExcel::currentSheet()
+bool TcExcel::currentSheet()
 {
     bool ret = false;
     delete sheet; sheet = nullptr;
@@ -175,7 +175,7 @@ bool TcMSExcel::currentSheet()
     return ret;
 }
 
-bool TcMSExcel::setCurrentSheet(int index)
+bool TcExcel::setCurrentSheet(int index)
 {
     bool ret = false;
     if ( sheets != NULL && !sheets->isNull())
@@ -188,7 +188,7 @@ bool TcMSExcel::setCurrentSheet(int index)
     return ret;
 }
 
-int TcMSExcel::sheetCount()
+int TcExcel::sheetCount()
 {
     int ret = 0;
     if ( sheets != NULL && ! sheets->isNull())
@@ -198,7 +198,7 @@ int TcMSExcel::sheetCount()
     return ret;
 }
 
-void TcMSExcel::cellFormat(int row, int col, const QString& format)
+void TcExcel::cellFormat(int row, int col, const QString& format)
 {
     if ( sheet != NULL && ! sheet->isNull())
     {
@@ -208,7 +208,7 @@ void TcMSExcel::cellFormat(int row, int col, const QString& format)
     }
 }
 
-void TcMSExcel::cellAlign(int row, int col, Alignment hAlign, Alignment vAlign)
+void TcExcel::cellAlign(int row, int col, Alignment hAlign, Alignment vAlign)
 {
     if ( sheet != NULL && !sheet->isNull())
     {
@@ -219,7 +219,7 @@ void TcMSExcel::cellAlign(int row, int col, Alignment hAlign, Alignment vAlign)
     }
 }
 
-QVariant TcMSExcel::read(int row, int col)
+QVariant TcExcel::read(int row, int col)
 {
     QVariant ret;
     if ( sheet != NULL && ! sheet->isNull())
@@ -231,7 +231,7 @@ QVariant TcMSExcel::read(int row, int col)
     return ret;
 }
 
-void TcMSExcel::write(int row, int col, const QVariant& value)
+void TcExcel::write(int row, int col, const QVariant& value)
 {
     if ( sheet != NULL && ! sheet->isNull())
     {
@@ -241,7 +241,7 @@ void TcMSExcel::write(int row, int col, const QVariant& value)
     }
 }
 
-bool TcMSExcel::usedRange(int& rowStart, int& colStart, int& rowEnd, int& colEnd)
+bool TcExcel::usedRange(int& rowStart, int& colStart, int& rowEnd, int& colEnd)
 {
     bool ret = false;
     if ( sheet != NULL && ! sheet->isNull())
@@ -256,4 +256,5 @@ bool TcMSExcel::usedRange(int& rowStart, int& colStart, int& rowEnd, int& colEnd
     }
     return ret;
 }
-#endif // Q_OS_WIN32 / Q_OS_WIN64
+#endif // Q_OS_WIN
+

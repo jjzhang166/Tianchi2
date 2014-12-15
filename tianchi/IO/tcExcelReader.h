@@ -1,21 +1,18 @@
-// **************************************************************************
-// Tianchi C++ library for Qt (open source)
-// 天池共享源码库
-// 版权所有 (C) 天池共享源码库开发组
-// 授权协议：请阅读天池共享源码库附带的授权协议
-// **************************************************************************
-// 文档说明：通过 OLE 方式操作 Microsoft Excel（仅限 Windows 下使用，要求已
-//           安装 Excel）
-// ==========================================================================
-// 开发日志：
-// 日期         人员        说明
-// --------------------------------------------------------------------------
-// 2013.05.02   XChinux     建立
-//
-// ==========================================================================
-/// @file tcExcelReader.h 通过 OLE 方式读取 Microsoft Excel（仅限 Windows 下使用，
-//                        要求已安装 Excel或WPSOffice）
-// ==========================================================================
+/// ********************************************************************************************************************
+/// @copyright Tianchi C++ source library for Qt5 (天池共享源码库)\n
+/// 天池共享源码库开发组(www.qtcn.org)\n
+/// @license 授权协议：请阅读天池共享源码库附带的授权协议(LICENSE.LGPLv2.1)\n
+/// ********************************************************************************************************************
+/// @file tcExcelReader.h
+/// @brief 通过 OLE 方式读取 Microsoft Excel, WPS（Linux 下仅支持WPS）
+/// @version 1.0
+/// @date 2013.05.02
+/// @author XChinux(XChinux@qtcn.org)
+/// @attention 需要在安装了 Microsoft Excel 或 WPS 时使用
+///
+/// ====================================================================================================================
+
+#pragma once
 #ifndef TIANCHI_TCEXCELREADER_H
 #define TIANCHI_TCEXCELREADER_H
 
@@ -28,9 +25,8 @@
 
 class TcExcelReaderPrivate;
 
-/// @brief  simple excel reader class, limit to read first sheet
-/// @author XChinux xchinux@qtcn.org
-/// @date   2013-05-02
+/// @brief simple excel reader class, limit to read first sheet
+/// @attention 需要在安装了 Microsoft Excel 或 WPS 时使用
 class TIANCHI_API TcExcelReader
 {
 public:

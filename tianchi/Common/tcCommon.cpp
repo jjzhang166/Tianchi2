@@ -1,6 +1,10 @@
 #include "tcCommon.h"
 
-QDateTime TcCommon::toDateTime(const QString& text)
+#include <QTextCodec>
+#include <QStringList>
+#include <QCryptographicHash>
+
+QDateTime toDateTime(const QString& text)
 {
     QDateTime ret = QDateTime();
     switch(text.length())
@@ -53,7 +57,7 @@ QDateTime TcCommon::toDateTime(const QString& text)
     return ret;
 }
 
-char TcCommon::getIDCardVerifyCode(const QByteArray& id)
+char getIDCardVerifyCode(const QByteArray& id)
 {
     char ret = '\0';
     if ( id.length() >= 17 )
@@ -75,7 +79,7 @@ char TcCommon::getIDCardVerifyCode(const QByteArray& id)
     return ret;
 }
 
-QDateTime TcCommon::complieDateTime(const QString& complieDate, const QString& complieTime)
+QDateTime complieDateTime(const QString& complieDate, const QString& complieTime)
 {
     QString DateString = complieDate;
     QString Year  = DateString.right(4);
@@ -98,6 +102,99 @@ QDateTime TcCommon::complieDateTime(const QString& complieDate, const QString& c
     }
     return QDateTime(QDate(Year.toInt(), MonthValue, Day.toInt()),
                      QTime(Hour.toInt(), Minute.toInt(), Second.toInt()));
+}
+
+// 分解姓名（单、复姓、英文）
+int splitHumanName(const QString& full, QString& sur, QString& real, QString& english)
+{
+    QString surs = QTextCodec::codecForLocale()->toUnicode(
+                               "欧阳\n太史\n端木\n上官\n司马\n东方\n独孤\n南宫\n万俟\n"
+                               "闻人\n夏侯\n诸葛\n尉迟\n公羊\n赫连\n澹台\n皇甫\n宗政\n"
+                               "濮阳\n公冶\n太叔\n申屠\n公孙\n慕容\n仲孙\n钟离\n长孙\n"
+                               "宇文\n司徒\n鲜于\n司空\n闾丘\n子车\n亓官\n司寇\n巫马\n"
+                               "公西\n颛孙\n壤驷\n公良\n漆雕\n乐正\n宰父\n谷梁\n拓跋\n"
+                               "夹谷\n轩辕\n令狐\n段干\n百里\n呼延\n东郭\n南门\n羊舌\n"
+                               "微生\n公户\n公玉\n公仪\n梁丘\n公仲\n公上\n公门\n公山\n"
+                               "公坚\n左丘\n公伯\n西门\n公祖\n第五\n公乘\n贯丘\n公皙\n"
+                               "南荣\n东里\n东宫\n仲长\n子书\n子桑\n即墨\n达奚\n褚师\n");
+    QStringList doubleSurnames = surs.split("\n");
+
+    QString fullname = full.trimmed();
+
+    int ret = 0;
+    if ( ! fullname.isEmpty() )
+    {
+        if ( fullname.length() != fullname.toLocal8Bit().length() )
+        {// 汉字
+            foreach(QString s, doubleSurnames)
+            {
+                if ( ! s.isEmpty() && fullname.startsWith(s) )
+                {
+                    sur = s;
+                    ret = 2;
+                    break;
+                }
+            }
+            if ( ret != 2 )
+            {
+                sur = fullname.mid(0, 1);
+                ret = 1;
+            }
+            real = fullname.mid(sur.length());
+        }else
+        {// 英文名
+            QStringList ss = fullname.split(" ", QString::SkipEmptyParts);
+            english = "";
+            for( int i=0;i<ss.count();i++ )
+            {
+                QString t = ss.at(i);
+                if ( i == ss.count()-1 )
+                {
+                    sur = t;
+                }else
+                {
+                    english += t + " ";
+                }
+            }
+            english = english.trimmed();
+
+            ret = 3;
+        }
+    }
+    return ret;
+}
+
+QString hmacSha1(const QByteArray& baseString, const QByteArray& key)
+{
+    const int blockSize = 64;
+
+    QByteArray hmacSha1Key = key.length() > blockSize
+            ? QCryptographicHash::hash(key, QCryptographicHash::Sha1)
+            : key;
+
+    QByteArray innerPadding(blockSize, char(0x36));
+    QByteArray outerPadding(blockSize, char(0x5C));
+
+    for( int i = 0; i < hmacSha1Key.length(); i++ )
+    {
+        innerPadding[i] = innerPadding[i] ^ hmacSha1Key.at(i);
+        outerPadding[i] = outerPadding[i] ^ hmacSha1Key.at(i);
+    }
+
+    QByteArray part  = innerPadding;  part .append(baseString);
+    QByteArray total = outerPadding;  total.append(QCryptographicHash::hash(part, QCryptographicHash::Sha1));
+
+    QByteArray hashed = QCryptographicHash::hash(total, QCryptographicHash::Sha1);
+
+    QString ret;
+    QString s;
+    for( int i=0; i<hashed.count(); i++ )
+    {
+        unsigned char c = hashed.at(i);
+        s.sprintf("%02x", c);
+        ret += s;
+    }
+    return ret;
 }
 
 QString toString(const QJsonValue& jv)
@@ -215,4 +312,14 @@ bool toBool(const QJsonValue& jv)
                 || s.toInt() >0;
     }
     return ret;
+}
+
+bool isTrue(const QString& s)
+{
+    return s.toInt() >0
+            || s.compare("true", Qt::CaseInsensitive)==0
+            || s.compare("yes", Qt::CaseInsensitive)==0
+            || s.compare("ok", Qt::CaseInsensitive)==0
+            || s.compare("y", Qt::CaseInsensitive)==0
+            || s.compare("t", Qt::CaseInsensitive)==0;
 }

@@ -1,36 +1,35 @@
-// **************************************************************************
-// Tianchi share library for Qt (C++)
-// 天池共享源码库
-// 版权所有 (C) 天池共享源码库开发组
-// 授权协议：请阅读天池共享源码库附带的授权协议
-// **************************************************************************
-// 文档说明： 汉语相关处理
-// ==========================================================================
-// 开发日志：
-// 日期         人员        说明
-// --------------------------------------------------------------------------
-// 2013.04.15   圣域天子    建立
-// 2014.12.11   圣域天子    局部修复
-// ==========================================================================
-/// @file tcChinese.h 汉语相关处理
+/// ********************************************************************************************************************
+/// @copyright Tianchi C++ source library for Qt5 (天池共享源码库)\n
+/// 天池共享源码库开发组(www.qtcn.org)\n
+/// @license 授权协议：请阅读天池共享源码库附带的授权协议(LICENSE.LGPLv2.1)\n
+/// ********************************************************************************************************************
+/// @file tcChinese.h
+/// @brief Windows 下汉字转拼音功能
+/// @version 1.1
+/// @date 2014.12.11
+/// @author 圣域天子(Jonix@qtcn.org)
+/// @attention 只能在 Windows 下使用\n
+/// 需要在 .pro 文件中追加：\n
+/// QT += axcontainer\n
+/// LIB += -lole32
+/// 若以 GBK 格式保存，可能需要修改源码：请在 .cpp 中搜索: <GBK>
+///
+/// ====================================================================================================================
 
-// 请在 .pro 文件中追加：
-// QT += axcontainer
-// 若以 GBK 格式保存，可能需要修改源码：请在 .cpp 中搜索: <GBK>
-
+#pragma once
 #ifndef TIANCHI_TCCHINESE_H
 #define TIANCHI_TCCHINESE_H
-
-#if defined(Q_OS_WIN)
 
 #ifndef TIANCHI_API
     #define TIANCHI_API
 #endif
 
+#include <QtCore>
+#if defined(Q_OS_WIN)
+
 #include <QString>
 
-/// @brief 汉语相关处理类
-/// @note 此类仅限在 Windows 下有效，使用时需要在 .pro 文件中加上 LIB += -lole32
+/// @brief 汉语转拼音
 class TIANCHI_API TcChinese
 {
 public:
@@ -107,13 +106,6 @@ public:
     static QString toEnglishName(const QString& Str, bool style=false, bool capitalization=false,
                                  bool hyphenatedname= false);
 
-    /// @brief 分割中文全名中的姓氏、名字和英文名
-    /// @param full 全名
-    /// @param sur 姓氏
-    /// @param real 名字
-    /// @param english 英文名
-    /// @return 0: 失败，1: 单姓，2: 复姓，3: 英文名
-    static int splitHumanName(const QString& full, QString& sur, QString& real, QString& english);
 };
 
 #endif // Q_OS_WIN

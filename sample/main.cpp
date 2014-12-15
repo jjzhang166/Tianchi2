@@ -1,5 +1,6 @@
 #include "mainwindow.h"
-#include "tcSingleinstance.h"
+#include "tcRunOnceChecker.h"
+
 #include <QApplication>
 #include <QMessageBox>
 #include <QDesktopWidget>
@@ -8,8 +9,8 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    TcSingleInstance si("Tianchi2_Samples_App");
-    if ( si.first() )
+    TcRunOnceChecker checker("Tianchi2_Samples_App");
+    if ( ! checker.isRunning(TcRunOnceChecker::ProcessList) )
     {
         // 首次运行
         MainWindow w;

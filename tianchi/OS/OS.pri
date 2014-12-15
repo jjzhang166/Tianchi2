@@ -1,4 +1,7 @@
 #依赖的Qt模块：core，gui,widgets
+
+INCLUDEPATH += $$PWD/
+
 HEADERS  += \
     $$PWD/msime.h \
     $$PWD/tcChinese.h \
@@ -15,8 +18,6 @@ SOURCES += \
     $$PWD/tcSystemInfo.cpp \
     $$PWD/tcSelfRestarter.cpp 
     
-INCLUDEPATH += $$PWD/
-    
 win32:{
     HEADERS  +=  $$PWD/tcWindows.h
     SOURCES += \
@@ -32,6 +33,9 @@ unix:{
         SOURCES += \
             $$PWD/tcAdminAuthorization_mac.cpp \
             $$PWD/tcSystemInfo_mac.cpp
+            
+        LIBS += -framework Carbon -framework Security
+
     } else {
         SOURCES += \
             $$PWD/tcAdminAuthorization_x11.cpp \

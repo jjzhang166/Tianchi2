@@ -5,7 +5,3 @@ include($$PWD//IO/IO.pri)
 include($$PWD//Network/Network.pri)
 include($$PWD//OS/OS.pri)
 include($$PWD//Widgets/Widgets.pri) 
-
-RESOURCES += \
-    $$PWD/resource.qrc
-

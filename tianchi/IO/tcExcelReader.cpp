@@ -1,13 +1,15 @@
 #include "tcExcelReader.h"
+
 #include <QFile>
+
 #ifdef Q_OS_WIN
-#include <QDateTime>
-#include <QAxObject>
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
-#include <QStandardPaths>
-#else
-#include <QDesktopServices>
-#endif
+  #include <QDateTime>
+  #include <QAxObject>
+  #if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
+    #include <QStandardPaths>
+  #else
+    #include <QDesktopServices>
+  #endif
 #endif
 
 class TcExcelReaderPrivate

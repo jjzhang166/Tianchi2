@@ -1,13 +1,21 @@
 QT += core gui network
-win32:QT += axcontainer
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 CONFIG += c++11 
-
-TARGET = $$qtLibraryTarget(TianChi)
+CONFIG += shared
+DESTDIR = ../bin
+TARGET = $$qtLibraryTarget(tianchi)
 TEMPLATE = lib
 
-DEFINES += TIANCHI_API=Q_CORE_EXPORT
+#DEFINES += TIANCHI_API=Q_CORE_EXPORT
+DEFINES += TIANCHI_API=Q_DECL_EXPORT
 
-include($$PWD/tianchi.pri)
+include($$PWD/tianchi_all.pri)
 
-VERSION = 2.0.0
+VERSION = 0.2.1
+
+#注意：中文时必须采用 GBK 编码
+QMAKE_TARGET_PRODUCT = Tianchi2
+QMAKE_TARGET_COMPANY = www.qtcn.org
+QMAKE_TARGET_DESCRIPTION = Tianchi2 source library for Qt5
+QMAKE_TARGET_COPYRIGHT = tianchi2@www.qtcn.org

@@ -1,9 +1,9 @@
-#include "tcWindowSizer.h"
+#include "tcWndSizer.h"
 #include <QMainWindow>
 #include <QMouseEvent>
 #include <QDebug>
 
-TcWindowSizer::TcWindowSizer(QWidget* parent)
+TcWndSizer::TcWndSizer(QWidget* parent)
     : QObject(parent)
 {
     m_widget = parent;
@@ -17,18 +17,18 @@ TcWindowSizer::TcWindowSizer(QWidget* parent)
     m_widget->installEventFilter(this);	// 代理窗体事件
 }
 
-void TcWindowSizer::setBorderWidth(int width)
+void TcWndSizer::setBorderWidth(int width)
 {
     m_borderWidth = width;
 }
 
-bool TcWindowSizer::eventFilter(QObject* target, QEvent* event)
+bool TcWndSizer::eventFilter(QObject* target, QEvent* event)
 {
     static QPoint   pressedPos;
     static int      sizeDirection = 0;
 
     QMouseEvent* mouseEvent;
-    switch(event->type())
+    switch((unsigned long)(event->type()))
     {
     case QEvent::MouseButtonPress:
         if ( sizeDirection != 0 )
