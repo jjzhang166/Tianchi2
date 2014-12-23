@@ -79,9 +79,20 @@ public:
 
     static QString  getWinSysDir(SYSTEMPATH path);//获取系统的路径
 
+    static bool     resizeEvent(const QByteArray&, void* msg, long* result, const QRect& wndRect);
+
 private:
     TcWindows(){}
 };
+
+// *********************************************************************************************************************
+//class TIANCHI_API TcWindowsEvent
+//{
+//public:
+//    static void paintShadow(QWidget* widget, int shadowWidth=3);
+//    static bool resizeEvent(const QByteArray&, void* msg, long* result, const QRect& wndRect);
+//};
+
 #endif // Q_OS_WIN
 
 #endif // TIANCHI_TCWINDOWS_H

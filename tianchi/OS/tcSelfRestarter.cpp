@@ -48,7 +48,6 @@ class TcSelfRestarter::Private
 {
 public:
     Private(int argc, char *argv[])
-        : restartOnQuit(false)
     {
         executable = QString::fromLocal8Bit(argv[0]);
         workingPath = QDir::currentPath();
@@ -65,18 +64,20 @@ public:
 
     ~Private()
     {
-        if (restartOnQuit)
+        if ( restartOnQuit )
+        {
             QProcess::startDetached(executable, args, workingPath);
+        }
     }
 
-    QString executable;
+    QString     executable;
     QStringList args;
-    bool restartOnQuit;
-    QString workingPath;
-    static TcSelfRestarter *instance;
+    bool        restartOnQuit = false;
+    QString     workingPath;
+    static TcSelfRestarter* instance;
 };
 
-TcSelfRestarter* TcSelfRestarter::Private::instance = 0;
+TcSelfRestarter* TcSelfRestarter::Private::instance = nullptr;
 
 TcSelfRestarter::TcSelfRestarter(int argc, char *argv[])
     : d(new Private(argc, argv))

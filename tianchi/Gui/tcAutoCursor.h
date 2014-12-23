@@ -33,8 +33,19 @@
 /// @see class TcCursorBusy
 class TIANCHI_API TcAutoCursor
 {
+public:
+    /// @brief 立即恢复最初的光标
+    inline void restore()
+    {
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
+        QGuiApplication::restoreOverrideCursor();
+#else
+        QApplication::restoreOverrideCursor();
+#endif
+    }
+
 protected:
-    TcAutoCursor(Qt::CursorShape shape)
+    explicit TcAutoCursor(Qt::CursorShape shape)
     {
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
         QGuiApplication::setOverrideCursor(QCursor(shape));
@@ -46,19 +57,7 @@ protected:
     {
         restore();
     }
-    QWidget* m_parent;
     QCursor  m_cursor;
-
-public:
-    /// @brief 立即恢复最初的光标
-    inline void restore()
-    {
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
-        QGuiApplication::restoreOverrideCursor();
-#else
-        QApplication::restoreOverrideCursor();
-#endif
-    }
 };
 
 /// @brief 表示忙的等待沙漏光标
@@ -98,7 +97,7 @@ public:
 class TIANCHI_API TcCursorBusy : public TcAutoCursor
 {
 public:
-    TcCursorBusy()
+    explicit TcCursorBusy()
         : TcAutoCursor(Qt::BusyCursor)
     {
     }

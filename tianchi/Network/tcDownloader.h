@@ -41,8 +41,8 @@ public Q_SLOTS:
 
 private:
     QNetworkAccessManager   m_Qnam;
-    QNetworkReply*          m_Reply;
-    QFile*                  m_File;
+    QNetworkReply*          m_Reply = nullptr;
+    QFile*                  m_File = nullptr;
 
     const int   m_Index;
     qint64      m_HaveDoneBytes;
@@ -72,7 +72,7 @@ private:
     int m_FinishedNum;
     int m_FileSize;
     QUrl m_Url;
-    QFile *m_File;
+    QFile* m_File = nullptr;
 };
 
 #endif // TIANCHI_TCDOWNLOADER_H

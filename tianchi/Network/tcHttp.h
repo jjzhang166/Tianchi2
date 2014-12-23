@@ -27,6 +27,8 @@ class TIANCHI_API TcHttp : public QObject
 {
     Q_OBJECT
 public:
+    TcHttp(int timeout=30000);
+
     /// @brief 使用 get 方式进行请求
     /// @param url 地址以及参数，支持 http/https
     QByteArray get(const QString& url);

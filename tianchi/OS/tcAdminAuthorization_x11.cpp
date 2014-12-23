@@ -145,7 +145,7 @@ bool TcAdminAuthorization::execute(QWidget *parent, const QString &program, cons
         return false;
 
     int flags = ::fcntl(pipedData[0], F_GETFD);
-    if (flags != -1)
+    if ( flags != -1 )
         ::fcntl(pipedData[0], F_SETFL, flags | O_NONBLOCK);
 
     pid_t child = fork();
@@ -166,9 +166,10 @@ bool TcAdminAuthorization::execute(QWidget *parent, const QString &program, cons
 
         QRegExp re(QLatin1String("[Pp]assword.*:"));
         QByteArray errData;
-        flags = ::fcntl(masterFD, F_GETFD);
+        //flags =
+        ::fcntl(masterFD, F_GETFD);
         int bytes = 0;
-        int errBytes = 0;
+        //int errBytes = 0;
         char buf[1024];
         char errBuf[1024];
         while (bytes >= 0) {
@@ -176,11 +177,11 @@ bool TcAdminAuthorization::execute(QWidget *parent, const QString &program, cons
             if (::waitpid(child, &state, WNOHANG) == -1)
                 break;
             bytes = ::read(masterFD, buf, 1023);
-            errBytes = ::read(pipedData[0], errBuf, 1023);
-            if (errBytes > 0)
+            int errBytes = ::read(pipedData[0], errBuf, 1023);
+            if (errBytes >0)
             {
                 errData.append(buf, errBytes);
-                errBytes=0;
+                //errBytes=0;
             }
             if (bytes > 0) {
                 const QString line = QString::fromLatin1(buf, bytes);
@@ -253,7 +254,9 @@ bool TcAdminAuthorization::execute(QWidget *parent, const QString &program, cons
 
         int i = 0;
         for (QList<QByteArray>::iterator it = args.begin(); it != args.end(); ++it, ++i)
+        {
             argp[i] = it->data();
+        }
         argp[i] = 0;
 
         ::unsetenv("LANG");

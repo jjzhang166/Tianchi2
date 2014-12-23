@@ -8,6 +8,11 @@
 #include <iostream>
 using namespace std;
 
+TcHttp::TcHttp(int timeout)
+{
+    m_timeout = timeout;
+}
+
 QByteArray TcHttp::get(const QString& url)
 {
     QNetworkAccessManager   nam;

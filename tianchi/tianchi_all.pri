@@ -1,3 +1,4 @@
+QT += core
 CONFIG += c++11
 
 #Common
@@ -10,15 +11,13 @@ HEADERS += \
     $$PWD/Common/tcRecentUse.hpp \
     $$PWD/Common/tcSingleton.hpp \
     $$PWD/Common/tcTuple.hpp \
-    $$PWD/Common/tcVariantMapTableModel.h \
-    $$PWD/Widgets/tcWndSizer.h
+    $$PWD/Common/tcVariantMapTableModel.h
 
 SOURCES += \
     $$PWD/Common/tcCommon.cpp \
     $$PWD/Common/tcFunctionalSortFilterProxyModel.cpp \
     $$PWD/Common/tcInvoke.cpp \
-    $$PWD/Common/tcVariantMapTableModel.cpp \
-    $$PWD/Widgets/tcWndSizer.cpp
+    $$PWD/Common/tcVariantMapTableModel.cpp
 
 #Component
 INCLUDEPATH += $$PWD/Component
@@ -30,13 +29,17 @@ SOURCES += \
     $$PWD/Component/tcdateedit.cpp
 
 #Gui
+QT += gui
+
 INCLUDEPATH += $$PWD/Gui
 
 HEADERS += \
-    $$PWD/Gui/tcAutoCursor.h
+    $$PWD/Gui/tcAutoCursor.h \
+    $$PWD/Gui/tcGuiCommon.h
 
 SOURCES += \
-    $$PWD/Gui/tcAutoCursor.cpp
+    $$PWD/Gui/tcAutoCursor.cpp \
+    $$PWD/Gui/tcGuiCommon.cpp
 
 #IO
 INCLUDEPATH += $$PWD/IO
@@ -137,13 +140,23 @@ QT += gui
 INCLUDEPATH += $$PWD/Widgets
 
 HEADERS += \
+    $$PWD/Widgets/tcPageTurnWidget.h \
+    $$PWD/Widgets/tcScreenshot.h \
+    $$PWD/Widgets/tcShadowDialog.h \
     $$PWD/Widgets/tcWndCaption.h \
-    $$PWD/Widgets/tcWndSizer.h
+    $$PWD/Widgets/tcWndSizer.h \
+
 
 SOURCES += \
-    $$PWD/Widgets/tcWndCaption.cpp
-    $$PWD/Widgets/tcWndSizer.cpp \
+    $$PWD/Widgets/tcPageTurnWidget.cpp \
+    $$PWD/Widgets/tcScreenshot.cpp \
+    $$PWD/Widgets/tcShadowDialog.cpp \
+    $$PWD/Widgets/tcWndCaption.cpp \
+    $$PWD/Widgets/tcWndSizer.cpp
+
+FORMS += \
+    $$PWD/Widgets/tcScreenshot.ui \
+    $$PWD/Widgets/tcShadowDialog.ui
 
 RESOURCES += \
     $$PWD/Widgets/tcWndCaption.qrc
-

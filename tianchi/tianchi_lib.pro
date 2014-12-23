@@ -7,9 +7,9 @@ DESTDIR = ../bin
 TARGET = $$qtLibraryTarget(tianchi_lib)
 TEMPLATE = lib
 
-DEFINES += TIANCHI_API=Q_CORE_EXPORT
+#DEFINES += TIANCHI_API=Q_CORE_EXPORT
 
 include($$PWD/tianchi_all.pri)
 
-VERSION = 2.0.0
+VERSION = 0.2.0
 

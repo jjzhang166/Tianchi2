@@ -64,6 +64,8 @@ QDateTime TIANCHI_API complieDateTime(const QString& complieDate, const QString&
 /// @return 0: 失败，1: 单姓，2: 复姓，3: 英文名
 int TIANCHI_API splitHumanName(const QString& full, QString& sur, QString& real, QString& english);
 
+QByteArray TIANCHI_API md5hex(const QString& str);
+
 // hmac-sha1 带密钥(secret)的哈希算法
 QString TIANCHI_API hmacSha1(const QByteArray& baseString, const QByteArray& key);
 
@@ -91,6 +93,11 @@ bool TIANCHI_API toBool(const QJsonValue& jv);
 
 /// @brief 判断一个字符串是否是boolean的 true值
 bool TIANCHI_API isTrue(const QString& s);
+
+/// @brief 把 GBK 转成 Utf-8 编码
+QString TIANCHI_API GbkToUtf8(const QByteArray& gbkString);
+/// @brief 把 Utf-8 转成 GBK 编码
+QByteArray TIANCHI_API Utf8ToGbk(const QString& utf8String);
 
 } // End of extern "C"
 

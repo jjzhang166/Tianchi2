@@ -14,6 +14,12 @@ CONFIG += c++11
 
 TIANCHIDIR = $$PWD/../tianchi
 include($$TIANCHIDIR/tianchi_all.pri)
+#TIANCHILIB = tianchi
+#CONFIG(debug, debug|release)
+#{
+#    TIANCHILIB = $${TIANCHILIB}d
+#}
+#LIBS += -l$$TIANCHILIB
 
 HEADERS += mainwindow.h
 

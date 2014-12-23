@@ -2,7 +2,6 @@
 #include "ui_mainwindow.h"
 
 #include "tcWndCaption.h"
-#include "tcWndSizer.h"
 #include <QMessageBox>
 #include <QDebug>
 
@@ -19,12 +18,18 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    setAttribute(Qt::WA_TranslucentBackground, true); // 使用阴影时，必须把窗口设为全透明
+
     ui->formLayout->insertWidget(0, new TcWndCaption(this, "我是可移动的自绘标题"));
-    new TcWndSizer(this);
+
+    m_PageTurnWidget.setParent(ui->ButtonWidget);
+    connect(&m_PageTurnWidget, &TcPageTurnWidget::pageTurnClicked, this, &MainWindow::evPageTurnClicked);
+    m_PageTurnWidget.newButtons(1, 100, 10);
 }
 
 MainWindow::~MainWindow()
 {
+    delete m_screenshot;
     delete ui;
 }
 
@@ -60,6 +65,11 @@ void MainWindow::on_pushButton_5_clicked()
 void MainWindow::udpRecv(TcUdp*, const QHostAddress& Client, const QByteArray& Datagram)
 {
     ui->udpMessages->append("收到Udp广播：来自" + Client.toString() + ", 收到内容：" + QString(Datagram));
+}
+
+void MainWindow::evPageTurnClicked(int pageNo)
+{
+    m_PageTurnWidget.newButtons(pageNo, 100, 10);//, this, SLOT(evPageTurnClicked(int)));
 }
 
 void MainWindow::on_pushButton_6_clicked()
@@ -263,3 +273,20 @@ void MainWindow::on_pushButton_25_clicked()
     TcWindows::createLink(qApp->applicationFilePath(), TcWindows::getWinSysDir(TcWindows::UserDeskTopPath) + "\\天池演示程序");
   #endif
 }
+
+void MainWindow::on_pushButton_26_clicked()
+{
+    if ( m_screenshot == nullptr )
+    {
+        m_screenshot = new TcScreenshot();
+    }
+
+    connect(m_screenshot, &TcScreenshot::photograph, this, &MainWindow::evScreenshotPhotograph);
+    m_screenshot->show();
+}
+
+void MainWindow::evScreenshotPhotograph(const QPixmap& pixmap)
+{
+    ui->label_3->setPixmap(pixmap);
+}
+

@@ -164,6 +164,13 @@ int splitHumanName(const QString& full, QString& sur, QString& real, QString& en
     return ret;
 }
 
+QByteArray md5hex(const QString& str)
+{
+    QCryptographicHash md(QCryptographicHash::Md5);
+    md.addData(str.toUtf8());
+    return md.result().toHex();
+}
+
 QString hmacSha1(const QByteArray& baseString, const QByteArray& key)
 {
     const int blockSize = 64;
@@ -323,3 +330,19 @@ bool isTrue(const QString& s)
             || s.compare("y", Qt::CaseInsensitive)==0
             || s.compare("t", Qt::CaseInsensitive)==0;
 }
+
+
+namespace TIANCHI
+{
+static QTextCodec* tianchi_gbkCodec = QTextCodec::codecForName("GBK");
+}
+QString GbkToUtf8(const QByteArray& gbkString)
+{
+    return TIANCHI::tianchi_gbkCodec->toUnicode(gbkString);
+}
+
+QByteArray Utf8ToGbk(const QString& utf8String)
+{
+    return TIANCHI::tianchi_gbkCodec->fromUnicode(utf8String);
+}
+

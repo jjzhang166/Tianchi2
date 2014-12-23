@@ -26,7 +26,7 @@ private:
 public:
     MORRSLT	*m_pmorrslt;
     DWORD	m_dwCaps;
-    wchar_t	m_ImeName[32];
+    //wchar_t	m_ImeName[32];
 public:
     IMEEngine();
     ~IMEEngine();

@@ -140,11 +140,10 @@ QStringList TcIO::searchFiles(const QString& path, const QStringList& nameFilter
     return ret;
 }
 
-const int TcIO::KB = 1024; // KB 1024
-const int TcIO::MB = 1048576; // MB 1024*1024
-const int TcIO::GB = 1073741824; // GB 1024*1024*1024
-const int TcIO::defaultBufferSize = 4 * TcIO::MB; // 4MB 4*1024*1024
-
+//const int TcIO::KB = 1024; // KB 1024
+//const int TcIO::MB = 1048576; // MB 1024*1024
+//const int TcIO::GB = 1073741824; // GB 1024*1024*1024
+//const int TcIO::defaultBufferSize = 4 * TcIO::MB; // 4MB 4*1024*1024
 
 qint64 TcIO::copy(const QString &fromFile,
         const QString &toFile,

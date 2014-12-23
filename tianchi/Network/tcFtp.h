@@ -61,7 +61,7 @@ private:
     CMD m_cmdType;
 
     bool b_isConnected;
-    bool b_isLogined;
+    bool b_isLogined = false;
     bool b_stop;
 
     QByteArray m_data;

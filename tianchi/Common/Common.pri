@@ -7,10 +7,12 @@ HEADERS  += \
     $$PWD/tcVariantMapTableModel.h \
     $$PWD/tcCommon.h \
     $$PWD/tcSingleton.hpp \
-    $$PWD/tcTuple.hpp 
+    $$PWD/tcTuple.hpp \
+    $$PWD/tcInvoke.cpp
 
 SOURCES += \
     $$PWD/tcFunctionalSortFilterProxyModel.cpp \
     $$PWD/tcVariantMapTableModel.cpp \
-    $$PWD/tcCommon.cpp
+    $$PWD/tcCommon.cpp \
+    $$PWD/tcInvoke.cpp
 

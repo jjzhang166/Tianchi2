@@ -5,7 +5,8 @@
 #include <QEventLoop>
 
 TcHttpDownloader::TcHttpDownloader(int index, QObject *parent)
-    : QObject(parent), m_Index(index)
+    : QObject(parent)
+    , m_Index(index)
 {
     m_HaveDoneBytes = 0;
     m_StartPoint = 0;
