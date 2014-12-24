@@ -2,13 +2,24 @@
 
 INCLUDEPATH += $$PWD/
 
-HEADERS  += \
-      $$PWD/tcWndCaption.h \
-      $$PWD/tcWndSizer.h
+HEADERS += \
+    $$PWD/tcPageTurnWidget.h \
+    $$PWD/tcScreenshot.h \
+    $$PWD/tcShadowDialog.h \
+    $$PWD/tcWndCaption.h \
+    $$PWD/tcWndSizer.h \
+
 
 SOURCES += \
-      $$PWD/tcWndCaption.cpp \
-      $$PWD/tcWndSizer.cpp
+    $$PWD/tcPageTurnWidget.cpp \
+    $$PWD/tcScreenshot.cpp \
+    $$PWD/tcShadowDialog.cpp \
+    $$PWD/tcWndCaption.cpp \
+    $$PWD/tcWndSizer.cpp
+
+FORMS += \
+    $$PWD/tcScreenshot.ui \
+    $$PWD/tcShadowDialog.ui
 
 RESOURCES += \
-      $$PWD/tcWndCaption.qrc
+    $$PWD/tcWndCaption.qrc

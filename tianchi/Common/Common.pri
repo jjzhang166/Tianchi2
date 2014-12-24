@@ -1,18 +1,19 @@
 #依赖的Qt模块：core
 INCLUDEPATH += $$PWD/
 
-HEADERS  += \
-    $$PWD/tcFunctionalSortFilterProxyModel.h \
-    $$PWD/tcRecentUse.hpp \
-    $$PWD/tcVariantMapTableModel.h \
+HEADERS += \
     $$PWD/tcCommon.h \
+    $$PWD/tcFunctionalSortFilterProxyModel.h \
+    $$PWD/tcInvoke.h \
+    $$PWD/tcRecentUse.hpp \
     $$PWD/tcSingleton.hpp \
     $$PWD/tcTuple.hpp \
-    $$PWD/tcInvoke.cpp
+    $$PWD/tcVariantMapTableModel.h
 
 SOURCES += \
-    $$PWD/tcFunctionalSortFilterProxyModel.cpp \
-    $$PWD/tcVariantMapTableModel.cpp \
     $$PWD/tcCommon.cpp \
-    $$PWD/tcInvoke.cpp
+    $$PWD/tcFunctionalSortFilterProxyModel.cpp \
+    $$PWD/tcInvoke.cpp \
+    $$PWD/tcVariantMapTableModel.cpp
+
 

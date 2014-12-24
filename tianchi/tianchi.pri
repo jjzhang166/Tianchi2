@@ -2,6 +2,7 @@
 include($$PWD/Common/Common.pri)
 include($$PWD/Component/Component.pri)
 include($$PWD/IO/IO.pri)
+include($$PWD/GUI/GUI.pri)
 include($$PWD/Network/Network.pri)
 include($$PWD/OS/OS.pri)
 include($$PWD/Widgets/Widgets.pri)

@@ -2,41 +2,45 @@
 
 INCLUDEPATH += $$PWD/
 
-HEADERS  += \
-    $$PWD/msime.h \
+HEADERS += \
+    $$PWD/tcAdminAuthorization.h \
     $$PWD/tcChinese.h \
     $$PWD/tcOS.h \
-    $$PWD/tcAdminAuthorization.h \
     $$PWD/tcRunOnceChecker.h \
+    $$PWD/tcSelfRestarter.h \
     $$PWD/tcSystemInfo.h \
-    $$PWD/tcSelfRestarter.h
-    
+    $$PWD/tcWindows.h
+
 SOURCES += \
     $$PWD/tcChinese.cpp \
     $$PWD/tcOS.cpp \
     $$PWD/tcRunOnceChecker.cpp \
+    $$PWD/tcSelfRestarter.cpp \
     $$PWD/tcSystemInfo.cpp \
-    $$PWD/tcSelfRestarter.cpp 
-    
+    $$PWD/tcWindows.cpp
+
 win32:{
-    HEADERS  +=  $$PWD/tcWindows.h
+
     SOURCES += \
-	$$PWD/tcWindows.cpp \
         $$PWD/tcAdminAuthorization_win.cpp \
         $$PWD/tcSystemInfo_win.cpp
-        
-    win32-g++*:LIBS += -lmpr -lmprapi
+
+    LIBS += -lversion
+
+    win32-g++*:
+    {
+        LIBS += -lmpr -lmprapi
+    }
 }
-    
 unix:{
     macx:{
         SOURCES += \
             $$PWD/tcAdminAuthorization_mac.cpp \
             $$PWD/tcSystemInfo_mac.cpp
-            
+
         LIBS += -framework Carbon -framework Security
 
-    } else {
+    }else{
         SOURCES += \
             $$PWD/tcAdminAuthorization_x11.cpp \
             $$PWD/tcSystemInfo_x11.cpp
@@ -44,3 +48,4 @@ unix:{
         LIBS += -lutil
     }
 }
+
