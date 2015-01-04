@@ -2,6 +2,7 @@
 
 #if defined(Q_OS_WIN)
 
+#include <QSettings>
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
@@ -16,6 +17,34 @@
 #ifndef PIDLIST_ABSOLUTE
 typedef ITEMIDLIST *PIDLIST_ABSOLUTE;
 #endif
+
+void TcWindows::autoStart(const QString& name, const QString& program)
+{
+    const QString HKEY_DIRECTORY = "Software/Microsoft/Windows/CurrentVersion/Run/";
+    QSettings reg("HKEY_CURRENT_USER", QSettings::NativeFormat);
+    if ( ! program.isEmpty() )
+    {
+        reg.setValue(HKEY_DIRECTORY + name, program);
+    }else
+    {
+        reg.remove(HKEY_DIRECTORY + name);
+    }
+}
+
+QString TcWindows::getWinSysDir(int pathid)
+{
+    CoInitialize(NULL);
+    PIDLIST_ABSOLUTE pidl;  // Force start menu cache update
+    wchar_t MyDir[_MAX_PATH] = {0};
+    if (SUCCEEDED(SHGetFolderLocation(0, pathid, 0, 0, &pidl)))
+    {
+        SHGetPathFromIDList(pidl,MyDir);
+        SHChangeNotify(SHCNE_UPDATEDIR, SHCNF_IDLIST, pidl, 0);
+        CoTaskMemFree(pidl);
+    }
+    CoUninitialize();
+    return QString::fromWCharArray(MyDir).replace("\\","/");
+}
 
 bool TcWindows::createLink(const QString &fileName, const QString &linkName,
                 const QString &arguments, const QString &iconPath,
@@ -66,21 +95,6 @@ bool TcWindows::createLink(const QString &fileName, const QString &linkName,
     }
     CoUninitialize();
     return success;
-}
-
-QString TcWindows::getWinSysDir(SYSTEMPATH path)
-{
-    CoInitialize(NULL);
-    PIDLIST_ABSOLUTE pidl;  // Force start menu cache update
-    wchar_t MyDir[_MAX_PATH] = {0};
-    if (SUCCEEDED(SHGetFolderLocation(0, path, 0, 0, &pidl)))
-    {
-        SHGetPathFromIDList(pidl,MyDir);
-        SHChangeNotify(SHCNE_UPDATEDIR, SHCNF_IDLIST, pidl, 0);
-        CoTaskMemFree(pidl);
-    }
-    CoUninitialize();
-    return QString::fromWCharArray(MyDir).replace("\\","/");
 }
 
 bool TcWindows::resizeEvent(const QByteArray&, void* msg, long* result, const QRect& wndRect)

@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include "tcWndCaption.h"
+//#include "tcWndCaption.h"
 #include <QMessageBox>
 #include <QDebug>
 
@@ -11,6 +11,7 @@
 #include "tcAdminAuthorization.h"
 #include "tcSystemInfo.h"
 #include "tcWindows.h"
+#include "tcDes.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent, Qt::FramelessWindowHint),
@@ -20,11 +21,13 @@ MainWindow::MainWindow(QWidget *parent)
 
     setAttribute(Qt::WA_TranslucentBackground, true); // 使用阴影时，必须把窗口设为全透明
 
-    ui->formLayout->insertWidget(0, new TcWndCaption(this, "我是可移动的自绘标题"));
+//    ui->formLayout->insertWidget(0, new TcWndCaption(this, "我是可移动的自绘标题"));
 
     m_PageTurnWidget.setParent(ui->ButtonWidget);
     connect(&m_PageTurnWidget, &TcPageTurnWidget::pageTurnClicked, this, &MainWindow::evPageTurnClicked);
     m_PageTurnWidget.newButtons(1, 100, 10);
+
+    this->showFullScreen();
 }
 
 MainWindow::~MainWindow()
@@ -290,3 +293,76 @@ void MainWindow::evScreenshotPhotograph(const QPixmap& pixmap)
     ui->label_3->setPixmap(pixmap);
 }
 
+
+void MainWindow::on_pushButton_27_clicked()
+{
+    ui->textEdit->clear();
+    if ( ui->lineEdit->text().isEmpty() )
+    {
+        ui->textEdit->append("请输入明文内容。");
+        ui->lineEdit->setFocus();
+    }else
+    if ( ui->edDesPwd->text().isEmpty() )
+    {
+        ui->textEdit->append("请输入密码。");
+        ui->edDesPwd->setFocus();
+    }else
+    {
+//        char sKey[] = "fujingjing";
+//        const char sSrc[1024] = "China Mobile (Shenzhen) Limited 中国移动(深圳)有限公司 2003/3/20成立";
+//        char sEncrypt[1024] = {0};
+//        char sDecrypt[1024] = {0};
+
+//        unsigned sEncryptLen = 0;
+
+//        cout << "原字符串:" << sSrc << endl;
+//        cout << "密钥:" << sKey << endl << endl;
+
+        QByteArray sEncrypt;
+        sEncrypt.resize(ui->lineEdit->text().toUtf8().length() * 8);
+
+        // 加密
+//        start = clock();
+        int sEncryptLen = DES_Encrypt(ui->lineEdit->text().toUtf8().data(), ui->lineEdit->text().toUtf8().length(),
+                                      ui->edDesPwd->text().toUtf8().data(),
+                                      sEncrypt.data());
+        sEncrypt.resize(sEncryptLen);
+
+        ui->textEdit->append("密文长度    ：" + QString::number(sEncryptLen));
+        ui->textEdit->append("密文(Base64)：" + sEncrypt.toBase64());
+        ui->textEdit->append("密文(Hex   )：" + sEncrypt.toHex()   );
+        ui->textEdit->append("");
+        ui->textEdit->append("");
+
+        QByteArray sDecrypt;
+        sDecrypt.resize(sEncrypt.length());
+        int sDecryptLen = DES_Decrypt(sEncrypt.data(), sEncrypt.length(),
+                                      ui->edDesPwd->text().toUtf8().data(),
+                                      sDecrypt.data());
+
+        sDecrypt.resize(sDecryptLen);
+        ui->textEdit->append(QString("解密出明文：") + sDecrypt);
+
+//        stop = clock();
+
+//        cout << "加密耗时" << stop-start << "毫秒" << endl;
+//        cout << "加密后:" << sEncrypt << endl << endl;
+
+//        // 解密
+//        start = clock();
+//        DES_Decrypt(sEncrypt, sEncryptLen,  sKey, sDecrypt);
+//        stop = clock();
+
+//        cout << "解密耗时" << stop-start << "毫秒" << endl;
+//        cout << "解密后:" << sDecrypt << endl << endl;
+
+//        if (0 == strcmp (sSrc, sDecrypt))
+//        {
+//            cout << "原字符串和解密字符串相同" << endl;
+//        }
+//        else
+//        {
+//            cout << "原字符串和解密字符串不相同" << endl;
+//        }
+    }
+}

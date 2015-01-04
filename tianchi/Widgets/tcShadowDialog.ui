@@ -13,34 +13,40 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">TcShadowDialog 
+{
+	border: 2px solid #B4C1E3;
+}</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
     <number>0</number>
    </property>
    <property name="leftMargin">
-    <number>3</number>
+    <number>4</number>
    </property>
    <property name="topMargin">
-    <number>3</number>
+    <number>4</number>
    </property>
    <property name="rightMargin">
-    <number>3</number>
+    <number>4</number>
    </property>
    <property name="bottomMargin">
-    <number>3</number>
+    <number>4</number>
    </property>
    <item>
     <widget class="QWidget" name="wndCaption" native="true">
      <property name="minimumSize">
       <size>
        <width>0</width>
-       <height>40</height>
+       <height>34</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
        <width>16777215</width>
-       <height>40</height>
+       <height>34</height>
       </size>
      </property>
      <property name="font">
@@ -48,21 +54,15 @@
        <family>微软雅黑</family>
       </font>
      </property>
-     <property name="styleSheet">
-      <string notr="true">QWidget#wndCaption
-{
-background-color: #4373C5;
-background-image: url(:/images/wndCaption.png);
-border-top-left-radius: 3px; 
-border-top-right-radius: 3px; 
-}</string>
-     </property>
      <layout class="QHBoxLayout" name="wndCaptionLayout">
       <property name="leftMargin">
        <number>9</number>
       </property>
       <property name="topMargin">
        <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>6</number>
       </property>
       <property name="bottomMargin">
        <number>0</number>
@@ -90,20 +90,33 @@ border-top-right-radius: 3px;
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="edCaption">
-        <property name="font">
-         <font>
-          <family>微软雅黑</family>
-          <pointsize>11</pointsize>
-         </font>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <property name="leftMargin">
+         <number>0</number>
         </property>
-        <property name="styleSheet">
-         <string notr="true">color: white;</string>
+        <property name="topMargin">
+         <number>9</number>
         </property>
-        <property name="text">
-         <string>出错啦！</string>
+        <property name="bottomMargin">
+         <number>9</number>
         </property>
-       </widget>
+        <item>
+         <widget class="QLabel" name="edCaption">
+          <property name="font">
+           <font>
+            <family>微软雅黑</family>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: white;</string>
+          </property>
+          <property name="text">
+           <string>Dialog</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <spacer name="horizontalSpacer">
@@ -119,47 +132,28 @@ border-top-right-radius: 3px;
        </spacer>
       </item>
       <item>
-       <widget class="QWidget" name="widget" native="true">
-        <layout class="QVBoxLayout" name="verticalLayout_3">
-         <property name="spacing">
-          <number>0</number>
-         </property>
-         <property name="leftMargin">
-          <number>0</number>
-         </property>
-         <property name="topMargin">
-          <number>0</number>
-         </property>
-         <property name="rightMargin">
-          <number>0</number>
-         </property>
-         <property name="bottomMargin">
-          <number>0</number>
-         </property>
-         <item>
-          <widget class="QToolButton" name="bnClose">
-           <property name="styleSheet">
-            <string notr="true">QToolButton
-{
-    border: 0px;
-}
-QToolButton:hover
-{
-    border: 0px solid;
-    background-color:rgb(212,64,39);
-}</string>
-           </property>
-           <property name="text">
-            <string>...</string>
-           </property>
-           <property name="icon">
-            <iconset resource="resource.qrc">
-             <normaloff>:/images/close.png</normaloff>:/images/close.png</iconset>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QToolButton" name="bnClose">
+          <property name="styleSheet">
+           <string notr="true">QToolButton{border: 0px} QToolButton::hover{border: 0px;background-color:#e90000; }</string>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="tcShadowDialog.qrc">
+            <normaloff>:/images/close.png</normaloff>:/images/close.png</iconset>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>
@@ -188,7 +182,7 @@ QToolButton:hover
   </layout>
  </widget>
  <resources>
-  <include location="resource.qrc"/>
+  <include location="tcShadowDialog.qrc"/>
  </resources>
  <connections>
   <connection>

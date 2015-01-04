@@ -9,13 +9,16 @@
 
 #include <QDebug>
 
-TcShadowDialog::TcShadowDialog(QWidget* parent)//, const QPixmap& pixmap, const QString& caption)
+TcShadowDialog::TcShadowDialog(QWidget* parent, int shadowWidth)
     : QDialog(parent, Qt::FramelessWindowHint | Qt::WindowSystemMenuHint | Qt::WindowMinimizeButtonHint)
     , ui(new Ui::TcShadowDialog)
 {
+    m_shadowWidth = shadowWidth;
+
     ui->setupUi(this);
 
-    setAttribute(Qt::WA_TranslucentBackground, true);
+    setContentsMargins(0,0,0,0);
+    ui->verticalLayout->setContentsMargins(shadowWidth,shadowWidth,shadowWidth,shadowWidth);
 
     ui->wndCaption->installEventFilter(this);
 }
@@ -50,6 +53,14 @@ bool TcShadowDialog::eventFilter(QObject* target, QEvent* event)
             QMouseEvent* mouseEvent = (QMouseEvent*)event;
             move(mouseEvent->globalPos() - mousePressedPos);
             return true;
+//        }else
+//        if ( event->type() == QEvent::Paint )
+//        {
+//            QStyleOption o;
+//            o.initFrom(ui->wndCaption);
+//            QPainter p(ui->wndCaption);
+//            ui->wndCaption->style()->drawPrimitive(QStyle::PE_Widget, &o, &p, ui->wndCaption);
+//            return true;
         }
     }
     return QDialog::eventFilter(target, event);
@@ -66,8 +77,8 @@ void TcShadowDialog::paintShadow(QWidget* widget, int shadowWidth)
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.fillPath(path, QBrush(Qt::white));
 
-    QColor color(0, 0, 0, 50);
-    for(int i=0; i<shadowWidth; i++)
+    QColor color(0, 0, 0, 250);
+    for(int i=0; i<shadowWidth; ++i)
     {
         QPainterPath path;
         path.setFillRule(Qt::WindingFill);
@@ -75,8 +86,8 @@ void TcShadowDialog::paintShadow(QWidget* widget, int shadowWidth)
                             shadowWidth-i,
                             widget->width()-(shadowWidth-i)*2,
                             widget->height()-(shadowWidth-i)*2,
-                            shadowWidth, shadowWidth);
-        color.setAlpha((shadowWidth*16) / (i+1)); //- qSqrt(i)*50);
+                            shadowWidth, shadowWidth, Qt::AbsoluteSize);
+        color.setAlpha((shadowWidth*24) / (i+1)); //- qSqrt(i)*50);
         painter.setPen(color);
         painter.drawPath(path);
     }
@@ -139,12 +150,93 @@ bool TcShadowDialog::resizeEvent(const QByteArray&, void* msg, long* result, con
     return ret;
 }
 
+bool TcShadowDialog::sorptionEvent(const QByteArray&, void* msg, long*, int shadowWidth)
+{
+    MSG* message = (MSG*) msg;
+    if ( message->message == WM_MOVING )
+    {
+        LPRECT prc = (LPRECT)message->lParam;
+        int wndWidth  = prc->right - prc->left;
+        int wndHeight = prc->bottom - prc->top;
+
+        const int distance = 16;
+
+        static bool sorptionX = false;
+        static bool sorptionY = false;
+        static int startX;
+        static int startY;
+        if ( abs(prc->left) <= distance )
+        {
+            prc->left = -shadowWidth;
+            prc->right = wndWidth-shadowWidth;
+            if ( ! sorptionX )
+            {
+                sorptionX = true;
+                startX = QCursor::pos().x();
+            }
+        }
+        if ( abs(prc->right - qApp->desktop()->availableGeometry().right()) <= distance )
+        {
+            prc->left = qApp->desktop()->availableGeometry().right() - wndWidth + shadowWidth;
+            prc->right = qApp->desktop()->availableGeometry().right() + shadowWidth;
+            if ( ! sorptionX )
+            {
+                sorptionX = true;
+                startX = QCursor::pos().x();
+            }
+        }
+        if ( abs(prc->top) <= distance )
+        {
+            prc->top = -shadowWidth;
+            prc->bottom = wndHeight-shadowWidth;
+            if ( ! sorptionY )
+            {
+                sorptionY = true;
+                startY = QCursor::pos().y();
+            }
+        }
+        if ( abs(prc->bottom - qApp->desktop()->availableGeometry().bottom()) <= distance )
+        {
+            prc->top = qApp->desktop()->availableGeometry().bottom() - wndHeight + shadowWidth;
+            prc->bottom = qApp->desktop()->availableGeometry().bottom() + shadowWidth;
+            if ( ! sorptionY )
+            {
+                sorptionY = true;
+                startY = QCursor::pos().y();
+            }
+        }
+        if ( sorptionX )
+        {
+            int newX = QCursor::pos().x() - startX;
+            if ( abs(newX) > distance )
+            {
+                prc->left = prc->left + newX - shadowWidth;
+                prc->right = prc->left + wndWidth;
+
+                sorptionX = false;
+            }
+        }
+        if ( sorptionY )
+        {
+            int newY = QCursor::pos().y() - startY;
+            if ( abs(newY) > distance )
+            {
+                prc->top = prc->top + newY - shadowWidth;
+                prc->bottom = prc->top + wndHeight;
+
+                sorptionY = false;
+            }
+        }
+    }
+    return false;
+}
+
 QVBoxLayout* TcShadowDialog::clientLayout()
 {
     return ui->DialogLayout;
 }
 
-void TcShadowDialog::initClient(QWidget* widget)
+void TcShadowDialog::initClient(QWidget* widget, const QString& captionStyle)
 {
     widget->setParent(ui->DialogWidget);
     ui->DialogLayout->addWidget(widget);
@@ -154,6 +246,20 @@ void TcShadowDialog::initClient(QWidget* widget)
 
     move((qApp->desktop()->availableGeometry().bottomRight()
           - QPoint(geometry().size().width(), geometry().size().height())) /2);
+
+    if ( captionStyle.isEmpty() )
+    {
+        ui->wndCaption->setStyleSheet("QWidget#wndCaption{"
+                                      "background-color:#3868BD;"
+                                      "border-top-left-radius:3px;"
+                                      "border-top-right-radius:3px;}");
+    }else
+    {
+        ui->wndCaption->setStyleSheet(captionStyle);
+    }
+
+    setAttribute(Qt::WA_TranslucentBackground, m_shadowWidth >0);
+        //setStyleSheet("TcShadowDialog{border: 1px solid #000000;}");
 }
 
 void TcShadowDialog::setIcon(const QPixmap& pixmap)

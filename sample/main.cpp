@@ -9,8 +9,12 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
+    /// @brief 检查程序是否重复运行（第一种方式: 标准）
     TcRunOnceChecker checker("Tianchi2_Samples_App");
     if ( ! checker.isRunning(TcRunOnceChecker::ProcessList) )
+    /// @brief 检查程序是否重复运行（第二种方式：简易）
+    //QSharedMemory mem("Tianchi2_Samples_App");
+    //if ( mem.create(1) )
     {
         // 首次运行
         MainWindow w;

@@ -5,32 +5,46 @@
 此版本为重新整理，简化使用
 
 使用方式:
-   1. 直接使用源代码文件
-      Tianchi2 设计时尽量保持单组文件型式，所以只要把对应
-      的 .h/.cpp 直接引用到工程文件中即可使用
+   1. 动态链接库方式（推荐）
+      打开并编译 tianchi/tianchi.pro , 生成动态链接库
+      生成位置：bin/
+      Debug  时连接库：-lQt5Tianchid
+      Release时连接库：-lQt5Tianchi
 
    2. 在自己的工程文件中直接包含天池源码库
-      include(../tianchi/tianchi_all.pri)
-      或者
-      include(../tianchi/tianchi.pri)
-      
-      也可以根据需要分别包含单独的模块:
-      include(../tianchi/Common/Common.pri)
-      include(../tianchi/Component/Component.pri)
-      include(../tianchi/IO/IO.pri)
-      include(../tianchi/Network/Network.pri)
-      include(../tianchi/OS/OS.pri)
-      include(../tianchi/Widgets/Widgets.pri)       
+      include(tianchi/tianchi_all.pri)
 
-   3. 静态链接库
-      打开并编译 tianchi_lib.pro , 生成静态链接库
-      生成位置：./bin
+   3. 直接使用源代码文件
+      Tianchi2 设计时尽量保持单组文件型式，所以只要把对应
+      的 .h/.cpp 直接引用到工程文件中即可使用.
+      部分使用开源库的源文件需要同时引入开源库文件, 具体
+      请参见 tianchi/tianchi_all.pri 中的引入内容
 
-   4. 动态链接库
-      打开并编译 tianchi.pro , 生成动态链接库
-      生成位置：./bin
+   4. 静态链接库
+      打开并编译 tianchi/tianchi_lib.pro , 生成静态链接库
+      生成位置：bin
+
 
 文件列表与说明:
+
+bin/                                            编译生成文件的目录
+    Qt5Tianchid.lib (Qt5Tianchid.a )            生成的动态/静态链接库(Debug)
+    Qt5Tianchid.dll (Qt5Tianchid.so)            生成的动态链接库(Debug)
+    Qt5Tianchi.lib  (Qt5Tianchi.a  )            生成的动态/静态链接库(Release)
+    Qt5Tianchi.dll  (Qt5Tianchi.so )            生成的动态链接库(Release)
+    tianchi2_sample.exe                         天池的演示程序
+
+help/
+    Doxyfile                                    Doxygen 生成文档的配置文件
+
+QtCreatorPlugins/
+    QtCreatorPlugins.pro                        可生成 QtCreator 的编译控件(插件)
+                                                Windows 下必须使用 MSVC2010 编译
+    readme.txt                                  小白编译前必读
+
+sample/                                         演示程序目录
+    sample.pro                                  演示程序的工程文件，采用直接包含天池库方式
+
 
 tianchi/
     tianchi.pro                                 生成动态链接库
@@ -51,14 +65,22 @@ tianchi/
         tcVariantMapTableModel.h                以QVariantMap作为数据行的model,只可追加和清除,不可插入与删除
         tcVariantMapTableModel.cpp
     Component/                                  Qt IDE 的控件，由于Qt限制，必须为全小写文件名
-        tcdateedit.h                            允许输入为空的日期选择插件(IDE控件)
-        tcdateedit.cpp
+        QSint/                                  QSint 开源组件(部分), 请详见：http://www.oschina.net/p/qsint
+        Tianchi/                                Tianchi 组件
+            tcdateedit.h                        允许输入为空的日期选择插件(IDE控件)
+            tcdateedit.cpp
+    Encrypt/
+        tcAES.h                                 AES 加密/解密（使用 Crypto++）
+        tcAES.cpp
+        cryptopp562/                            Crypto++5.6.2 加密/解密开源库
     Gui/
         tcAutoCursor.h                          鼠标光标的设置和自动恢复处理
         tcAutoCursor.cpp
+        tcGuiCommon.h                           一些GUI相关的公共单元。
+        tcGuiCommon.cpp
     IO/
         tcExcel.h                               通过 OLE 方式操作 Microsoft Excel（仅限 Windows 下使用，要求已安装 Excel）
-        tcExcel.cpp        
+        tcExcel.cpp
         tcExcelReader.h                         通过 OLE 方式读取 Microsoft Excel, WPS（Linux 下仅支持WPS）
         tcExcelReader.cpp
         tcIO.h                                  目录、文件等操作功能
@@ -76,9 +98,9 @@ tianchi/
         tcUdp.cpp
     OS/
         tcAdminAuthorization.h                  操作系统管理员权限的判断和提升权限执行程序
-        tcAdminAuthorization_win.h              本机管理员提权，Windows实现
-        tcAdminAuthorization_x11.h              本机管理员提权，Linux/BSD实现
-        tcAdminAuthorization_mac.h              本机管理员提权，MacOS实现
+        tcAdminAuthorization_mac.cpp            本机管理员提权，MacOS实现
+        tcAdminAuthorization_win.cpp            本机管理员提权，Windows实现
+        tcAdminAuthorization_x11.cpp            本机管理员提权，Linux/BSD实现
         tcChinese.h                             Windows 下汉字转拼音功能
         tcChinese.cpp
         tcChinese.inc
@@ -90,20 +112,41 @@ tianchi/
         tcSelfRestarter.cpp
         tcSystemInfo.h                          磁盘、内存等系统信息
         tcSystemInfo.cpp
+        tcSystemInfo_mac.cpp
         tcSystemInfo_win.cpp
         tcSystemInfo_x11.cpp
-        tcSystemInfo_mac.cpp
         tcWindows.h                             Microsoft Windows 系统功能，只能在Windows上使用
         tcWindows.cpp
+    QRCode/                                     二维码编码解码模块
+        tcQrencode.h                            二维码编码
+        tcQrencode.cpp
+        qrencode/                               二维码编码的开源库
+        tcZxing.h                               二维码解码
+        tcZxing.cpp
+        zxing/                                  二维码解码的开源库
     Widgets/
-        tcWndCaption.h                          自绘窗口的可移动标题
-        tcWndCaption.cpp
+        tcPageTurnWidget.h                      翻页按钮组
+        tcPageTurnWidget.cpp
+        tcScreenshot.h                          截屏
+        tcScreenshot.cpp
+        tcScreenshot.ui
+        tcShadowDialog.h                        含阴影和可缩放的无边对话框父类
+        tcShadowDialog.cpp
+        tcShadowDialog.ui
+        tcShadowDialog.qrc
+        tcWidget.h                              自绘窗口的可移动标题
+        tcWidget.cpp
         tcWndCaption.qrc
-        tcWndCaption/
-            close.png                           tcWndCaption 使用的关闭窗口的X图片
-        tcWndSizer.h                            缩放无框窗口
+        tcWndSizer.h                            缩放无框窗口，不同实现，不推
         tcWndSizer.cpp
+        images/
+            close.png                           tcShadowDialog 使用的关闭窗口的X图片
 
+
+tianchi4qtc/                                    Qt Designer 组件
+    tianchi4qtc.pro                             组件工程文件。
+                                                注意: 必须以 Release 模式编译 !!!
+                                                      Windows 下必须用 VC2010+ 下编译 !!!
 
 天池开源软件库源自1.0的重新整理版
 最初原版请参见：https://github.com/qtcn/tianchi

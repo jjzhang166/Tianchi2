@@ -324,8 +324,7 @@ bool TcVariantMapTableModel::setHeaderData(int section,
 }
 
 //////////////////////////////////////////////////////////
-void TcVariantMapTableModel::setFlags(const QModelIndex &index, 
-        Qt::ItemFlags flags)
+void TcVariantMapTableModel::setFlags(const QModelIndex &index,  Qt::ItemFlags flags)
 {
     Q_D(TcVariantMapTableModel);
     if (!(d->flags.contains(index) && d->flags[index] == flags))

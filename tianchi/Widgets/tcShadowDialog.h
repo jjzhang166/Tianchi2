@@ -3,7 +3,7 @@
 /// 天池共享源码库开发组(www.qtcn.org)\n
 /// @license 授权协议：请阅读天池共享源码库附带的授权协议(LICENSE.LGPLv2.1)\n
 /// ********************************************************************************************************************
-/// @file tcPageTurnWidget.h
+/// @file tcShadowDialog.h
 /// @brief 无边框窗口加阴影，缩放功能
 /// @version 1.0
 /// @date 2014.12.19
@@ -31,22 +31,24 @@ class TIANCHI_API TcShadowDialog : public QDialog
 {
     Q_OBJECT
 public:
-    explicit TcShadowDialog(QWidget* parent);//, const QPixmap& pixmap=QPixmap(), const QString& caption="");
+    explicit TcShadowDialog(QWidget* parent, int shadowWidth=4);
     ~TcShadowDialog();
 
     static void paintShadow(QWidget* widget, int shadowWidth=3);
     static bool resizeEvent(const QByteArray&, void* msg, long* result, const QRect& wndRect);
+    static bool sorptionEvent(const QByteArray&, void* msg, long*, int shadowWidth=0);
 
 protected:
     Ui::TcShadowDialog* ui;
 
     QVBoxLayout*  clientLayout();
-    void          initClient(QWidget* widget);
+
+    void    initClient(QWidget* widget, const QString& captionStyle="");
 
     void    setIcon(const QPixmap& pixmap);
     void    setCaption(const QString& caption);
 
-    int     m_shadowWidth = 4;
+    int     m_shadowWidth;
     bool    m_frameResize = false;
 
     virtual bool    eventFilter(QObject* target, QEvent* event) override;

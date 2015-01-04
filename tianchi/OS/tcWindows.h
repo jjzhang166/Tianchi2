@@ -30,59 +30,69 @@
 class TIANCHI_API TcWindows
 {
 public:
-    //用户目录和临时目录，请用QDir获取
-    enum SYSTEMPATH
-    {
-        UserDeskTopPath = CSIDL_DESKTOPDIRECTORY,//桌面
-        UserDocumentsPath = CSIDL_PERSONAL,//我的文档
-        UserMusicPath = CSIDL_MYMUSIC,//我的音乐
-        UserVideoPath = CSIDL_MYVIDEO,//我的视频
-        UserPricturesPath = CSIDL_MYPICTURES,//我的图片
-        UserFavoritesPath = CSIDL_FAVORITES,//我的收藏
-        UserAppDataPath = CSIDL_APPDATA,//当前用户的特定的应用程序数据存储文件夹
-        UserLocalAppDataPath = CSIDL_LOCAL_APPDATA,//表示当前用户的应用程序数据文件夹，例如：C:\Documents and Settings\username\Local Settings\Application Dat
-        UserNetHoodPath = CSIDL_NETHOOD,//表示当前用户存在的网络连接的文件夹，例如：C:\Documents and Settings\username\NetHood
-        UserPrintHoodPath = CSIDL_PRINTHOOD,//表示当前用户存在的网络打印机的虚拟文件夹，例如：C:\Documents and Settings\username\PrintHood
+    /// @brief 针对当前登录用户设置 Windows 开机程序启动项，程序名为空时表示删除已存在的启动项
+    /// @param name 程序的名称，注册表键值
+    /// @param program 程序全路径名，为空时删除已存在的启动项
+    static void autoStart(const QString& name, const QString& program="");
 
-        UserStartMenuPath = CSIDL_STARTMENU,//用户开始菜单
-        UserStartMenuProgramsPath = CSIDL_PROGRAMS,//用户开始程序菜单
-        UserStartUpPath = CSIDL_STARTUP,//启动目录
-        UserSentTo = CSIDL_SENDTO,//表示当前用户的“发送到”文件夹，例如：C:\Documents and Settings\username\SendTo
+    /// @brief 获取系统的路径
+    /// @note 常用参数：<br/>
+    /// 桌面&emsp;&emsp;CSIDL_DESKTOPDIRECTORY<br/>
+    /// 我的文档&emsp;CSIDL_PERSONAL<br/>
+    /// 我的图片&emsp;CSIDL_MYPICTURES<br/>
+    /// 我的音乐&emsp;CSIDL_MYMUSIC<br/>
+    /// 我的视频&emsp;CSIDL_MYVIDEO<br/>
+    /// 收藏夹&emsp;CSIDL_FAVORITES<br/>
+    /// 发送到&emsp;CSIDL_SENDTO<br/>
+    /// 应用程序数据存储&emsp;CSIDL_APPDATA<br/>
+    /// 应用程序数据文件夹&emsp;&emsp;CSIDL_LOCAL_APPDATA<br/>
+    /// 网络连接的文件夹&emsp;CSIDL_NETHOOD<br/>
+    /// 网络打印机的虚拟文件夹&emsp;CSIDL_PRINTHOOD<br/>
+    /// 启动目录&emsp;CSIDL_STARTUP<br/>
+    /// 开始菜单&emsp;CSIDL_STARTMENU<br/>
+    /// 开始程序菜单&emsp;CSIDL_PROGRAMS<br/>
+    /// 模板目录&emsp;CSIDL_TEMPLATES<br/>
+    /// Internet Explorer的cookie文件夹&emsp;CSIDL_COOKIES<br/>
+    /// Inernet Explorer的历史记录文件夹&emsp;CSIDL_HISTORY<br/>
+    /// Internet Explorer的Cache文件夹&emsp;CSIDL_INTERNET_CACHE<br/>
 
-        AdminToolsPath = CSIDL_COMMON_ADMINTOOLS,//表示所有用户的“管理工具”系统文件夹
-        CommonAppData = CSIDL_COMMON_APPDATA,//表示所有用户的特定的应用程序数据存储文件夹,例如:C:\Documents and Settings\All Users\Application Data
-        CommonDeskTopPath = CSIDL_COMMON_DESKTOPDIRECTORY,//表示所有用户的“桌面”文件夹，例如：C:\Documents and Settings\All Users\Desktop。
-        CommonDocumentsPath = CSIDL_COMMON_DOCUMENTS,//表示所有用户的“我的文档”文件夹，例如:C:\Documents and Settings\All Users\Documents
-        CommonFavoritesPath =CSIDL_COMMON_FAVORITES,//表示所有用户的“我的收藏夹”文件夹。
-        CommonMusicPath = CSIDL_COMMON_MUSIC,// 公共音乐 0x0035
-        CommonPricturesPath = CSIDL_COMMON_PICTURES,// 公共图片0x0036
-        CommonVideoPath = CSIDL_COMMON_VIDEO,//公共视频 0x0037
-        CommonStartMenuProgramsPath = CSIDL_COMMON_PROGRAMS,//表示所有用户的“程序”文件夹，例如：C:\Documents and Settings\All Users\Start Menu\Programs
-        CommonStartMenuPath = CSIDL_COMMON_STARTMENU,//表示所有用户的“开始菜单”文件夹，例如：C:\Documents and Settings\All Users\Start Menu
-        CommonStartUpPath = CSIDL_COMMON_STARTUP,//表示所有用户的“启动”文件夹，例如：C:\Documents and Settings\All Users\Start Menu\Programs\Startup
-        CommonTemplantesPath = CSIDL_COMMON_TEMPLATES,//表示所有用户的“模块”文件夹，例如：C:\Documents and Settings\All Users\Templates
+    /// Windows文件夹&emsp;CSIDL_WINDOWS<br/>
+    /// Windows系统文件夹&emsp;CSIDL_SYSTEM<br/>
+    /// 程序文件的文件夹&emsp;CSIDL_PROGRAM_FILES<br/>
+    /// 公用系统程序文件夹&emsp;CSIDL_PROGRAM_FILES_COMMON<br/>
+    /// 字体目录&emsp;CSIDL_FONTS<br/>
+    /// 管理工具目录&emsp;CSIDL_COMMON_ADMINTOOLS<br/>
 
-        IECookiesPath = CSIDL_COOKIES,//表示当前用户Internet Explorer的cookie 文件夹，例如：C:\Documents and Settings\username\Cookies
-        IEHistoryPath = CSIDL_HISTORY,//表示Inernet Explorer的“历史记录”文件夹
-        IECachePath = CSIDL_INTERNET_CACHE,//表示当前用户的Internet Explorer的"Cache"文件夹，例如：C:\Documents and Settings\username\Temporary Internet Files
+    /// 公用桌面&emsp;CSIDL_COMMON_DESKTOPDIRECTORY<br/>
+    /// 公用文档&emsp;CSIDL_COMMON_DOCUMENTS<br/>
+    /// 公用图片&emsp;CSIDL_COMMON_PICTURES<br/>
+    /// 公用音乐&emsp;CSIDL_COMMON_MUSIC<br/>
+    /// 公用视频&emsp;CSIDL_COMMON_VIDEO<br/>
+    /// 公用收藏夹&emsp;CSIDL_COMMON_FAVORITES<br/>
+    /// 公用应用程序数据存储&emsp;CSIDL_COMMON_APPDATA<br/>
+    /// 公用程序文件夹&emsp;CSIDL_COMMON_PROGRAMS<br/>
+    /// 公用开始菜单文件夹&emsp;CSIDL_COMMON_STARTMENU<br/>
+    /// 公用启动文件夹&emsp;CSIDL_COMMON_STARTUP<br/>
+    /// 公用模块文件夹&emsp;CSIDL_COMMON_TEMPLATES<br/>
+    static QString  getWinSysDir(int pathid);
 
-        TemplantesPath = CSIDL_TEMPLATES,//模板目录
-        FontsPath   = CSIDL_FONTS,//字体目录
-        ProgramFilesPath = CSIDL_PROGRAM_FILES,//表示程序文件的文件夹，例如：C:\Program Files
-        ProgramFilesCommonPath =CSIDL_PROGRAM_FILES_COMMON,//表示系统程序共用组件文件夹，例如：C:\Program Files\Common
-        SystemPath = CSIDL_SYSTEM,//表示WINDOWS系统的系统文件夹，例如：C:\WINNT\SYSTEM32
-        WindowsPath = CSIDL_WINDOWS//表示的是系统中Windows目录的文件珍，例如：C:\WINNT
-    };
+    /// @brief 在指定目录下创建快捷键
     static bool createLink(const QString &fileName, const QString &linkName, const QString &arguments = QString(),
                            const QString &iconPath = QString(),
                            const QString &iconId = QString());//创建快捷方式：源文件，创建到的完整path
 
-    static QString  getWinSysDir(SYSTEMPATH path);//获取系统的路径
-
-    static bool     resizeEvent(const QByteArray&, void* msg, long* result, const QRect& wndRect);
-
-private:
-    TcWindows(){}
+    /// @brief 为无框窗口增加缩放功能
+    /// @param eventType 对应 nativeEvent(...)参数
+    /// @param msg       对应 nativeEvent(...)参数
+    /// @param result    对应 nativeEvent(...)参数
+    /// @param wndRect   根据需要指定边框的位置，一般用于含阴影的边框，比实际框略小
+    /// @code
+    /// virtual bool nativeEvent(const QByteArray& eventType, void* msg, long* result) override;
+    /// {
+    ///     retrun TcWindow::resizeEvent(eventType, msg, result, geometry());
+    /// }
+    /// @endcode
+    static bool resizeEvent(const QByteArray&, void* msg, long* result, const QRect& wndRect);
 };
 
 // *********************************************************************************************************************
