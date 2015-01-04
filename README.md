@@ -35,6 +35,9 @@ Tianchi2 设计时尽量保持单组文件型式，所以只要把对应<br/>
         Qt5Tianchi.lib  (Qt5Tianchi.a  )            生成的动态/静态链接库(Release)
         Qt5Tianchi.dll  (Qt5Tianchi.so )            生成的动态链接库(Release)
         tianchi2_sample.exe                         天池的演示程序
+        tianchi4qtc.dll                             Qt Designer 插件
+                                                    请复制到：C:\Qt\Qt5.4.0\Tools\QtCreator\bin\plugins\designer
+                                                    重启 Qt Creator 后可在设计器中使用
 
     help/
         Doxyfile                                    Doxygen 生成文档的配置文件
