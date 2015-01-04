@@ -8,19 +8,19 @@ Tianchi2
 Ê¹ÓÃ·½Ê½:
 ---------
 ##1. ¶¯Ì¬Á´½Ó¿â·½Ê½£¨ÍÆ¼ö£©
-  ´ò¿ª²¢±àÒë tianchi/tianchi.pro , Éú³É¶¯Ì¬Á´½Ó¿â<br/>
-  Éú³ÉÎ»ÖÃ£ºbin/<br/>
-  Debug  Ê±Á¬½Ó¿â£º```-lQt5Tianchid```<br/>
-  ReleaseÊ±Á¬½Ó¿â£º```-lQt5Tianchi```<br/>
+´ò¿ª²¢±àÒë tianchi/tianchi.pro , Éú³É¶¯Ì¬Á´½Ó¿â<br/>
+Éú³ÉÎ»ÖÃ£ºbin/<br/>
+Debug  Ê±Á¬½Ó¿â£º```-lQt5Tianchid```<br/>
+ReleaseÊ±Á¬½Ó¿â£º```-lQt5Tianchi```<br/>
 
 ##2. ÔÚ×Ô¼ºµÄ¹¤³ÌÎÄ¼þÖÐÖ±½Ó°üº¬Ìì³ØÔ´Âë¿â
-  ```include(tianchi/tianchi_all.pri)```<br/>
+ÔÚ.proÎÄ¼þÖÐÌí¼Ó£º```include(tianchi/tianchi.pri)```<br/>
 
 ##3. Ö±½ÓÊ¹ÓÃÔ´´úÂëÎÄ¼þ
-  Tianchi2 Éè¼ÆÊ±¾¡Á¿±£³Öµ¥×éÎÄ¼þÐÍÊ½£¬ËùÒÔÖ»Òª°Ñ¶ÔÓ¦<br/>
-  µÄ .h/.cpp Ö±½ÓÒýÓÃµ½¹¤³ÌÎÄ¼þÖÐ¼´¿ÉÊ¹ÓÃ.<br/>
-  ²¿·ÖÊ¹ÓÃ¿ªÔ´¿âµÄÔ´ÎÄ¼þÐèÒªÍ¬Ê±ÒýÈë¿ªÔ´¿âÎÄ¼þ, ¾ßÌå<br/>
-  Çë²Î¼û tianchi/tianchi.pri ÖÐµÄÒýÈëÄÚÈÝ<br/>
+Tianchi2 Éè¼ÆÊ±¾¡Á¿±£³Öµ¥×éÎÄ¼þÐÍÊ½£¬ËùÒÔÖ»Òª°Ñ¶ÔÓ¦<br/>
+µÄ .h/.cpp Ö±½ÓÒýÓÃµ½¹¤³ÌÎÄ¼þÖÐ¼´¿ÉÊ¹ÓÃ.<br/>
+¿·ÖÊ¹ÓÃ¿ªÔ´¿âµÄÔ´ÎÄ¼þÐèÒªÍ¬Ê±ÒýÈë¿ªÔ´¿âÎÄ¼þ, ¾ßÌå<br/>
+Çë²Î¼û tianchi/tianchi.pri ÖÐµÄÒýÈëÄÚÈÝ<br/>
 
 ######4. ¾²Ì¬Á´½Ó¿â
   ´ò¿ª²¢±àÒë tianchi/tianchi_lib.pro , Éú³É¾²Ì¬Á´½Ó¿â<br/>
