@@ -7,28 +7,28 @@ Tianchi2
 
 使用方式:
 ---------
-#1. 动态链接库方式（推荐）<br/>
+##1. 动态链接库方式（推荐）
   打开并编译 tianchi/tianchi.pro , 生成动态链接库<br/>
   生成位置：bin/<br/>
   Debug  时连接库：```-lQt5Tianchid```<br/>
   Release时连接库：```-lQt5Tianchi```<br/>
-<br/>
-##2. 在自己的工程文件中直接包含天池源码库<br/>
+
+##2. 在自己的工程文件中直接包含天池源码库
   ```include(tianchi/tianchi_all.pri)```<br/>
-<br/>
-###3. 直接使用源代码文件<br/>
+
+##3. 直接使用源代码文件
   Tianchi2 设计时尽量保持单组文件型式，所以只要把对应<br/>
   的 .h/.cpp 直接引用到工程文件中即可使用.<br/>
   部分使用开源库的源文件需要同时引入开源库文件, 具体<br/>
   请参见 tianchi/tianchi.pri 中的引入内容<br/>
-<br/>
-####4. 静态链接库<br/>
+
+######4. 静态链接库
   打开并编译 tianchi/tianchi_lib.pro , 生成静态链接库<br/>
   生成位置：bin/<br/>
 
 
 文件列表与说明:
----------
+---------------
     bin/                                            编译生成文件的目录
         Qt5Tianchid.lib (Qt5Tianchid.a )            生成的动态/静态链接库(Debug)
         Qt5Tianchid.dll (Qt5Tianchid.so)            生成的动态链接库(Debug)
