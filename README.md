@@ -17,10 +17,10 @@ ReleaseÊ±Á¬½Ó¿â£º```-lQt5Tianchi```<br/>
 ÔÚ.proÎÄ¼şÖĞÌí¼Ó£º```include(tianchi/tianchi.pri)```<br/>
 
 ####3. Ö±½ÓÊ¹ÓÃÔ´´úÂëÎÄ¼ş
-Tianchi2 Éè¼ÆÊ±¾¡Á¿±£³Öµ¥×éÎÄ¼şĞÍÊ½£¬ËùÒÔÖ»Òª°Ñ¶ÔÓ¦<br/>
-µÄ .h/.cpp Ö±½ÓÒıÓÃµ½¹¤³ÌÎÄ¼şÖĞ¼´¿ÉÊ¹ÓÃ.<br/>
-¿·ÖÊ¹ÓÃ¿ªÔ´¿âµÄÔ´ÎÄ¼şĞèÒªÍ¬Ê±ÒıÈë¿ªÔ´¿âÎÄ¼ş, ¾ßÌå<br/>
-Çë²Î¼û tianchi/tianchi.pri ÖĞµÄÒıÈëÄÚÈİ<br/>
+Tianchi2 Éè¼ÆÊ±¾¡Á¿±£³Öµ¥×éÎÄ¼şĞÍÊ½£¬ËùÒÔÖ»Òª°Ñ<br/>
+¶ÔÓ¦µÄ .h/.cpp/.ui Ö±½ÓÒıÓÃµ½¹¤³ÌÎÄ¼şÖĞ¼´¿ÉÊ¹ÓÃ.<br/>
+²¿·ÖÊ¹ÓÃ¿ªÔ´¿âµÄÔ´ÎÄ¼şĞèÒªÍ¬Ê±ÒıÈë¿ªÔ´¿âÎÄ¼ş, ¾ß<br/>
+ÌåÇë²Î¼û tianchi/tianchi.pri ÖĞµÄÒıÈëÄÚÈİ<br/>
 
 ####4. ¾²Ì¬Á´½Ó¿â
   ´ò¿ª²¢±àÒë tianchi/tianchi_lib.pro , Éú³É¾²Ì¬Á´½Ó¿â<br/>
@@ -35,9 +35,6 @@ Tianchi2 Éè¼ÆÊ±¾¡Á¿±£³Öµ¥×éÎÄ¼şĞÍÊ½£¬ËùÒÔÖ»Òª°Ñ¶ÔÓ¦<br/>
         Qt5Tianchi.lib  (Qt5Tianchi.a  )            Éú³ÉµÄ¶¯Ì¬/¾²Ì¬Á´½Ó¿â(Release)
         Qt5Tianchi.dll  (Qt5Tianchi.so )            Éú³ÉµÄ¶¯Ì¬Á´½Ó¿â(Release)
         tianchi2_sample.exe                         Ìì³ØµÄÑİÊ¾³ÌĞò
-        tianchi4qtc.dll                             Qt Designer ²å¼ş
-                                                    Çë¸´ÖÆµ½£ºC:\Qt\Qt5.4.0\Tools\QtCreator\bin\plugins\designer
-                                                    ÖØÆô Qt Creator ºó¿ÉÔÚÉè¼ÆÆ÷ÖĞÊ¹ÓÃ
 
     help/
         Doxyfile                                    Doxygen Éú³ÉÎÄµµµÄÅäÖÃÎÄ¼ş
