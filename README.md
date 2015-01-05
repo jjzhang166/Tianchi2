@@ -8,8 +8,8 @@ Tianchi2
 使用方式:
 ---------
 ####1. QtCreator / QtDesigner 可视化插件
-把 bin/designer/*.* 复制到：C:\Qt\Qt5.4.0\Tools\QtCreator\bin\plugins\designer
-QtDesigner 需要复制到：C:\Qt\Qt5.4.0\5.4\mingw491_32\plugins\designer
+把 bin/designer/*.* 复制到：C:\Qt\Qt5.4.0\Tools\QtCreator\bin\plugins\designer<br/>
+QtDesigner 需要复制到：C:\Qt\Qt5.4.0\5.4\mingw491_32\plugins\designer<br/>
 
 ####2. 动态链接库方式 - mingw（推荐）
 打开并编译 tianchi/tianchi.pro , 生成动态链接库<br/>
@@ -50,7 +50,6 @@ Tianchi2 设计时尽量保持单组文件型式，所以只要把<br/>
     sample/                                         演示程序目录
         sample.pro                                  演示程序的工程文件，采用直接包含天池库方式
 
-
     tianchi/
         tianchi.pro                                 生成动态链接库
         tianchi_lib.pro                             生成静态链接库
@@ -60,13 +59,8 @@ Tianchi2 设计时尽量保持单组文件型式，所以只要把<br/>
         Common/
             tcCommon.h                              一些常用的公共单元。根据 Tianchi 的 common & utils 进行了合并整理
             tcCommon.cpp
-            tcFunctionalSortFilterProxyModel.h      依所设过滤参数(QVariantMap)来使用已设滤函数进行过滤的模型
-            tcFunctionalSortFilterProxyModel.cpp
             tcInvoke.h                              映射信号槽的执行对象
             tcInvoke.cpp
-            tcRecentUse.hpp                         "最近使用"模版类，例如：用于最近打开的文件，默认最大10个
-            tcSingleton.hpp                         用指针实现的单例模式的模版类
-            tcTuple.hpp                             简单的 Tuple(元组) 模版类, 提供2~10个类型参数的模版
         Component/                                  Qt IDE 的控件，由于Qt限制，必须为全小写文件名
             QSint/                                  QSint 开源组件(部分), 请详见：http://www.oschina.net/p/qsint
             Tianchi/                                Tianchi 组件
@@ -127,7 +121,7 @@ Tianchi2 设计时尽量保持单组文件型式，所以只要把<br/>
             qrencode/                               二维码编码的开源库
             tcZxing.h                               二维码解码
             tcZxing.cpp
-            zxing/                                  二维码解码的开源库
+            zxing/                                  二维码解码的开源库 (VC2010下无法编译，请自行去除)
         Widgets/
             tcPageTurnWidget.h                      翻页按钮组
             tcPageTurnWidget.cpp
@@ -156,3 +150,12 @@ Tianchi2 设计时尽量保持单组文件型式，所以只要把<br/>
 ---------------------------------
 最初原版请参见：<https://github.com/qtcn/tianchi><br/>
 
+
+特别感谢代码贡献者以及参与维护人员 (排名随机)
+----------------------------------
+cnhemiya / 南果梨<br/>
+XChinux / www.qtcn.org 坛主<br/>
+roywillow<br/>
+younghz<br/>
+渡世白玉<br/>
+Jonix<br/>

@@ -8,24 +8,12 @@ INCLUDEPATH += $$PWD/Common
 
 HEADERS += \
     $$PWD/Common/tcCommon.h \
-    $$PWD/Common/tcFunctionalSortFilterProxyModel.h \
-    $$PWD/Common/tcInvoke.h \
-    $$PWD/Common/tcRecentUse.hpp \
-    $$PWD/Common/tcSingleton.hpp \
-    $$PWD/Common/tcTuple.hpp
-
+    $$PWD/Common/tcInvoke.h
 
 SOURCES += \
     $$PWD/Common/tcCommon.cpp \
-    $$PWD/Common/tcFunctionalSortFilterProxyModel.cpp \
     $$PWD/Common/tcInvoke.cpp
 
-# 以下文件在 Windows-VC2010 下编译失败，原因不明
-#HEADERS += \
-#    $$PWD/Common/tcVariantMapTableModel.h
-
-#SOURCES += \
-#    $$PWD/Common/tcVariantMapTableModel.cpp
 
 # =====================================================================================================================
 # Component
