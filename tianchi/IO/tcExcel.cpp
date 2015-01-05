@@ -1,9 +1,14 @@
-#include "tcExcel.h"
+﻿#include "tcExcel.h"
 
 #if defined(Q_OS_WIN)
 #include <QList>
 
 TcExcel::TcExcel()
+    : excel(nullptr)
+    , books(nullptr)
+    , book(nullptr)
+    , sheets(nullptr)
+    , sheet(nullptr)
 {
 }
 

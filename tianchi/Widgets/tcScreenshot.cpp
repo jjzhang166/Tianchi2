@@ -1,4 +1,4 @@
-#include "tcScreenshot.h"
+﻿#include "tcScreenshot.h"
 #include "ui_tcScreenshot.h"
 
 #include <QPainter>
@@ -8,13 +8,14 @@
 #include <QScreen>
 #include <QDebug>
 
-TcScreenshot::TcScreenshot() :
-    QWidget(0, Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint),
-    ui(new Ui::TcScreenshot)
+TcScreenshot::TcScreenshot()
+    : QWidget(0, Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint)
+    , ui(new Ui::TcScreenshot)
+    , m_moveHole(0)
 {
     ui->setupUi(this);
 
-    //setAttribute(Qt::WA_DeleteOnClose); // 加上这句，此对象可以自动释放
+    //setAttribute(Qt::WA_DeleteOnClose); // 加上这句，此窗口在关闭后自动释放
 
     setAttribute(Qt::WA_TranslucentBackground);
 

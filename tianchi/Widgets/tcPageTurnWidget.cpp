@@ -1,10 +1,11 @@
-#include "tcPageTurnWidget.h"
+﻿#include "tcPageTurnWidget.h"
 #include <QLayout>
 #include <QVariant>
 #include <QDebug>
 
 TcPageTurnWidget::TcPageTurnWidget(QWidget* parent)
     : QObject(parent)
+    , m_pageTurnBar(nullptr)
 {
     m_buttonStyle = "QToolButton { background-color:white;border:1px solid rgb(222,222,222); }";
 }

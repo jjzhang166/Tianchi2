@@ -1,4 +1,4 @@
-#include "tcIO.h"
+﻿#include "tcIO.h"
 
 #include <QDir>
 #include <QFile>
@@ -9,7 +9,7 @@
 #if defined(Q_OS_WIN)
 
 //这里的代码是有效的
-#include <windows.h>
+#include <qt_windows.h>
 #endif
 
 TcIO::TcIO(QObject* parent)

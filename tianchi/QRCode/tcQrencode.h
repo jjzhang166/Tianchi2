@@ -25,9 +25,6 @@
 class TIANCHI_API TcQrencode
 {
 public:
-    TcQrencode();
-    virtual ~TcQrencode();
-
     static QImage encodeImage(const QString& s, int bulk=8);
 };
 

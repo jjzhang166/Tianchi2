@@ -5,7 +5,7 @@
 #include <QTextStream>
 
 #if defined(Q_OS_WIN)
-  #include <windows.h>
+  #include <qt_windows.h>
 #endif
 
 QString TcOS::name()

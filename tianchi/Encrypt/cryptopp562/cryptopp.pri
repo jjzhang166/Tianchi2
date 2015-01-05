@@ -132,7 +132,6 @@ HEADERS += \
     $$CRYPTOPP_DIR/tiger.h \
     $$CRYPTOPP_DIR/trdlocal.h \
     $$CRYPTOPP_DIR/trunhash.h \
-    $$CRYPTOPP_DIR/ttmac.h \
     $$CRYPTOPP_DIR/twofish.h \
     $$CRYPTOPP_DIR/validate.h \
     $$CRYPTOPP_DIR/vmac.h \
@@ -147,6 +146,8 @@ HEADERS += \
     $$CRYPTOPP_DIR/zinflate.h \
     $$CRYPTOPP_DIR/zlib.h
 
+#此文件导致 VC2010 编译不过
+#    $$CRYPTOPP_DIR/ttmac.h \
 
 SOURCES += \
     $$CRYPTOPP_DIR/3way.cpp \
@@ -260,7 +261,6 @@ SOURCES += \
     $$CRYPTOPP_DIR/tiger.cpp \
     $$CRYPTOPP_DIR/tigertab.cpp \
     $$CRYPTOPP_DIR/trdlocal.cpp \
-    $$CRYPTOPP_DIR/ttmac.cpp \
     $$CRYPTOPP_DIR/twofish.cpp \
     $$CRYPTOPP_DIR/vmac.cpp \
     $$CRYPTOPP_DIR/wait.cpp \
@@ -273,6 +273,8 @@ SOURCES += \
     $$CRYPTOPP_DIR/zinflate.cpp \
     $$CRYPTOPP_DIR/zlib.cpp
 
+#此文件导致 VC2010 编译不过
+#    $$CRYPTOPP_DIR/ttmac.cpp \
 
 LIBS += -lws2_32
 

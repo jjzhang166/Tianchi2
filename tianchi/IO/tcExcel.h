@@ -1,4 +1,4 @@
-/// ********************************************************************************************************************
+﻿/// ********************************************************************************************************************
 /// @copyright Tianchi C++ source library for Qt5 (天池共享源码库)\n
 /// 天池共享源码库开发组(www.qtcn.org)\n
 /// @license 授权协议：请阅读天池共享源码库附带的授权协议(LICENSE.LGPLv2.1)\n
@@ -126,11 +126,11 @@ public:
     bool usedRange(int& rowStart, int& colStart, int &rowEnd, int &colEnd);
 
 private:
-    QAxObject*  excel  = nullptr;
-    QAxObject*  books  = nullptr;
-    QAxObject*  book   = nullptr;
-    QAxObject*  sheets = nullptr;
-    QAxObject*  sheet  = nullptr;
+    QAxObject*  excel ;
+    QAxObject*  books ;
+    QAxObject*  book  ;
+    QAxObject*  sheets;
+    QAxObject*  sheet ;
 
     QString     m_filename;
     QString     m_sheetName;

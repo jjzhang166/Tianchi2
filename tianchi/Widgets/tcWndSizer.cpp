@@ -1,10 +1,11 @@
-#include "tcWndSizer.h"
+﻿#include "tcWndSizer.h"
 #include <QMainWindow>
 #include <QMouseEvent>
 #include <QDebug>
 
 TcWndSizer::TcWndSizer(QWidget* parent)
     : QObject(parent)
+    , m_borderWidth(8)
 {
     m_widget = parent;
     m_widgetCursor = parent->cursor();

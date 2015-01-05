@@ -6,6 +6,26 @@ TARGET = tianchi4qtc
 DESTDIR = ../bin
 TEMPLATE = lib
 
+
+# Tianchi
+INCLUDEPATH += tianchi $$TC_COMPONENT/tianchi
+
+HEADERS += \
+    tianchi/tcColorWheelPlugin.h \
+    tianchi/tcDateEditPlugin.h \
+    $$TC_COMPONENT/tianchi/tcColorWheel.h \
+    $$TC_COMPONENT/tianchi/tcDateEdit.h
+
+SOURCES += \
+    tianchi/tcColorWheelPlugin.cpp \
+    tianchi/tcDateEditPlugin.cpp \
+    $$TC_COMPONENT/tianchi/tcColorWheel.cpp \
+    $$TC_COMPONENT/tianchi/tcDateEdit.cpp
+
+RESOURCES += \
+    tianchi/tianchi.qrc
+
+
 # QSint:
 # http://www.oschina.net/p/qsint
 
@@ -53,25 +73,35 @@ RESOURCES += \
     $$TC_COMPONENT/QSint/schemes.qrc \
     QSint/QSint.qrc
 
-# Tianchi
-INCLUDEPATH += tianchi $$TC_COMPONENT/tianchi
+
+# wwWidgets: http://www.wysota.eu.org/wwwidgets
+
+INCLUDEPATH += wwwidgets $$TC_COMPONENT/wwwidgets
 
 HEADERS += \
-    tianchi/tcdateeditplugin.h \
-    $$TC_COMPONENT/tianchi/tcdateedit.h
+    wwwidgets/qwwhuesatpickeriface.h \
+    wwwidgets/qwwhuesatradialpickeriface.h \
+    $$TC_COMPONENT/wwwidgets/qwwhuesatpicker.h \
+    $$TC_COMPONENT/wwwidgets/qwwhuesatradialpicker.h
 
 SOURCES += \
-    tianchi/tcdateeditplugin.cpp \
-    $$TC_COMPONENT/tianchi/tcdateedit.cpp
+    wwwidgets/qwwhuesatpickeriface.cpp \
+    wwwidgets/qwwhuesatradialpickeriface.cpp \
+    $$TC_COMPONENT/wwwidgets/qwwhuesatpicker.cpp \
+    $$TC_COMPONENT/wwwidgets/qwwhuesatradialpicker.cpp \
+    $$TC_COMPONENT/wwwidgets/wwglobal_p.cpp
 
-RESOURCES += \
-    tianchi/tianchi.qrc
+RESOURCES += wwWidgets/wwWidgets.qrc
 
 # plugins
+INCLUDEPATH += $$PWD
+
 HEADERS += \
-    tcdesignercomponent.h
+    tcDesignerComponent.h \
+    TianchiPlugin.h
 
 SOURCES += \
-    tcdesignercomponent.cpp
+    tcDesignerComponent.cpp \
+    TianchiPlugin.cpp
 
 RC_FILE += tianchi4qtc.rc

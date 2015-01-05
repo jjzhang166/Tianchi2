@@ -1,6 +1,6 @@
-﻿#include "tcdateedit.h"
+﻿#include "tcDateEditPlugin.h"
+#include "tcDateEdit.h"
 #include <QtPlugin>
-#include "tcdateeditplugin.h"
 
 TcDateEditPlugin::TcDateEditPlugin(QObject *parent)
     : QObject(parent), m_initialized(false)
@@ -14,7 +14,7 @@ QString TcDateEditPlugin::name() const
 
 QString TcDateEditPlugin::includeFile() const
 {
-    return "tcdateedit.h";
+    return "tcDateEdit.h";
 }
 
 QString TcDateEditPlugin::group() const
@@ -24,7 +24,7 @@ QString TcDateEditPlugin::group() const
 
 QIcon TcDateEditPlugin::icon() const
 {
-    return QIcon(":/images/tcdateedit.png");
+    return QIcon(":/images/TcDateEdit.png");
 }
 
 QString TcDateEditPlugin::toolTip() const

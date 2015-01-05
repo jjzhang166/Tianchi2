@@ -1,4 +1,4 @@
-/// ********************************************************************************************************************
+﻿/// ********************************************************************************************************************
 /// @copyright Tianchi C++ source library for Qt5 (天池共享源码库)\n
 /// 天池共享源码库开发组(www.qtcn.org)\n
 /// @license 授权协议：请阅读天池共享源码库附带的授权协议(LICENSE.LGPLv2.1)\n
@@ -61,7 +61,7 @@ private:
     QRect m_grip_10; // 右下
 
     QCursor m_defaultCursor;
-    int     m_moveHole = 0;
+    int     m_moveHole;
     QPoint  m_pressedPos;
 
     QPixmap m_pixmap;

@@ -10,6 +10,7 @@
 #include <tlhelp32.h>
 #include <winbase.h>
 #include <winnetwk.h>
+#include <Strsafe.h>
 
 #ifndef Q_CC_MINGW
 #pragma comment(lib, "mpr.lib")
@@ -18,9 +19,6 @@
 #include <QList>
 #include <QDir>
 #include <QLibrary>
-
-#include <QDebug>
-//#include <QDir>
 
 // *********************************************************************************************************************
 // Link & TcRunInfo

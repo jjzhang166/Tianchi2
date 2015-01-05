@@ -6,6 +6,8 @@
 
 TcHttpDownloader::TcHttpDownloader(int index, QObject *parent)
     : QObject(parent)
+    , m_Reply(nullptr)
+    , m_File(nullptr)
     , m_Index(index)
 {
     m_HaveDoneBytes = 0;
@@ -62,6 +64,7 @@ void TcHttpDownloader::HttpReadyRead()
 // *********************************************************************************************************************
 TcDownloader::TcDownloader(QObject* parent)
     : QObject(parent)
+    , m_File(nullptr)
 {
     m_DownloadCount = 0;
     m_FinishedNum = 0;

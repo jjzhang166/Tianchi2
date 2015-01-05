@@ -48,6 +48,7 @@ class TcSelfRestarter::Private
 {
 public:
     Private(int argc, char *argv[])
+        : restartOnQuit(false)
     {
         executable = QString::fromLocal8Bit(argv[0]);
         workingPath = QDir::currentPath();
@@ -56,6 +57,7 @@ public:
     }
 
     Private()
+        : restartOnQuit(false)
     {
         executable = qApp->applicationFilePath();
         workingPath = QDir::currentPath();
@@ -72,7 +74,7 @@ public:
 
     QString     executable;
     QStringList args;
-    bool        restartOnQuit = false;
+    bool        restartOnQuit;
     QString     workingPath;
     static TcSelfRestarter* instance;
 };

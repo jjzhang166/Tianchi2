@@ -1,4 +1,4 @@
-/// ********************************************************************************************************************
+﻿/// ********************************************************************************************************************
 /// @copyright Tianchi C++ source library for Qt5 (天池共享源码库)\n
 /// 天池共享源码库开发组(www.qtcn.org)\n
 /// @license 授权协议：请阅读天池共享源码库附带的授权协议(LICENSE.LGPLv2.1)\n
@@ -29,7 +29,7 @@ class TIANCHI_API TcHttpDownloader : public QObject
 {
     Q_OBJECT
 public:
-    TcHttpDownloader(int index, QObject *parent = 0);
+    TcHttpDownloader(int index, QObject* parent = 0);
     void start(const QUrl& url, QFile* file, qint64 startPoint=0, qint64 endPoint=-1);
 
 Q_SIGNALS:
@@ -41,8 +41,8 @@ public Q_SLOTS:
 
 private:
     QNetworkAccessManager   m_Qnam;
-    QNetworkReply*          m_Reply = nullptr;
-    QFile*                  m_File = nullptr;
+    QNetworkReply*          m_Reply;
+    QFile*                  m_File;
 
     const int   m_Index;
     qint64      m_HaveDoneBytes;
@@ -72,7 +72,7 @@ private:
     int m_FinishedNum;
     int m_FileSize;
     QUrl m_Url;
-    QFile* m_File = nullptr;
+    QFile* m_File;
 };
 
 #endif // TIANCHI_TCDOWNLOADER_H

@@ -573,4 +573,4 @@ void TcVariantMapTableModel::clear()
     endResetModel();
 }
 
-//#include "moc_tcVariantMapTableModel.cpp"
+

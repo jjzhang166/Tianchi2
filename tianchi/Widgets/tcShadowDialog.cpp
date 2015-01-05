@@ -1,4 +1,4 @@
-#include "tcShadowDialog.h"
+﻿#include "tcShadowDialog.h"
 #include "ui_tcShadowDialog.h"
 
 #include <QDesktopWidget>
@@ -12,6 +12,7 @@
 TcShadowDialog::TcShadowDialog(QWidget* parent, int shadowWidth)
     : QDialog(parent, Qt::FramelessWindowHint | Qt::WindowSystemMenuHint | Qt::WindowMinimizeButtonHint)
     , ui(new Ui::TcShadowDialog)
+    , m_frameResize(false)
 {
     m_shadowWidth = shadowWidth;
 

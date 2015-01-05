@@ -7,22 +7,28 @@ Tianchi2
 
 使用方式:
 ---------
-####1. 动态链接库方式（推荐）
+####1. QtCreator / QtDesigner 可视化插件
+把 bin/designer/*.* 复制到：C:\Qt\Qt5.4.0\Tools\QtCreator\bin\plugins\designer
+QtDesigner 需要复制到：C:\Qt\Qt5.4.0\5.4\mingw491_32\plugins\designer
+
+####2. 动态链接库方式 - mingw（推荐）
 打开并编译 tianchi/tianchi.pro , 生成动态链接库<br/>
 生成位置：bin/<br/>
 Debug  时连接库：```-lQt5Tianchid```<br/>
 Release时连接库：```-lQt5Tianchi```<br/>
 
-####2. 在自己的工程文件中直接包含天池源码库
+注意：VC2010 编译时，ZXing 包无法通过。
+
+####3. 在自己的工程文件中直接包含天池源码库
 在.pro文件中添加：```include(tianchi/tianchi.pri)```<br/>
 
-####3. 直接使用源代码文件
+####4. 直接使用源代码文件
 Tianchi2 设计时尽量保持单组文件型式，所以只要把<br/>
 对应的 .h/.cpp/.ui 直接引用到工程文件中即可使用.<br/>
 部分使用开源库的源文件需要同时引入开源库文件, 具<br/>
 体请参见 tianchi/tianchi.pri 中的引入内容<br/>
 
-####4. 静态链接库
+####5. 静态链接库
   打开并编译 tianchi/tianchi_lib.pro , 生成静态链接库<br/>
   生成位置：bin/<br/>
 
@@ -30,11 +36,8 @@ Tianchi2 设计时尽量保持单组文件型式，所以只要把<br/>
 文件列表与说明:
 ---------------
     bin/                                            编译生成文件的目录
-        Qt5Tianchid.lib (Qt5Tianchid.a )            生成的动态/静态链接库(Debug)
-        Qt5Tianchid.dll (Qt5Tianchid.so)            生成的动态链接库(Debug)
-        Qt5Tianchi.lib  (Qt5Tianchi.a  )            生成的动态/静态链接库(Release)
-        Qt5Tianchi.dll  (Qt5Tianchi.so )            生成的动态链接库(Release)
-        tianchi2_sample.exe                         天池的演示程序
+        tianchi4qtc.dll                             Windows版天池的 QtCreator / QtDesigner 可视化插件
+                                                    请复制到：C:\Qt\Qt5.4.0\Tools\QtCreator\bin\plugins\designer
 
     help/
         Doxyfile                                    Doxygen 生成文档的配置文件
@@ -64,13 +67,12 @@ Tianchi2 设计时尽量保持单组文件型式，所以只要把<br/>
             tcRecentUse.hpp                         "最近使用"模版类，例如：用于最近打开的文件，默认最大10个
             tcSingleton.hpp                         用指针实现的单例模式的模版类
             tcTuple.hpp                             简单的 Tuple(元组) 模版类, 提供2~10个类型参数的模版
-            tcVariantMapTableModel.h                以QVariantMap作为数据行的model,只可追加和清除,不可插入与删除
-            tcVariantMapTableModel.cpp
         Component/                                  Qt IDE 的控件，由于Qt限制，必须为全小写文件名
             QSint/                                  QSint 开源组件(部分), 请详见：http://www.oschina.net/p/qsint
             Tianchi/                                Tianchi 组件
                 tcdateedit.h                        允许输入为空的日期选择插件(IDE控件)
                 tcdateedit.cpp
+            wwWidgets/                              wwWidgets 开源组件(部分), 请详见：http://www.wysota.eu.org/wwwidgets
         Encrypt/
             tcAES.h                                 AES 加密/解密（使用 Crypto++）
             tcAES.cpp

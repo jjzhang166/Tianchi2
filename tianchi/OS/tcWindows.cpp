@@ -11,7 +11,7 @@
 
 #include <ObjBase.h>
 
-#include <windows.h>
+#include <qt_windows.h>
 #include <windowsx.h>
 
 #ifndef PIDLIST_ABSOLUTE

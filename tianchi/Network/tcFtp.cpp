@@ -1,4 +1,4 @@
-#include "tcFtp.h"
+﻿#include "tcFtp.h"
 
 #include <QHostAddress>
 #include <QFileInfo>
@@ -7,6 +7,8 @@
 TcFtp::TcFtp()
     : QObject(0)
     , b_isConnected(false)
+    , b_isLogined(false)
+    , LINE_CR("\r\n")
 {
     p_cmdSocket=new QTcpSocket;
     p_dataSocket=nullptr;
@@ -21,7 +23,10 @@ TcFtp::TcFtp()
     b_stop=false;
 }
 
-TcFtp::TcFtp(QString ip,quint16 port,QString username,QString passwd):QObject(0),b_isConnected(false)
+TcFtp::TcFtp(QString ip,quint16 port,QString username,QString passwd)
+    : QObject(0)
+    , b_isConnected(false)
+    , b_isLogined(false)
 {
     p_cmdSocket=new QTcpSocket;
     p_dataSocket=nullptr;
@@ -38,6 +43,7 @@ TcFtp::TcFtp(QString ip,quint16 port,QString username,QString passwd):QObject(0)
     n_port=port;
     str_username=username;
     str_password=passwd;
+
     if(!connectToHost(str_ip,n_port))
         return;
 
@@ -416,9 +422,9 @@ void TcFtp::writeData()
     if(!p_file->isOpen())
         return;
 
-    int bufsize=8*1024;
+    const int bufsize=8*1024;
     char buffer[bufsize];
-    qint64 read=p_file->read(buffer,bufsize);
+    qint64 read=p_file->read(buffer, bufsize);
     if(read==-1){
         emit error(11,"can't read file!");
         p_file->close();

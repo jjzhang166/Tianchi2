@@ -5,7 +5,11 @@
 class TcAESPrivate
 {
 public:
-    int                     keyLength = CryptoPP::AES::MAX_KEYLENGTH;
+    TcAESPrivate()
+        : keyLength(CryptoPP::AES::MAX_KEYLENGTH)
+    {}
+
+    int                     keyLength;// = CryptoPP::AES::MAX_KEYLENGTH;
     CryptoPP::AESEncryption encryptor;
     CryptoPP::AESDecryption decryptor;
 };
@@ -69,7 +73,7 @@ QByteArray TcAES::decryp(const QByteArray& data)
     QByteArray ret;
     QByteArray inputData = data;
 
-    unsigned char outBlock[d_func()->keyLength];
+    unsigned char* outBlock = new unsigned char[d_func()->keyLength];
     while(inputData.size() >= d_func()->keyLength)
     {
         QByteArray ba = inputData.left(d_func()->keyLength);
@@ -83,6 +87,7 @@ QByteArray TcAES::decryp(const QByteArray& data)
         d_func()->decryptor.ProcessBlock((byte*)inputData.data(), outBlock);
         ret.append((char*)outBlock, d_func()->keyLength);
     }
+    delete outBlock;
     return ret;
 }
 

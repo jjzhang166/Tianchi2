@@ -1,4 +1,4 @@
-/// ********************************************************************************************************************
+﻿/// ********************************************************************************************************************
 /// @copyright Tianchi C++ source library for Qt5 (天池共享源码库)\n
 /// 天池共享源码库开发组(www.qtcn.org)\n
 /// @license 授权协议：请阅读天池共享源码库附带的授权协议(LICENSE.LGPLv2.1)\n
@@ -42,7 +42,7 @@ private slots:
     void evPageTurn_clicked();
 
 private:
-    QWidget*        m_pageTurnBar = nullptr;
+    QWidget*        m_pageTurnBar;
     QString         m_buttonStyle;
     QList<QWidget*> m_buttons;
 

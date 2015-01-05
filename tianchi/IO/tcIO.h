@@ -1,4 +1,4 @@
-/// ********************************************************************************************************************
+﻿/// ********************************************************************************************************************
 /// @copyright Tianchi C++ source library for Qt5 (天池共享源码库)\n
 /// 天池共享源码库开发组(www.qtcn.org)\n
 /// @license 授权协议：请阅读天池共享源码库附带的授权协议(LICENSE.LGPLv2.1)\n
@@ -29,6 +29,18 @@ class TIANCHI_API TcIO : public QObject
     Q_OBJECT
 public:
     explicit TcIO(QObject* parent = 0);
+
+    /// @brief 默认的缓冲大小 4MB
+    static const int defaultBufferSize;
+
+    /// @brief 1KB = 1024
+    static const int KB = 1024;
+
+    /// @brief 1MB = 1024 * 1024 = 1048576
+    static const int MB = 1048576;
+
+    /// @brief 1GB = 1024 * 1024 * 1024 = 1073741824
+    static const int GB = 1073741824;
 
     /// @brief 装载文本文件,参数codec指定读取的编码,若为空,则不预设
     static bool loadFromFile(QString& context, const QString &filename, const QString &codec = QString());
@@ -126,18 +138,6 @@ public:
     static qint64 makeDummyFile(const QString &fileName, qint64 fileSize,
                                 const char fill = 0x00,
                                 qint64 bufferSize = defaultBufferSize);
-
-    /// @brief 1KB = 1024
-    static const int KB;
-
-    /// @brief 1MB = 1024 * 1024 = 1048576
-    static const int MB;
-
-    /// @brief 1GB = 1024 * 1024 * 1024 = 1073741824
-    static const int GB;
-
-    /// @brief 默认的缓冲大小 4MB
-    static const int defaultBufferSize;
 
     /// @brief 复制目录树下所有的文件到新文件夹
     /// @param fromPath 源文件夹

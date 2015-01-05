@@ -1,4 +1,4 @@
-/// ********************************************************************************************************************
+﻿/// ********************************************************************************************************************
 /// @copyright Tianchi C++ source library for Qt5 (天池共享源码库)\n
 /// 天池共享源码库开发组(www.qtcn.org)\n
 /// @license 授权协议：请阅读天池共享源码库附带的授权协议(LICENSE.LGPLv2.1)\n
@@ -61,7 +61,7 @@ private:
     CMD m_cmdType;
 
     bool b_isConnected;
-    bool b_isLogined = false;
+    bool b_isLogined;
     bool b_stop;
 
     QByteArray m_data;
@@ -74,7 +74,7 @@ private:
     qint64 n_transferTotal;
     qint64 n_remoteFileSize;
 
-    const QString LINE_CR = "\r\n";
+    const QString LINE_CR;
 
 signals:
     void failToDataChannel();

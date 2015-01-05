@@ -1,8 +1,10 @@
-// ´ËÍ·ÎÄ¼ş½öÎª·½±ãÊ¹ÓÃ£¬°üº¬ÁËËùÓĞ¾ßÌåÍ·ÎÄ¼ş¡£
-// ÓÃ»§¿ÉÒÔ¸ù¾İĞèÒª½øĞĞÉ¸¼õ¡£
+// æ­¤å¤´æ–‡ä»¶ä»…ä¸ºæ–¹ä¾¿ä½¿ç”¨ï¼ŒåŒ…å«äº†æ‰€æœ‰å…·ä½“å¤´æ–‡ä»¶ã€‚
+// ç”¨æˆ·å¯ä»¥æ ¹æ®éœ€è¦è¿›è¡Œç­›å‡ã€‚
 
 #include "Common/tcCommon.h"
 #include "Common/tcInvoke.h"
+#include "Component/Tianchi/tcColorWheel.h"
+#include "Component/Tianchi/tcDateEdit.h"
 #include "Component/QSint/actionbox.h"
 #include "Component/QSint/actiongroup.h"
 #include "Component/QSint/actionlabel.h"
@@ -14,7 +16,6 @@
 #include "Component/QSint/macpanelscheme.h"
 #include "Component/QSint/winvistapanelscheme.h"
 #include "Component/QSint/winxppanelscheme.h"
-#include "Component/Tianchi/tcdateedit.h"
 #include "Encrypt/tcAES.h"
 #include "Gui/tcAutoCursor.h"
 #include "Gui/tcGuiCommon.h"

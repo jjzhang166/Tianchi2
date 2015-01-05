@@ -12,15 +12,20 @@ HEADERS += \
     $$PWD/Common/tcInvoke.h \
     $$PWD/Common/tcRecentUse.hpp \
     $$PWD/Common/tcSingleton.hpp \
-    $$PWD/Common/tcTuple.hpp \
-    $$PWD/Common/tcVariantMapTableModel.h
+    $$PWD/Common/tcTuple.hpp
+
 
 SOURCES += \
     $$PWD/Common/tcCommon.cpp \
     $$PWD/Common/tcFunctionalSortFilterProxyModel.cpp \
-    $$PWD/Common/tcInvoke.cpp \
-    $$PWD/Common/tcVariantMapTableModel.cpp
+    $$PWD/Common/tcInvoke.cpp
 
+# 以下文件在 Windows-VC2010 下编译失败，原因不明
+#HEADERS += \
+#    $$PWD/Common/tcVariantMapTableModel.h
+
+#SOURCES += \
+#    $$PWD/Common/tcVariantMapTableModel.cpp
 
 # =====================================================================================================================
 # Component
@@ -28,8 +33,19 @@ SOURCES += \
 INCDIR = $$PWD/Component
 INCLUDEPATH += $$INCDIR
 
-# QSint:
-# http://www.oschina.net/p/qsint
+
+# tianchi
+INCLUDEPATH += $$INCDIR/tianchi
+HEADERS += \
+    $$INCDIR/tianchi/tcDateEdit.h \
+    $$INCDIR/tianchi/tcColorWheel.h
+
+SOURCES += \
+    $$INCDIR/tianchi/tcDateEdit.cpp \
+    $$INCDIR/tianchi/tcColorWheel.cpp
+
+
+# QSint: http://www.oschina.net/p/qsint
 
 INCLUDEPATH += $$INCDIR/QSint
 
@@ -64,13 +80,20 @@ SOURCES += \
 RESOURCES += \
     $$INCDIR/QSint/schemes.qrc
 
-# tianchi
-INCLUDEPATH += $$INCDIR/tianchi
+
+# wwWidgets: http://www.wysota.eu.org/wwwidgets
+
+INCLUDEPATH += $$INCDIR/wwwidgets
+
 HEADERS += \
-    $$INCDIR/tianchi/tcdateedit.h
+    $$INCDIR/wwwidgets/wwglobal.h \
+    $$INCDIR/wwwidgets/qwwHueSatPicker.h \
+    $$INCDIR/wwwidgets/qwwHueSatRadialPicker.h \
 
 SOURCES += \
-    $$INCDIR/tianchi/tcdateedit.cpp
+    $$INCDIR/wwwidgets/wwglobal_p.cpp \
+    $$INCDIR/wwwidgets/qwwHueSatPicker.cpp \
+    $$INCDIR/wwwidgets/qwwHueSatRadialPicker.cpp
 
 
 # =====================================================================================================================
@@ -187,6 +210,11 @@ win32:{
     {
         LIBS += -lmpr -lmprapi
     }
+
+    win32-msvc*:
+    {
+        LIBS += -lshell32
+    }
 }
 unix:{
     macx:{
@@ -211,12 +239,14 @@ unix:{
 # ---------------------------------------------------------------------------------------------------------------------
 INCLUDEPATH += $$PWD/QRCode
 
+# 二维码解码包
 HEADERS += $$PWD/QRCode/tcQrencode.h
 SOURCES += $$PWD/QRCode/tcQrencode.cpp
 # 第三方源码包 - QRencode
 QRENCODE_DIR = $$PWD/QRCode/qrencode
 include($$QRENCODE_DIR/qrencode.pri)
 
+# 二维码解码包
 HEADERS += $$PWD/QRCode/tcZxing.h
 SOURCES += $$PWD/QRCode/tcZxing.cpp
 # 第三方源码包 - ZXing

@@ -19,12 +19,13 @@
     #define TIANCHI_API
 #endif
 
+#include <QString>
 #include <QByteArray>
 #include <QDateTime>
 #include <QJsonValue>
 
 /// @brief 操作模式的标识常量
-struct TIANCHI_API TcOperMode
+struct TcOperMode
 {
 const static int Append = 1; ///< 添加或新建
 const static int Change = 2; ///< 修改
@@ -45,8 +46,7 @@ inline int iif(bool logic, int v1, int v2=0) { return logic ? v1 : v2; }
 /// @brief 分支逻辑判断
 inline QString iif(bool logic, const QString& v1, const QString& v2="") { return logic ? v1 : v2; }
 
-extern "C"
-{
+
 /// @brief 转换字符串为日期时间(yyyy/MM/dd HH:mm:ss)
 QDateTime TIANCHI_API toDateTime(const QString& text);
 
@@ -99,6 +99,5 @@ QString TIANCHI_API GbkToUtf8(const QByteArray& gbkString);
 /// @brief 把 Utf-8 转成 GBK 编码
 QByteArray TIANCHI_API Utf8ToGbk(const QString& utf8String);
 
-} // End of extern "C"
 
 #endif // TIANCHI_TCCOMMON_H

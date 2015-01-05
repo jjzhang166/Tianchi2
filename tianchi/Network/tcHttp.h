@@ -1,4 +1,4 @@
-/// ********************************************************************************************************************
+﻿/// ********************************************************************************************************************
 /// @copyright Tianchi C++ source library for Qt5 (天池共享源码库)\n
 /// 天池共享源码库开发组(www.qtcn.org)\n
 /// @license 授权协议：请阅读天池共享源码库附带的授权协议(LICENSE.LGPLv2.1)\n
@@ -20,12 +20,10 @@
 #endif
 
 #include <QByteArray>
-#include <QNetworkReply>
-#include <QSslError>
 
-class TIANCHI_API TcHttp : public QObject
+
+class TIANCHI_API TcHttp
 {
-    Q_OBJECT
 public:
     TcHttp(int timeout=30000);
 
@@ -41,14 +39,7 @@ public:
     inline void setTimeout(int value) { m_timeout = value; }
 
 protected:
-    bool        m_finished = false;
-    QByteArray  m_finishedBytes;
-
-    int         m_timeout = 30000;
-
-private slots:
-    void finishedSlot(QNetworkReply*);
-    void sslErrorsSlot(QNetworkReply* reply, const QList<QSslError>& errors);
+    int m_timeout;
 };
 
 #endif // TIANCHI_TCHTTP_H
