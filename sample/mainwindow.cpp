@@ -11,7 +11,7 @@
 #include "tcAdminAuthorization.h"
 #include "tcSystemInfo.h"
 #include "tcWindows.h"
-#include "tcDes.h"
+#include "tcAES.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent, Qt::FramelessWindowHint),
@@ -323,24 +323,28 @@ void MainWindow::on_pushButton_27_clicked()
 
         // 加密
 //        start = clock();
-        int sEncryptLen = DES_Encrypt(ui->lineEdit->text().toUtf8().data(), ui->lineEdit->text().toUtf8().length(),
-                                      ui->edDesPwd->text().toUtf8().data(),
-                                      sEncrypt.data());
-        sEncrypt.resize(sEncryptLen);
+        TcAES   aes;
+        aes.setKey(ui->edDesPwd->text().toUtf8());
+        sEncrypt = aes.encryp(ui->lineEdit->text().toUtf8());
+//        int sEncryptLen = DES_Encrypt(ui->lineEdit->text().toUtf8().data(), ui->lineEdit->text().toUtf8().length(),
+//                                      ui->edDesPwd->text().toUtf8().data(),
+//                                      sEncrypt.data());
+//        sEncrypt.resize(sEncryptLen);
 
-        ui->textEdit->append("密文长度    ：" + QString::number(sEncryptLen));
+//        ui->textEdit->append("密文长度    ：" + QString::number(sEncryptLen));
         ui->textEdit->append("密文(Base64)：" + sEncrypt.toBase64());
         ui->textEdit->append("密文(Hex   )：" + sEncrypt.toHex()   );
         ui->textEdit->append("");
         ui->textEdit->append("");
 
         QByteArray sDecrypt;
-        sDecrypt.resize(sEncrypt.length());
-        int sDecryptLen = DES_Decrypt(sEncrypt.data(), sEncrypt.length(),
-                                      ui->edDesPwd->text().toUtf8().data(),
-                                      sDecrypt.data());
+        sDecrypt = aes.decryp(sEncrypt);
+//        sDecrypt.resize(sEncrypt.length());
+//        int sDecryptLen = DES_Decrypt(sEncrypt.data(), sEncrypt.length(),
+//                                      ui->edDesPwd->text().toUtf8().data(),
+//                                      sDecrypt.data());
 
-        sDecrypt.resize(sDecryptLen);
+//        sDecrypt.resize(sDecryptLen);
         ui->textEdit->append(QString("解密出明文：") + sDecrypt);
 
 //        stop = clock();

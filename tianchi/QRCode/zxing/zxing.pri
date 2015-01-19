@@ -5,8 +5,6 @@ isEmpty($$ZXING_DIR)
 
 INCLUDEPATH += $$ZXING_DIR
 
-LIBS += -liconv
-
 HEADERS += \
     $$ZXING_DIR/CameraImageWrapper.h \
     $$ZXING_DIR/zxing/ResultPointCallback.h \
@@ -191,6 +189,7 @@ SOURCES += \
 
 win32:{
 
+    LIBS += -liconv
 }
 unix:{
     macx:{

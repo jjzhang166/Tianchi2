@@ -14,7 +14,7 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">TcShadowDialog 
+   <string notr="true">TcShadowDialog
 {
 	border: 2px solid #B4C1E3;
 }</string>

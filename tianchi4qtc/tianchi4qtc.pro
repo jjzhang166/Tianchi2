@@ -5,7 +5,7 @@ QT += widgets designer concurrent
 TARGET = tianchi4qtc
 DESTDIR = ../bin
 TEMPLATE = lib
-
+CONFIG += c++11
 
 # Tianchi
 INCLUDEPATH += tianchi $$TC_COMPONENT/tianchi
@@ -76,20 +76,20 @@ RESOURCES += \
 
 # wwWidgets: http://www.wysota.eu.org/wwwidgets
 
-INCLUDEPATH += wwwidgets $$TC_COMPONENT/wwwidgets
+INCLUDEPATH += wwWidgets $$TC_COMPONENT/wwWidgets
 
 HEADERS += \
-    wwwidgets/qwwhuesatpickeriface.h \
-    wwwidgets/qwwhuesatradialpickeriface.h \
-    $$TC_COMPONENT/wwwidgets/qwwhuesatpicker.h \
-    $$TC_COMPONENT/wwwidgets/qwwhuesatradialpicker.h
+    wwWidgets/qwwHueSatPickerIface.h \
+    wwWidgets/qwwHueSatRadialPickerIface.h \
+    $$TC_COMPONENT/wwWidgets/qwwHueSatPicker.h \
+    $$TC_COMPONENT/wwWidgets/qwwHueSatRadialPicker.h
 
 SOURCES += \
-    wwwidgets/qwwhuesatpickeriface.cpp \
-    wwwidgets/qwwhuesatradialpickeriface.cpp \
-    $$TC_COMPONENT/wwwidgets/qwwhuesatpicker.cpp \
-    $$TC_COMPONENT/wwwidgets/qwwhuesatradialpicker.cpp \
-    $$TC_COMPONENT/wwwidgets/wwglobal_p.cpp
+    wwWidgets/qwwHueSatPickerIface.cpp \
+    wwWidgets/qwwHueSatRadialPickerIface.cpp \
+    $$TC_COMPONENT/wwWidgets/qwwHueSatPicker.cpp \
+    $$TC_COMPONENT/wwWidgets/qwwHueSatRadialPicker.cpp \
+    $$TC_COMPONENT/wwWidgets/wwglobal_p.cpp
 
 RESOURCES += wwWidgets/wwWidgets.qrc
 

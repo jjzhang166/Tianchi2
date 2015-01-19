@@ -13,7 +13,7 @@ TEMPLATE = app
 CONFIG += c++11
 
 TIANCHIDIR = $$PWD/../tianchi
-include($$TIANCHIDIR/tianchi_all.pri)
+include($$TIANCHIDIR/tianchi.pri)
 #TIANCHILIB = tianchi
 #CONFIG(debug, debug|release)
 #{

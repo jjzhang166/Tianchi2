@@ -1,4 +1,4 @@
-#include "tcWindows.h"
+﻿#include "tcWindows.h"
 
 #if defined(Q_OS_WIN)
 
@@ -151,6 +151,19 @@ bool TcWindows::resizeEvent(const QByteArray&, void* msg, long* result, const QR
             ret = false;
         }
     }
+    return ret;
+}
+
+QString TcWindows::userName()
+{
+    DWORD dwSize = 0;
+    ::GetUserNameA(NULL, &dwSize);
+    char *szBuf = new char[dwSize+1];
+    szBuf[0] = '\0';
+    ::GetUserNameA(szBuf, &dwSize);
+    QString ret = szBuf;
+    delete [] szBuf;
+
     return ret;
 }
 

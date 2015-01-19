@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>images/ActionLabel.png</file>
         <file>images/ActionBox.png</file>
         <file>images/ColorGrid.png</file>
         <file>images/ActionPanel.png</file>

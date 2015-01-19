@@ -1,8 +1,17 @@
-#include "tcCommon.h"
+﻿#include "tcCommon.h"
+
+#include <QDebug>
 
 #include <QTextCodec>
 #include <QStringList>
 #include <QCryptographicHash>
+
+#include <QUuid>
+#include <QMutex>
+#include <QVariant>
+#include <QFileInfo>
+#include <iostream>
+using namespace std;
 
 QDateTime toDateTime(const QString& text)
 {
@@ -331,6 +340,35 @@ bool isTrue(const QString& s)
             || s.compare("t", Qt::CaseInsensitive)==0;
 }
 
+QMutex PRINT_MUTEX;
+#if defined(QT_DEBUG)
+void DEBUG_TRACE(const char* file, int line, const char* func, const QVariant& text)
+{
+
+    QFileInfo fi(file);
+    PRINT_MUTEX.lock();
+    cout<<QDateTime::currentDateTime().toString("yyyy/MM/dd HH:mm:ss.zzz ").toLocal8Bit().data()
+       <<fi.completeBaseName().toLocal8Bit().data()
+       <<"/"<<func<<"():"<<line<<": "<<text.toString().toLocal8Bit().data()<<endl;
+    PRINT_MUTEX.unlock();
+}
+#else
+void DEBUG_TRACE(const char* file, int line, const char* func, const QVariant& text)
+{
+}
+#endif
+void DEBUG_PRINT(const QVariant& text)
+{
+    PRINT_MUTEX.lock();
+    cout<<text.toString().toLocal8Bit().data();
+    PRINT_MUTEX.unlock();
+}
+void DEBUG_PRINTLN(const QVariant& text)
+{
+    PRINT_MUTEX.lock();
+    cout<<text.toString().toLocal8Bit().data()<<endl;
+    PRINT_MUTEX.unlock();
+}
 
 namespace TIANCHI
 {
@@ -346,3 +384,43 @@ QByteArray Utf8ToGbk(const QString& utf8String)
     return TIANCHI::tianchi_gbkCodec->fromUnicode(utf8String);
 }
 
+QByteArray cutOff(QByteArray& bytes, const QByteArray& split)
+{
+    QByteArray ret;
+    int pos = split.isEmpty() ? -1 : bytes.indexOf(split);
+    if ( pos > -1 )
+    {
+        ret = bytes.left(pos);
+        bytes.remove(0, pos + split.length());
+    }else
+    {
+        ret = bytes;
+        bytes.clear();
+    }
+    return ret;
+}
+
+QString TcUuidKey(const QString& uuid)
+{
+    QByteArray newUuid = uuid.isEmpty() ? QUuid::createUuid().toByteArray() : uuid.toUtf8();
+    newUuid.replace("{", "");
+    newUuid.replace("-", "");
+    newUuid.replace("}", "");
+
+    quint64 total = 0;
+    for( int i=0; i<newUuid.count(); i++ )
+    {
+        total *= 10;
+        total += int(newUuid.at(i));
+    }
+
+    const char* Carry = "0123456789abcdefghijklmnopqrstuvwxyz";
+
+    QString ret;
+    while(total >0)
+    {
+        ret = QString(Carry[total % 36]) + ret;
+        total /= 36;
+    }
+    return ret;
+}

@@ -1,76 +1,15 @@
-﻿#include "tcShadowDialog.h"
-#include "ui_tcShadowDialog.h"
+﻿#include "tcStyleToolDialog.h"
+#include "ui_tcStyleToolDialog.h"
 
 #include <QDesktopWidget>
 #include <QMouseEvent>
 #include <QPainter>
-
-#if defined(Q_OS_WIN)
-  #include <qt_windows.h>
-  #include <windowsx.h>
-#endif
+#include <qt_windows.h>
+#include <windowsx.h>
 
 #include <QDebug>
 
-TcShadowDialog::TcShadowDialog(QWidget* parent, int shadowWidth)
-    : QDialog(parent, Qt::FramelessWindowHint | Qt::Tool)
-    , ui(new Ui::TcShadowDialog)
-    , m_frameResize(false)
-{
-    m_shadowWidth = shadowWidth;
-
-    ui->setupUi(this);
-
-    setContentsMargins(0,0,0,0);
-    ui->verticalLayout->setContentsMargins(shadowWidth,shadowWidth,shadowWidth,shadowWidth);
-
-    ui->wndCaption->installEventFilter(this);
-}
-
-TcShadowDialog::~TcShadowDialog()
-{
-    delete ui;
-}
-
-bool TcShadowDialog::eventFilter(QObject* target, QEvent* event)
-{
-    if ( target == ui->wndCaption )
-    {
-        static bool   mousePressed = false;
-        static QPoint mousePressedPos;
-        if ( event->type() == QEvent::MouseButtonPress )
-        {
-            QMouseEvent* mouseEvent = (QMouseEvent*)event;
-            if ( mouseEvent->button() == Qt::LeftButton )
-            {
-                mousePressed = true;
-                mousePressedPos = mouseEvent->globalPos() - pos();
-                return true;
-            }
-        }else
-        if ( event->type() == QEvent::MouseButtonRelease )
-        {
-            mousePressed = false;
-        }else
-        if ( mousePressed && event->type() == QEvent::MouseMove )
-        {
-            QMouseEvent* mouseEvent = (QMouseEvent*)event;
-            move(mouseEvent->globalPos() - mousePressedPos);
-            return true;
-//        }else
-//        if ( event->type() == QEvent::Paint )
-//        {
-//            QStyleOption o;
-//            o.initFrom(ui->wndCaption);
-//            QPainter p(ui->wndCaption);
-//            ui->wndCaption->style()->drawPrimitive(QStyle::PE_Widget, &o, &p, ui->wndCaption);
-//            return true;
-        }
-    }
-    return QDialog::eventFilter(target, event);
-}
-
-void TcShadowDialog::paintShadow(QWidget* widget, int shadowWidth)
+void TcStyleToolDialog::paintShadow(QWidget* widget, int shadowWidth)
 {
     QPainterPath path;
     path.setFillRule(Qt::WindingFill);
@@ -86,10 +25,10 @@ void TcShadowDialog::paintShadow(QWidget* widget, int shadowWidth)
     {
         QPainterPath path;
         path.setFillRule(Qt::WindingFill);
-        path.addRoundedRect(shadowWidth-i,
-                            shadowWidth-i,
-                            widget->width()-(shadowWidth-i)*2,
-                            widget->height()-(shadowWidth-i)*2,
+        path.addRoundedRect(shadowWidth -i,
+                            shadowWidth -i,
+                            widget->width()-(shadowWidth -i)*2,
+                            widget->height()-(shadowWidth -i)*2,
                             shadowWidth, shadowWidth, Qt::AbsoluteSize);
         color.setAlpha((shadowWidth*24) / (i+1)); //- qSqrt(i)*50);
         painter.setPen(color);
@@ -97,25 +36,23 @@ void TcShadowDialog::paintShadow(QWidget* widget, int shadowWidth)
     }
 }
 
-bool TcShadowDialog::resizeEvent(const QByteArray&, void* msg, long* result, const QRect& wndRect)
+bool TcStyleToolDialog::resizeEvent(const QByteArray&, void* msg, long* result, const QRect& wndRect)
 {
     bool ret = false;
-
-  #if defined(Q_OS_WIN)
     MSG* message = (MSG*) msg;
     switch(message->message)
     {
     case WM_NCHITTEST:
         int xPos = GET_X_LPARAM(message->lParam) - wndRect.x();
         int yPos = GET_Y_LPARAM(message->lParam) - wndRect.y();
-//        if ( childAt(xPos, yPos) == nullptr )
-//        {
-//            // 移动
-//            *result = HTCAPTION;
-//        }else
-//        {
-//            return false;
-//        }
+        //if ( childAt(xPos, yPos) == ? ) // ? 为桌面控件名，即可实现拖动，但无法双击缩放
+        //{
+        //    // 移动
+        //    *result = HTCAPTION;
+        //}else
+        //{
+        //    return false;
+        //}
         ret = true;
         if ( abs(xPos) <= 5 && abs(yPos) <= 5 )
         {
@@ -153,13 +90,11 @@ bool TcShadowDialog::resizeEvent(const QByteArray&, void* msg, long* result, con
             ret = false;
         }
     }
-  #endif
     return ret;
 }
 
-bool TcShadowDialog::sorptionEvent(const QByteArray&, void* msg, long*, int shadowWidth)
+bool TcStyleToolDialog::sorptionEvent(const QByteArray&, void* msg, long*, int shadowWidth)
 {
-  #if defined(Q_OS_WIN)
     MSG* message = (MSG*) msg;
     if ( message->message == WM_MOVING )
     {
@@ -236,68 +171,54 @@ bool TcShadowDialog::sorptionEvent(const QByteArray&, void* msg, long*, int shad
             }
         }
     }
-  #endif
     return false;
 }
 
-QVBoxLayout* TcShadowDialog::clientLayout()
+TcStyleToolDialog::TcStyleToolDialog(QWidget* parent)
+    : QDialog(parent)
+    , ui(new Ui::TcStyleToolDialog)
+    , m_dialogResize(false)
 {
-    return ui->DialogLayout;
+    ui->setupUi(this);
+
+    setWindowFlags( windowFlags() | Qt::FramelessWindowHint );
+
+    ui->DialogWidget->setAttribute(Qt::WA_TranslucentBackground, true);
+
+    //QMargins shadowMargins = ui->dialogLayout->contentsMargins();
+
+    m_shadowWidth = 0; //(shadowMargins.left()+shadowMargins.top()+shadowMargins.right()+shadowMargins.bottom())/4;
 }
 
-void TcShadowDialog::setWndCaptionVisible(bool value)
+TcStyleToolDialog::~TcStyleToolDialog()
 {
-    ui->wndCaption->setVisible(value);
+    delete ui;
 }
 
-void TcShadowDialog::initClient(QWidget* widget, const QString& captionStyle)
+QLayout* TcStyleToolDialog::clientLayout()
+{
+    return ui->clientLayout;
+}
+
+void TcStyleToolDialog::setShadowWidth(int shadowWidth)
+{
+    m_shadowWidth = shadowWidth;
+    setContentsMargins(0,0,0,0);
+    ui->dialogLayout->setContentsMargins(shadowWidth, shadowWidth, shadowWidth, shadowWidth);
+
+    setAttribute(Qt::WA_TranslucentBackground, shadowWidth >0);
+}
+
+void TcStyleToolDialog::initClient(QWidget* widget)
 {
     widget->setParent(ui->DialogWidget);
-    ui->DialogLayout->addWidget(widget);
-
-    setIcon(windowIcon().pixmap(ui->edIcon->size()));
-    setCaption(windowTitle());
+    ui->clientLayout->addWidget(widget);
 
     move((qApp->desktop()->availableGeometry().bottomRight()
           - QPoint(geometry().size().width(), geometry().size().height())) /2);
-
-    if ( captionStyle.isEmpty() )
-    {
-        ui->wndCaption->setStyleSheet("QWidget#wndCaption{"
-                                      "background-color:#3868BD;"
-                                      "border-top-left-radius:3px;"
-                                      "border-top-right-radius:3px;}");
-    }else
-    {
-        ui->wndCaption->setStyleSheet(captionStyle);
-    }
-
-    setAttribute(Qt::WA_TranslucentBackground, m_shadowWidth >0);
-        //setStyleSheet("TcShadowDialog{border: 1px solid #000000;}");
 }
 
-void TcShadowDialog::setIcon(const QPixmap& pixmap)
-{
-    ui->edIcon->setPixmap(pixmap);
-    QMargins margins = ui->wndCaptionLayout->contentsMargins();
-    if ( ! pixmap.isNull() )
-    {
-        margins.setLeft(1);
-        ui->edIcon->setVisible(true);
-    }else
-    {
-        margins.setLeft(9);
-        ui->edIcon->setVisible(false);
-    }
-    ui->wndCaptionLayout->setContentsMargins(margins);
-}
-
-void TcShadowDialog::setCaption(const QString& caption)
-{
-    ui->edCaption->setText(caption);
-}
-
-void TcShadowDialog::paintEvent(QPaintEvent*)
+void TcStyleToolDialog::paintEvent(QPaintEvent*)
 {
     if ( m_shadowWidth >0 )
     {
@@ -305,7 +226,26 @@ void TcShadowDialog::paintEvent(QPaintEvent*)
     }
 }
 
-bool TcShadowDialog::nativeEvent(const QByteArray& eventType, void* msg, long* result)
+bool TcStyleToolDialog::nativeEvent(const QByteArray& eventType, void* msg, long* result)
 {
-    return m_frameResize ? resizeEvent(eventType, msg, result, geometry()) : false;
+    MSG* message = (MSG*) msg;
+    switch(message->message)
+    {
+    case WM_NCHITTEST:
+        int xPos = GET_X_LPARAM(message->lParam) - geometry().x();
+        int yPos = GET_Y_LPARAM(message->lParam) - geometry().y();
+        if ( isMoveBar(childAt(xPos, yPos)) )
+        {
+            *result = HTCAPTION;
+            return true;
+        }else
+        if ( m_dialogResize )
+        {
+            return resizeEvent(eventType, msg, result, QRect(geometry().x()+m_shadowWidth,
+                                                             geometry().y()+m_shadowWidth,
+                                                             geometry().width()-m_shadowWidth-m_shadowWidth,
+                                                             geometry().height()-m_shadowWidth-m_shadowWidth));
+        }
+    }
+    return QDialog::nativeEvent(eventType, msg, result);
 }

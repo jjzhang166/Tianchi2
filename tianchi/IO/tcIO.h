@@ -45,6 +45,9 @@ public:
     /// @brief 装载文本文件,参数codec指定读取的编码,若为空,则不预设
     static bool loadFromFile(QString& context, const QString &filename, const QString &codec = QString());
 
+    /// @brief 装载二进制文件
+    static bool readFileContent(QByteArray& context, const QString &filename);
+
     /// @brief 在指定目录中返回一个临时文件名
     /// @return 返回临时文件名，注意不创建该文件
     /// @note 此方法不会自动创建文件

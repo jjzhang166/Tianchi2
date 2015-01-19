@@ -1,4 +1,4 @@
-﻿#include "tcdateedit.h"
+﻿#include "tcDateEdit.h"
 
 #include <QMouseEvent>
 
@@ -13,7 +13,15 @@ TcDateEdit::TcDateEdit(QWidget *parent)
     m_calendar->setFont(_font);
     m_calendar->setContentsMargins(0, 0, 0, 0);
     //m_calendar->resize(370, 180);
+  #if defined(Q_OS_WIN)
     m_calendar->resize(210, 169);
+  #elif defined(Q_OS_LINUX)
+    m_calendar->resize(461, 181);
+  #elif defined(Q_OS_MAC)
+    m_calendar->resize(210, 169);
+  #else
+    m_calendar->resize(210, 169);
+  #endif
     m_calendar->hide();
     m_calendar->setVerticalHeaderFormat(m_calendar->NoVerticalHeader);
 

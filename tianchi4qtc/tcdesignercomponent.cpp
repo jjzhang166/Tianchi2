@@ -1,7 +1,7 @@
-﻿#include "tcdesignercomponent.h"
+﻿#include "tcDesignerComponent.h"
 
 #include "tcColorWheelPlugin.h"
-#include "tcdateeditplugin.h"
+#include "tcDateEditPlugin.h"
 
 #include "actionboxplugin.h"
 #include "actionlabelplugin.h"
@@ -9,8 +9,8 @@
 #include "actionpanelplugin.h"
 #include "colorgridplugin.h"
 
-#include "qwwhuesatpickeriface.h"
-#include "qwwhuesatradialpickeriface.h"
+#include "qwwHueSatPickerIface.h"
+#include "qwwHueSatRadialPickerIface.h"
 
 #include <QtPlugin>
 

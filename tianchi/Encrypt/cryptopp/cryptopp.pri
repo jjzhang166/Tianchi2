@@ -9,8 +9,6 @@ CONFIG(shared, shared | static)
     DEFINES += CRYPTOPP_EXPORTS
 }
 
-INCLUDEPATH += $$CRYPTOPP_DIR
-
 HEADERS += \
     $$CRYPTOPP_DIR/3way.h \
     $$CRYPTOPP_DIR/adler32.h \
@@ -146,9 +144,6 @@ HEADERS += \
     $$CRYPTOPP_DIR/zinflate.h \
     $$CRYPTOPP_DIR/zlib.h
 
-#此文件导致 VC2010 编译不过
-#    $$CRYPTOPP_DIR/ttmac.h \
-
 SOURCES += \
     $$CRYPTOPP_DIR/3way.cpp \
     $$CRYPTOPP_DIR/adler32.cpp \
@@ -273,8 +268,37 @@ SOURCES += \
     $$CRYPTOPP_DIR/zinflate.cpp \
     $$CRYPTOPP_DIR/zlib.cpp
 
-#此文件导致 VC2010 编译不过
-#    $$CRYPTOPP_DIR/ttmac.cpp \
+win32 {
 
-LIBS += -lws2_32
 
+    LIBS += -lws2_32
+}
+
+unix:{
+
+    HEADERS += \
+        $$CRYPTOPP_DIR/ttmac.h \
+        $$CRYPTOPP_DIR/algebra.cpp \
+        $$CRYPTOPP_DIR/strciphr.cpp \
+        $$CRYPTOPP_DIR/eprecomp.cpp \
+        $$CRYPTOPP_DIR/eccrypto.cpp \
+        $$CRYPTOPP_DIR/polynomi.cpp
+
+    macx:{
+
+    }else{
+
+        SOURCES += \
+            $$CRYPTOPP_DIR/gcm.cpp \
+            $$CRYPTOPP_DIR/integer.cpp \
+            $$CRYPTOPP_DIR/panama.cpp \
+            $$CRYPTOPP_DIR/rijndael.cpp \
+            $$CRYPTOPP_DIR/salsa.cpp \
+            $$CRYPTOPP_DIR/sha.cpp \
+            $$CRYPTOPP_DIR/sosemanuk.cpp \
+            $$CRYPTOPP_DIR/ttmac.cpp \
+            $$CRYPTOPP_DIR/wake.cpp \
+            $$CRYPTOPP_DIR/whrlpool.cpp
+
+    }
+}

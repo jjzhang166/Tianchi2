@@ -1,5 +1,5 @@
-﻿#include "qwwhuesatradialpickeriface.h"
-#include "qwwhuesatradialpicker.h"
+﻿#include "qwwHueSatRadialPickerIface.h"
+#include "qwwHueSatRadialPicker.h"
 
 QwwHueSatRadialPickerIface::QwwHueSatRadialPickerIface(QObject *parent)
 : TianchiPlugin(parent)

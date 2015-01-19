@@ -3,39 +3,46 @@
 /// 天池共享源码库开发组(www.qtcn.org)\n
 /// @license 授权协议：请阅读天池共享源码库附带的授权协议(LICENSE.LGPLv2.1)\n
 /// ********************************************************************************************************************
-/// @file tcAES.h
-/// @brief AES 加密功能，使用 Crypto++ 开源库
+/// @file tcRSA.h
+/// @brief RSA 加密功能，使用 Crypto++ 开源库
 /// @version 1.0
-/// @date 2014.12.29
+/// @date 2015.01.19
 /// @author 圣域天子(Jonix@qtcn.org)
 ///
 /// ====================================================================================================================
 
 #pragma once
-#ifndef TIANCHI_TCAES_H
-#define TIANCHI_TCAES_H
+#ifndef TIANCHI_TCRSA_H
+#define TIANCHI_TCRSA_H
 
 #ifndef TIANCHI_API
     #define TIANCHI_API
 #endif
 
 #include <QByteArray>
+#include <string>
+using namespace std;
 
-class TcAESPrivate;
-class TIANCHI_API TcAES
+class TcRSAPrivate;
+class TIANCHI_API TcRSA
 {
 public:
-    TcAES();
-    ~TcAES();
+    TcRSA();
+    ~TcRSA();
 
-    void        setKey(const QByteArray& key);
+    QByteArray  privateKey();
+    QByteArray  publicKey();
+    void    setKey(const QByteArray& privKey, const QByteArray& pubKey);
+
+    void GenerateKey(unsigned int KeyLength);
+
     QByteArray  encryp(const QByteArray& data);
     QByteArray  decryp(const QByteArray& data);
 
 private:
-    Q_DISABLE_COPY(TcAES);
-    Q_DECLARE_PRIVATE(TcAES);
-    TcAESPrivate* const d_ptr;
+    Q_DISABLE_COPY(TcRSA);
+    Q_DECLARE_PRIVATE(TcRSA);
+    TcRSAPrivate* const d_ptr;
 };
 
-#endif // TIANCHI_TCAES_H
+#endif // TIANCHI_TCRSA_H

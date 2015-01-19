@@ -1,4 +1,4 @@
-/// ********************************************************************************************************************
+﻿/// ********************************************************************************************************************
 /// @copyright Tianchi C++ source library for Qt5 (天池共享源码库)\n
 /// 天池共享源码库开发组(www.qtcn.org)\n
 /// @license 授权协议：请阅读天池共享源码库附带的授权协议(LICENSE.LGPLv2.1)\n
@@ -99,5 +99,24 @@ QString TIANCHI_API GbkToUtf8(const QByteArray& gbkString);
 /// @brief 把 Utf-8 转成 GBK 编码
 QByteArray TIANCHI_API Utf8ToGbk(const QString& utf8String);
 
+void DEBUG_TRACE(const char* file, int line, const char* func, const QVariant& text);
+
+#if defined(QT_DEBUG)
+  #define TRACE(x)  DEBUG_TRACE(__FILE__, __LINE__, __FUNCTION__, x);
+  #define TRACES()  DEBUG_TRACE(__FILE__, __LINE__, __FUNCTION__, "...");
+#else
+  #define TRACE(x);
+  #define TRACES();
+#endif
+void DEBUG_PRINT(const QVariant& text);
+void DEBUG_PRINTLN(const QVariant& text);
+
+inline void PRINT(const QVariant& text) { DEBUG_PRINT(text); }
+inline void PRINTLN(const QVariant& text) { DEBUG_PRINTLN(text); }
+
+QByteArray TIANCHI_API cutOff(QByteArray& bytes, const QByteArray& split);
+
+/// @brief 为了缩减长度，把uuid转换为36进制，缩为 12-13 个字符长度
+QString TIANCHI_API TcUuidKey(const QString& uuid="");
 
 #endif // TIANCHI_TCCOMMON_H

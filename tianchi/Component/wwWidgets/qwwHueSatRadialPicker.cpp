@@ -11,7 +11,7 @@
 //
 #ifndef WW_NO_HUESATRADIALPICKER
 
-#include "qwwhuesatradialpicker.h"
+#include "qwwHueSatRadialPicker.h"
 #include <QPainter>
 #include <QMouseEvent>
 #include <cmath>

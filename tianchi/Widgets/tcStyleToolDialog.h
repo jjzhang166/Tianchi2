@@ -3,7 +3,7 @@
 /// 天池共享源码库开发组(www.qtcn.org)\n
 /// @license 授权协议：请阅读天池共享源码库附带的授权协议(LICENSE.LGPLv2.1)\n
 /// ********************************************************************************************************************
-/// @file tcShadowDialog.h
+/// @file tcStyleToolDialog.h
 /// @brief 无边框窗口加阴影，缩放功能
 /// @version 1.0
 /// @date 2014.12.19
@@ -12,8 +12,8 @@
 /// ====================================================================================================================
 
 #pragma once
-#ifndef TIANCHI_TCSHADOWDIALOG_H
-#define TIANCHI_TCSHADOWDIALOG_H
+#ifndef TIANCHI_TCSTYLETOOLDIALOG_H
+#define TIANCHI_TCSTYLETOOLDIALOG_H
 
 #include <QDialog>
 #include <QPixmap>
@@ -24,46 +24,46 @@
 #endif
 
 namespace Ui {
-class TcShadowDialog;
+class TcStyleToolDialog;
 }
 
-class TIANCHI_API TcShadowDialog : public QDialog
+class TIANCHI_API TcStyleToolDialog : public QDialog
 {
+    typedef QDialog inherited;
     Q_OBJECT
 public:
-    explicit TcShadowDialog(QWidget* parent, int shadowWidth=4);
-    ~TcShadowDialog();
-
     static void paintShadow(QWidget* widget, int shadowWidth=3);
     static bool resizeEvent(const QByteArray&, void* msg, long* result, const QRect& wndRect);
     static bool sorptionEvent(const QByteArray&, void* msg, long*, int shadowWidth=0);
 
+    explicit TcStyleToolDialog(QWidget* parent=0);
+    ~TcStyleToolDialog();
+
 protected:
-    Ui::TcShadowDialog* ui;
+    Ui::TcStyleToolDialog* ui;
 
-    QVBoxLayout*  clientLayout();
+    inline void setDialogResize(bool value) { m_dialogResize = value; }
+    void        setShadowWidth(int shadowWidth);
+    QLayout*    clientLayout();
+    void        initClient(QWidget* widget);
 
-    void    setWndCaptionVisible(bool value);
-    void    initClient(QWidget* widget, const QString& captionStyle="");
+    virtual bool    isMoveBar(QWidget* moveBar) const { Q_UNUSED(moveBar); return false; }
 
-    void    setIcon(const QPixmap& pixmap);
-    void    setCaption(const QString& caption);
-
-    int     m_shadowWidth;
-    bool    m_frameResize;
-
-    virtual bool    eventFilter(QObject* target, QEvent* event) override;
     virtual void    paintEvent(QPaintEvent*) override;
     virtual bool    nativeEvent(const QByteArray& eventType, void* msg, long* result) override;
+
+private:
+    bool    m_dialogResize;
+    int     m_shadowWidth;
 };
 
 #define TC_PAINTSHADOW(w) \
     virtual void paintEvent(QPaintEvent*) override \
-    { TcShadowDialog::paintShadow(this, w); }
+    { TcStyleToolDialog::paintShadow(this, w); }
 
 #define TC_WINDOWRESIZE(widget) \
     virtual bool    nativeEvent(const QByteArray& eventType, void* msg, long* result) override \
-    { return TcShadowDialog::resizeEvent(eventType, msg, result, widget->geometry()); }
+    { return TcStyleToolDialog::resizeEvent(eventType, msg, result, widget->geometry()); }
 
 
-#endif // TIANCHI_TCSHADOWDIALOG_H
+#endif // TIANCHI_TCSTYLETOOLDIALOG_H

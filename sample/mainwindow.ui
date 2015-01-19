@@ -649,7 +649,7 @@
   <customwidget>
    <class>TcDateEdit</class>
    <extends>QWidget</extends>
-   <header>tcdateedit.h</header>
+   <header>tcDateEdit.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

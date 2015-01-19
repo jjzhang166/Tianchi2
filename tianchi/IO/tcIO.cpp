@@ -4,6 +4,7 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QTextStream>
+#include <QDataStream>
 #include <QQueue>
 
 #if defined(Q_OS_WIN)
@@ -31,6 +32,19 @@ bool TcIO::loadFromFile(QString &context, const QString &filename,
            in.setCodec(codec.toLatin1().data());
        }
        context = in.readAll();
+       ret = true;
+       file.close();
+    }
+    return ret;
+}
+
+bool TcIO::readFileContent(QByteArray& context, const QString& filename)
+{
+    bool ret = false;
+    QFile file(filename);
+    if (file.open(QIODevice::ReadOnly))
+    {
+       context = file.readAll();
        ret = true;
        file.close();
     }
@@ -125,7 +139,6 @@ QStringList TcIO::searchFiles(const QString& path, const QStringList& nameFilter
         if ( "." != *it && ".." != *it )
         {
             QString dirName = path + QDir::separator() + *it;
-            //ret.append(dirName);
             if ( subDir )
             {
                 searchFiles(dirName, nameFilters, subDir);

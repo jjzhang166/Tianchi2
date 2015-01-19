@@ -1,4 +1,5 @@
 #include "tcLog.h"
+//#include "tcCommon.h" // 如果作者忘记删除，使用者可删除此行，并删除所有调用的关联代码。
 
 #include <QCoreApplication>
 #include <QDir>

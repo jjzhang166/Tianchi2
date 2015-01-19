@@ -33,6 +33,10 @@ Tianchi2 设计时尽量保持单组文件型式，所以只要把<br/>
   生成位置：bin/<br/>
 
 
+更新历史：
+
+
+
 文件列表与说明:
 ---------------
     bin/                                            编译生成文件的目录
@@ -70,7 +74,9 @@ Tianchi2 设计时尽量保持单组文件型式，所以只要把<br/>
         Encrypt/
             tcAES.h                                 AES 加密/解密（使用 Crypto++）
             tcAES.cpp
-            cryptopp562/                            Crypto++5.6.2 加密/解密开源库
+            tcRSA.h                                 RSA 加密/解密（使用 Crypto++）
+            tcRSA.cpp
+            cryptopp/                               Crypto++5.6.2 加密/解密开源库
         Gui/
             tcAutoCursor.h                          鼠标光标的设置和自动恢复处理
             tcAutoCursor.cpp
@@ -125,13 +131,16 @@ Tianchi2 设计时尽量保持单组文件型式，所以只要把<br/>
         Widgets/
             tcPageTurnWidget.h                      翻页按钮组
             tcPageTurnWidget.cpp
-            tcScreenshot.h                          截屏
+            tcScreenshot.h                          截屏功能
             tcScreenshot.cpp
             tcScreenshot.ui
             tcShadowDialog.h                        含阴影和可缩放的无边对话框父类
             tcShadowDialog.cpp
             tcShadowDialog.ui
             tcShadowDialog.qrc
+            tcStyleToolDialog.h                     无边框窗口加阴影，缩放功能
+            tcStyleToolDialog.cpp
+            tcStyleToolDialog.ui
             tcWidget.h                              自绘窗口的可移动标题
             tcWidget.cpp
             tcWndCaption.qrc
@@ -153,8 +162,8 @@ Tianchi2 设计时尽量保持单组文件型式，所以只要把<br/>
 
 特别感谢代码贡献者以及参与维护人员 (排名随机)
 ----------------------------------
-cnhemiya / 南果梨<br/>
 XChinux / www.qtcn.org 坛主<br/>
+cnhemiya / 南果梨<br/>
 roywillow<br/>
 younghz<br/>
 渡世白玉<br/>

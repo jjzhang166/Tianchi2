@@ -69,19 +69,19 @@ RESOURCES += \
     $$INCDIR/QSint/schemes.qrc
 
 
-# wwWidgets: http://www.wysota.eu.org/wwwidgets
+# wwWidgets: http://www.wysota.eu.org/wwWidgets
 
-INCLUDEPATH += $$INCDIR/wwwidgets
+INCLUDEPATH += $$INCDIR/wwWidgets
 
 HEADERS += \
-    $$INCDIR/wwwidgets/wwglobal.h \
-    $$INCDIR/wwwidgets/qwwHueSatPicker.h \
-    $$INCDIR/wwwidgets/qwwHueSatRadialPicker.h \
+    $$INCDIR/wwWidgets/wwglobal.h \
+    $$INCDIR/wwWidgets/qwwHueSatPicker.h \
+    $$INCDIR/wwWidgets/qwwHueSatRadialPicker.h \
 
 SOURCES += \
-    $$INCDIR/wwwidgets/wwglobal_p.cpp \
-    $$INCDIR/wwwidgets/qwwHueSatPicker.cpp \
-    $$INCDIR/wwwidgets/qwwHueSatRadialPicker.cpp
+    $$INCDIR/wwWidgets/wwglobal_p.cpp \
+    $$INCDIR/wwWidgets/qwwHueSatPicker.cpp \
+    $$INCDIR/wwWidgets/qwwHueSatRadialPicker.cpp
 
 
 # =====================================================================================================================
@@ -90,13 +90,15 @@ SOURCES += \
 INCLUDEPATH += $$PWD/Encrypt
 
 HEADERS += \
-    $$PWD/Encrypt/tcAES.h
+    $$PWD/Encrypt/tcAES.h \
+    $$PWD/Encrypt/tcRSA.h
 
 SOURCES += \
-    $$PWD/Encrypt/tcAES.cpp
+    $$PWD/Encrypt/tcAES.cpp \
+    $$PWD/Encrypt/tcRSA.cpp
 
 # 第三方源码包 - Crypto++
-CRYPTOPP_DIR = $$PWD/Encrypt/cryptopp562
+CRYPTOPP_DIR = $$PWD/Encrypt/cryptopp
 include($$CRYPTOPP_DIR/cryptopp.pri)
 
 

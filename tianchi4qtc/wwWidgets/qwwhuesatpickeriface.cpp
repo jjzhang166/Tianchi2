@@ -1,5 +1,5 @@
-﻿#include "qwwhuesatpickeriface.h"
-#include "qwwhuesatpicker.h"
+﻿#include "qwwHueSatPickerIface.h"
+#include "qwwHueSatPicker.h"
 #include <QSettings>
 
 QwwHueSatPickerIface::QwwHueSatPickerIface(QObject* parent)

@@ -12,7 +12,7 @@
 
 #ifndef WW_NO_HUESATPICKER
 
-#include "qwwhuesatpicker.h"
+#include "qwwHueSatPicker.h"
 #include <QPainter>
 #include <QImage>
 #include <QMouseEvent>
