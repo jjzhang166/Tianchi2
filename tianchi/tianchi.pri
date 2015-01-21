@@ -111,11 +111,13 @@ INCLUDEPATH += $$PWD/Gui
 
 HEADERS += \
     $$PWD/Gui/tcAutoCursor.h \
-    $$PWD/Gui/tcGuiCommon.h
+    $$PWD/Gui/tcGuiCommon.h \
+    $$PWD/Gui/tcImageAdjust.h
 
 SOURCES += \
     $$PWD/Gui/tcAutoCursor.cpp \
-    $$PWD/Gui/tcGuiCommon.cpp
+    $$PWD/Gui/tcGuiCommon.cpp \
+    $$PWD/Gui/tcImageAdjust.cpp
 
 
 # =====================================================================================================================
@@ -144,6 +146,18 @@ win32:{
         $$PWD/IO/tcExcel.cpp
 
 }
+
+
+# =====================================================================================================================
+# Multimedia
+# ---------------------------------------------------------------------------------------------------------------------
+INCLUDEPATH += $$PWD/Multimedia
+
+HEADERS += \
+    $$PWD/Multimedia/tcTextToSpeech.h
+
+SOURCES += \
+    $$PWD/Multimedia/tcTextToSpeech.cpp
 
 
 # =====================================================================================================================
@@ -254,21 +268,23 @@ HEADERS += \
     $$PWD/Widgets/tcPageTurnWidget.h \
     $$PWD/Widgets/tcScreenshot.h \
     $$PWD/Widgets/tcShadowDialog.h \
-    $$PWD/Widgets/tcWidget.h \
-    $$PWD/Widgets/tcWndSizer.h
+    $$PWD/Widgets/tcViewHeaderSetupDialog.h \
+    $$PWD/Widgets/tcWidget.h
 
 SOURCES += \
     $$PWD/Widgets/tcPageTurnWidget.cpp \
     $$PWD/Widgets/tcScreenshot.cpp \
     $$PWD/Widgets/tcShadowDialog.cpp \
-    $$PWD/Widgets/tcWidget.cpp \
-    $$PWD/Widgets/tcWndSizer.cpp
+    $$PWD/Widgets/tcViewHeaderSetupDialog.cpp \
+    $$PWD/Widgets/tcWidget.cpp
 
 FORMS += \
     $$PWD/Widgets/tcScreenshot.ui \
-    $$PWD/Widgets/tcShadowDialog.ui
+    $$PWD/Widgets/tcShadowDialog.ui \
+    $$PWD/Widgets/tcViewHeaderSetupDialog.ui
 
 RESOURCES += \
-    $$PWD/Widgets/tcShadowDialog.qrc
+    $$PWD/Widgets/tcShadowDialog.qrc \
+    $$PWD/Widgets/tcViewHeaderSetupDialog.qrc
 
 

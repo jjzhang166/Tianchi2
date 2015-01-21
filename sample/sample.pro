@@ -30,7 +30,7 @@ FORMS += mainwindow.ui
 RC_ICONS += images/qt32.ico
 
 VERSION = 1.0.0.0
-#注意：中文时必须采用 GBK 编码
+#注意：中文时必须采用 GBK 编码，建议用 include() 方式放在另一个 GBK 文件中
 QMAKE_TARGET_PRODUCT = Tianchi2 sample
 QMAKE_TARGET_COMPANY = Jonix Fu
 QMAKE_TARGET_DESCRIPTION = Sample for Tianchi2.

@@ -66,6 +66,18 @@ QDateTime toDateTime(const QString& text)
     return ret;
 }
 
+QDateTime toDateTime(double timeDouble)
+{
+    int    days    = int(timeDouble);
+    double seconds = timeDouble - days;
+
+    const static qint64 JULIAN_DAY = 2415019;
+    QDate date = QDate::fromJulianDay(JULIAN_DAY + days);
+    QTime time(0, 0, 0, 0);
+    time = time.addSecs(seconds * 86400.0);
+    return QDateTime(date, time);
+}
+
 char getIDCardVerifyCode(const QByteArray& id)
 {
     char ret = '\0';
@@ -422,5 +434,27 @@ QString TcUuidKey(const QString& uuid)
         ret = QString(Carry[total % 36]) + ret;
         total /= 36;
     }
+    return ret;
+}
+
+QByteArray TcFirstByteArray(QByteArray& str, const QByteArray& split)
+{
+    QByteArray ret;
+    int endOf = str.indexOf(split);
+    if ( endOf == 0 )
+    {
+        str.remove(0, 1);
+    }
+    else
+    if ( endOf > 0 )
+    {
+        ret = str.left(endOf);
+        str.remove(0, endOf +1);
+    }
+    else
+    {
+        ret = str;
+    }
+
     return ret;
 }

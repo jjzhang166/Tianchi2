@@ -97,14 +97,6 @@ public:
     static QString  userName();
 };
 
-// *********************************************************************************************************************
-//class TIANCHI_API TcWindowsEvent
-//{
-//public:
-//    static void paintShadow(QWidget* widget, int shadowWidth=3);
-//    static bool resizeEvent(const QByteArray&, void* msg, long* result, const QRect& wndRect);
-//};
-
 #endif // Q_OS_WIN
 
 #endif // TIANCHI_TCWINDOWS_H

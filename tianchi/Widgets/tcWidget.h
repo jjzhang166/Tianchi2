@@ -1,4 +1,4 @@
-/// ********************************************************************************************************************
+﻿/// ********************************************************************************************************************
 /// @copyright Tianchi C++ source library for Qt5 (天池共享源码库)\n
 /// 天池共享源码库开发组(www.qtcn.org)\n
 /// @license 授权协议：请阅读天池共享源码库附带的授权协议(LICENSE.LGPLv2.1)\n
@@ -25,6 +25,11 @@ class TIANCHI_API TcWidget
 {
 public:
     static void styleSheetPaintEvent(QWidget* widget, QPaintEvent*);
+
+    inline QWidget* parentForm() const { return m_parentForm; }
+    inline void     setParentForm(QWidget* value) { m_parentForm = value; }
+private:
+    QWidget*    m_parentForm;
 };
 
 #define TCDEFINE_WIDGET_STYLESHEET_PAINT() \

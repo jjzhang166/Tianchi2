@@ -7,6 +7,7 @@
 #include "tcUdp.h"
 #include "tcPageTurnWidget.h"
 #include "tcScreenshot.h"
+#include "tcViewHeaderSetupDialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -68,6 +69,8 @@ private:
 
     TC_PAINTSHADOW(5); // 给窗口加上阴影
     TC_WINDOWRESIZE(this); // 缩放无边框的窗口
+
+    TcViewHeaderSetup   viewHeaderSetup;
 };
 
 #endif // MAINWINDOW_H

@@ -50,6 +50,9 @@ inline QString iif(bool logic, const QString& v1, const QString& v2="") { return
 /// @brief 转换字符串为日期时间(yyyy/MM/dd HH:mm:ss)
 QDateTime TIANCHI_API toDateTime(const QString& text);
 
+/// @brief 转浮点时间值为日期时间(yyyy/MM/dd HH:mm:ss)
+QDateTime TIANCHI_API toDateTime(double timeDouble);
+
 /// @brief 返回18位身位证的最后一位校验码
 char TIANCHI_API getIDCardVerifyCode(const QByteArray& id);
 
@@ -118,5 +121,8 @@ QByteArray TIANCHI_API cutOff(QByteArray& bytes, const QByteArray& split);
 
 /// @brief 为了缩减长度，把uuid转换为36进制，缩为 12-13 个字符长度
 QString TIANCHI_API TcUuidKey(const QString& uuid="");
+
+
+QByteArray TIANCHI_API TcFirstByteArray(QByteArray& str, const QByteArray& split = "\t");
 
 #endif // TIANCHI_TCCOMMON_H

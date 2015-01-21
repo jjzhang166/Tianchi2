@@ -3,8 +3,8 @@
 /// 天池共享源码库开发组(www.qtcn.org)\n
 /// @license 授权协议：请阅读天池共享源码库附带的授权协议(LICENSE.LGPLv2.1)\n
 /// ********************************************************************************************************************
-/// @file tcdateedit.h
-/// @brief 允许输入为空的日期选择插件(IDE控件)
+/// @file tcColorWheel.h
+/// @brief 取色控件(IDE控件)
 /// @version 1.1
 /// @date 2014.12.11
 /// @author 圣域天子(Jonix@qtcn.org)
@@ -17,6 +17,7 @@
 
 #include <QWidget>
 
+/// @brief 取色控件(IDE控件)
 class TcColorWheel : public QWidget
 {
     Q_OBJECT

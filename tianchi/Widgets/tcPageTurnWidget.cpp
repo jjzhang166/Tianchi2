@@ -1,4 +1,8 @@
-﻿#include "tcPageTurnWidget.h"
+﻿#ifdef _MSC_VER
+#pragma execution_character_set("utf-8")
+#endif
+
+#include "tcPageTurnWidget.h"
 #include <QLayout>
 #include <QVariant>
 #include <QDebug>
@@ -55,7 +59,7 @@ void TcPageTurnWidget::newButtons(int pageNo, int records,
         if ( totalPages > 0 )
         {
             //　分页按钮
-            QToolButton* firstButton = newButton("首页", 1, receiver, member);
+            QToolButton* firstButton = newButton(QStringLiteral("首页"), 1, receiver, member);
             firstButton->setEnabled(pageNo >1);
             if ( pageNo >3 )
             {
@@ -104,7 +108,7 @@ void TcPageTurnWidget::newButtons(int pageNo, int records,
                 }
                 newButton(">>", newPageNo, receiver, member);
             }
-            QToolButton* nextButton = newButton("尾页", totalPages, receiver, member);
+            QToolButton* nextButton = newButton(QStringLiteral("尾页"), totalPages, receiver, member);
             nextButton->setEnabled(pageNo < totalPages);
         }
         parentWidget->update();

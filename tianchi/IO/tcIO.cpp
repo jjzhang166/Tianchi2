@@ -93,7 +93,7 @@ QString TcIO::uniqueFileName(const QString &dir,
     return ret;
 }
 
-QString TcIO::fileVersion(const QString&  exeFile)
+QString TcIO::fileVersion(const QString& exeFile)
 {
     QString ret;
 
@@ -112,6 +112,41 @@ QString TcIO::fileVersion(const QString&  exeFile)
                 int vMinor  = LOWORD(fileInfo->dwFileVersionMS);
                 int Release = HIWORD(fileInfo->dwFileVersionLS);
                 int vBuild  = LOWORD(fileInfo->dwFileVersionLS);
+                ret.append(QString::number(vMajor)).append(".")
+                        .append(QString::number(vMinor)).append(".")
+                        .append(QString::number(Release)).append(".")
+                        .append(QString::number(vBuild));
+            }
+        }
+        delete [] data;
+    }
+#else
+    Q_UNUSED(exeFile)
+#endif
+    return ret;
+}
+
+QString TcIO::fileVersion(const QString& exeFile, int& vMajor, int& vMinor, int& Release, int& vBuild)
+{
+    QString ret;
+
+    vMajor = vMinor = Release = vBuild = 0;
+
+#if defined(Q_OS_WIN)
+    int size = GetFileVersionInfoSize(exeFile.toStdWString().c_str(), NULL);
+    if (size > 0)
+    {
+        char* data = new char[size +1];
+        if (GetFileVersionInfo(exeFile.toStdWString().c_str(), 0, size, data))
+        {
+            VS_FIXEDFILEINFO* fileInfo;
+            unsigned int      fileInfoSize = 0;
+            if (VerQueryValue(data, L"\\", (void**)&fileInfo, &fileInfoSize))
+            {
+                vMajor  = HIWORD(fileInfo->dwFileVersionMS);
+                vMinor  = LOWORD(fileInfo->dwFileVersionMS);
+                Release = HIWORD(fileInfo->dwFileVersionLS);
+                vBuild  = LOWORD(fileInfo->dwFileVersionLS);
                 ret.append(QString::number(vMajor)).append(".")
                         .append(QString::number(vMinor)).append(".")
                         .append(QString::number(Release)).append(".")

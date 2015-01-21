@@ -21,11 +21,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     setAttribute(Qt::WA_TranslucentBackground, true); // 使用阴影时，必须把窗口设为全透明
 
-//    ui->formLayout->insertWidget(0, new TcWndCaption(this, "我是可移动的自绘标题"));
-
     m_PageTurnWidget.setParent(ui->ButtonWidget);
     connect(&m_PageTurnWidget, &TcPageTurnWidget::pageTurnClicked, this, &MainWindow::evPageTurnClicked);
     m_PageTurnWidget.newButtons(1, 100, 10);
+
+    viewHeaderSetup.append(ui->treeWidget); // 添加对 QTreeWidget 的列头设置功能
 
     this->showFullScreen();
 }
@@ -273,7 +273,7 @@ void MainWindow::on_pushButton_24_clicked()
 void MainWindow::on_pushButton_25_clicked()
 {
   #if defined(Q_OS_WIN)
-    TcWindows::createLink(qApp->applicationFilePath(), TcWindows::getWinSysDir(TcWindows::UserDeskTopPath) + "\\天池演示程序");
+    TcWindows::createLink(qApp->applicationFilePath(), TcWindows::getWinSysDir(CSIDL_DESKTOPDIRECTORY) + "\\天池演示程序");
   #endif
 }
 

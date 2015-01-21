@@ -58,6 +58,15 @@ public:
     /// @return 版本信息(xxx.xxx.xxx.xxx)
     static QString fileVersion(const QString& exeFile);
 
+    /// @brief 取执行文件的版本，仅支持 Windows
+    /// @param [in] exeFile 包含版本信息的文件名(.exe, .dll等)
+    /// @param [out] vMajor  主版本号
+    /// @param [out] vMinor  副版本号
+    /// @param [out] Release 发布号
+    /// @param [out] vBuild  编译号
+    /// @return 版本信息(xxx.xxx.xxx.xxx)
+    static QString fileVersion(const QString& exeFile, int& vMajor, int& vMinor, int& Release, int& vBuild);
+
     /// @brief 从目录及子目录中检索出所有文件名
     /// @param dir 要查找的文件夹
     /// @param nameFilters 文件过滤
