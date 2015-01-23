@@ -1,4 +1,7 @@
-﻿#include "tcIO.h"
+﻿#include <QtCore>
+#if defined(Q_OS_WIN)
+
+#include "tcIO.h"
 
 #include <QDir>
 #include <QFile>
@@ -6,8 +9,6 @@
 #include <QTextStream>
 #include <QDataStream>
 #include <QQueue>
-
-#if defined(Q_OS_WIN)
 
 //这里的代码是有效的
 #include <qt_windows.h>

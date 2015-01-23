@@ -1,5 +1,6 @@
 ﻿#include "tcDesignerComponent.h"
 
+#include "qcustomplotPlugin.h"
 #include "tcColorWheelPlugin.h"
 #include "tcDateEditPlugin.h"
 
@@ -17,6 +18,7 @@
 TcDesignerWidgets::TcDesignerWidgets(QObject *parent)
     : QObject(parent)
 {
+    m_plugins.append(new QCustomPlotPlugin(this));
     m_plugins.append(new TcDateEditPlugin(this));
     m_plugins.append(new TcColorWheelPlugin(this));
 

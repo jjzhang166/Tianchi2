@@ -1,6 +1,8 @@
-﻿#include "tcExcel.h"
-
+﻿#include <QtCore>
 #if defined(Q_OS_WIN)
+
+#include "tcExcel.h"
+
 #include <QList>
 
 TcExcel::TcExcel()

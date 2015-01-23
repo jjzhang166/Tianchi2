@@ -18,17 +18,19 @@ SOURCES += \
 # =====================================================================================================================
 # Component
 # ---------------------------------------------------------------------------------------------------------------------
+QT += printsupport
 INCDIR = $$PWD/Component
 INCLUDEPATH += $$INCDIR
-
 
 # tianchi
 INCLUDEPATH += $$INCDIR/tianchi
 HEADERS += \
+    $$INCDIR/tianchi/qcustomplot.h \
     $$INCDIR/tianchi/tcDateEdit.h \
     $$INCDIR/tianchi/tcColorWheel.h
 
 SOURCES += \
+    $$INCDIR/tianchi/qcustomplot.cpp \
     $$INCDIR/tianchi/tcDateEdit.cpp \
     $$INCDIR/tianchi/tcColorWheel.cpp
 
@@ -203,6 +205,8 @@ SOURCES += \
     $$PWD/OS/tcWindows.cpp
 
 win32:{
+
+    QT += axcontainer
 
     SOURCES += \
         $$PWD/OS/tcAdminAuthorization_win.cpp \

@@ -93,7 +93,8 @@ double TIANCHI_API toDouble(const QJsonValue &jv);
 /// @brief 取 Json 的键值
 /// @param [in] jv 把 Json 键值取出后强行转换为 bool 型
 bool TIANCHI_API toBool(const QJsonValue& jv);
-
+/// @brief [in] jv 把 Json 键值取出后判断是否是true值
+bool TIANCHI_API isTrue(const QJsonValue& jv);
 /// @brief 判断一个字符串是否是boolean的 true值
 bool TIANCHI_API isTrue(const QString& s);
 

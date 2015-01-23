@@ -1,6 +1,7 @@
-﻿#include "tcWindows.h"
-
+﻿#include <QtCore>
 #if defined(Q_OS_WIN)
+
+#include "tcWindows.h"
 
 #include <QSettings>
 #include <QDir>
@@ -8,8 +9,6 @@
 #include <QFileInfo>
 #include <QWidget>
 #include <QPainter>
-
-#include <ObjBase.h>
 
 #include <qt_windows.h>
 #include <windowsx.h>

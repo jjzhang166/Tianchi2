@@ -1,6 +1,6 @@
 TC_COMPONENT = ../tianchi/Component
 
-QT += widgets designer concurrent
+QT += widgets designer concurrent printsupport
 
 TARGET = tianchi4qtc
 DESTDIR = ../bin
@@ -11,14 +11,18 @@ CONFIG += c++11
 INCLUDEPATH += tianchi $$TC_COMPONENT/tianchi
 
 HEADERS += \
+    tianchi/qcustomplotPlugin.h \
     tianchi/tcColorWheelPlugin.h \
     tianchi/tcDateEditPlugin.h \
+    $$TC_COMPONENT/tianchi/qcustomplot.h \
     $$TC_COMPONENT/tianchi/tcColorWheel.h \
     $$TC_COMPONENT/tianchi/tcDateEdit.h
 
 SOURCES += \
+    tianchi/qcustomplotPlugin.cpp \
     tianchi/tcColorWheelPlugin.cpp \
     tianchi/tcDateEditPlugin.cpp \
+    $$TC_COMPONENT/tianchi/qcustomplot.cpp \
     $$TC_COMPONENT/tianchi/tcColorWheel.cpp \
     $$TC_COMPONENT/tianchi/tcDateEdit.cpp
 

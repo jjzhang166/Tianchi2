@@ -320,6 +320,11 @@ double toDouble(const QJsonValue &jv)
 
 bool toBool(const QJsonValue& jv)
 {
+    return isTrue(jv);
+}
+
+bool isTrue(const QJsonValue& jv)
+{
     bool ret = false;
     if ( jv.isBool() )
     {
@@ -331,13 +336,7 @@ bool toBool(const QJsonValue& jv)
     }else
     if ( jv.isString() )
     {
-        QString s = jv.toString();
-        ret = s.compare("true",Qt::CaseInsensitive )
-                || s.compare("yes",Qt::CaseInsensitive )
-                || s.compare("ok",Qt::CaseInsensitive )
-                || s.compare("t",Qt::CaseInsensitive )
-                || s.compare("y",Qt::CaseInsensitive )
-                || s.toInt() >0;
+        ret = isTrue(jv.toString());
     }
     return ret;
 }
@@ -348,8 +347,8 @@ bool isTrue(const QString& s)
             || s.compare("true", Qt::CaseInsensitive)==0
             || s.compare("yes", Qt::CaseInsensitive)==0
             || s.compare("ok", Qt::CaseInsensitive)==0
-            || s.compare("y", Qt::CaseInsensitive)==0
-            || s.compare("t", Qt::CaseInsensitive)==0;
+            || s.compare("t", Qt::CaseInsensitive)==0
+            || s.compare("y", Qt::CaseInsensitive)==0;
 }
 
 QMutex PRINT_MUTEX;

@@ -1,10 +1,11 @@
-#ifdef _MSC_VER
+﻿#ifdef _MSC_VER
 #pragma execution_character_set("utf-8")
 #endif
 
-#include "tcChinese.h"
-
+#include <QtCore>
 #if defined(Q_OS_WIN)
+
+#include "tcChinese.h"
 
 #include <QString>
 #include <QTextCodec>

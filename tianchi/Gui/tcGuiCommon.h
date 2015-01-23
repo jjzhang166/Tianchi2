@@ -1,4 +1,4 @@
-/// ********************************************************************************************************************
+﻿/// ********************************************************************************************************************
 /// @copyright Tianchi C++ source library for Qt5 (天池共享源码库)\n
 /// 天池共享源码库开发组(www.qtcn.org)\n
 /// @license 授权协议：请阅读天池共享源码库附带的授权协议(LICENSE.LGPLv2.1)\n
@@ -21,6 +21,7 @@
 
 #include <QWidget>
 #include <QApplication>
+#include <QTextEdit>
 
 extern "C"
 {
@@ -30,5 +31,8 @@ extern "C"
 /// @brief 把当前窗口移动到桌面正中间
 #define MOVETO_DESKTOPCENTER() \
     move((qApp->desktop()->availableGeometry().bottomRight()-geometry().bottomRight()) /2);
+
+/// @brief 限制 QTextEdit 输入文字的最大长度
+void TIANCHI_API onTextChanged_limitMaxLength(QTextEdit* editor, int maxLength);
 
 #endif // TIANCHI_TCGUICOMMON_H

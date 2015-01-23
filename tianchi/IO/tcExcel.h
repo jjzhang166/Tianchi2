@@ -16,12 +16,12 @@
 #ifndef TIANCHI_TCEXCEL_H
 #define TIANCHI_TCEXCEL_H
 
+#include <QtCore>
+#if defined(Q_OS_WIN)
+
 #ifndef TIANCHI_API
     #define TIANCHI_API
 #endif
-
-#include <QtCore>
-#if defined(Q_OS_WIN)
 
 #include <QString>
 #include <QStringList>
